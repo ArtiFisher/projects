@@ -2,10 +2,7 @@ import java.util.Set;
 
 public class Vertex {
     private int number;
-    private Set N;
+    private Set neighbors;
 
-    public void check(){
-        //N.
-    }
 
 }
