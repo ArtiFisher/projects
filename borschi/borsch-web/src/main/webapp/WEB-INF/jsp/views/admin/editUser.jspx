@@ -1,0 +1,51 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:form="http://www.springframework.org/tags/form"
+        >
+
+    <div>
+        <h2>Редактировать пользователя</h2>
+        <form:form commandName="user">
+
+            <table>
+
+                <tr>
+                    <td><form:label path="password"></form:label></td>
+                    <td><form:hidden path="password"></form:hidden></td>
+                </tr>
+
+                <tr>
+                    <td><form:label path="login">Логин</form:label></td>
+                    <td><form:input path="login"></form:input></td>
+                </tr>
+
+
+                <tr>
+                    <td><form:label path="role">Статус</form:label></td>
+
+                    <td>
+                        <form:select path="role">
+                            <form:option path="role" value="1">Пользователь</form:option>
+                            <form:option path="role" value="2">Администратор</form:option>
+                        </form:select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><form:label path="email">Email</form:label></td>
+                    <td><form:input path="email"></form:input></td>
+                </tr>
+
+                <tr>
+                    <td><form:label path="info">Инфо</form:label></td>
+                    <td><form:textarea path="info" cols="35" rows="3"></form:textarea></td>
+                </tr>
+
+                <tr>
+                    <td><form:button class="submit" type="submit">Применить</form:button></td>
+                    <!--<td><form:button onclick="">Отмена</form:button></td>-->
+                </tr>
+
+            </table>
+        </form:form>
+    </div>
+</jsp:root>

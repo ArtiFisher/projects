@@ -1,0 +1,59 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+
+    <script type="text/javascript">
+
+        var date = new Date();
+        var monday = new Date();
+        var url = document.URL;
+        monday.setDate(monday.getDate()-monday.getDay()+1);
+        $(document).ready(function(){
+            $("ul.nav li a").each(function(){
+                $(this).click(function(){
+                    var shift = $(this).attr('shift');
+                    date.setDate((monday.getDate()+parseInt(shift,10)));
+                    var dateStr = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+                    if((url.substring(url.lastIndexOf("/")+1,url.length).match(/^(orders|cancels|markdish)|([0-9]{4}\-([1-9]|1[012]|)\-([1-9]|[12][0-9]|3[01]))/))||(url.substring(url.lastIndexOf("/")-10,url.lastIndexOf("/")).match(/^borsch-web/))){
+                        //(url.substring(url.lastIndexOf("/")-11,url.lastIndexOf("/")-1).match(/^borsch\-web/))
+                        if(url.lastIndexOf("/")==url.length-1)
+                            document.location.replace(url+dateStr);
+                        else
+                            document.location.replace(url+'/'+dateStr);
+                        if((url.substring(url.lastIndexOf("/")+1,url.length)).match(/^[0-9]{4}\-([1-9]|1[012]|)\-([1-9]|[12][0-9]|3[01])/))
+                            document.location.replace(url.substring(0,url.lastIndexOf("/"))+'/'+dateStr);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <div class="span2">
+        <ul class="pager">
+            <li class="previous">
+                <a href="#" id="previous">{</a>
+            </li>
+            <li><a id="dateid">week</a></li>
+            <li class="next">
+                <a href="#" id="next">}</a>
+            </li>
+        </ul>
+        <ul class="nav nav-pills nav-stacked">
+            <!--<li><a href="${pageContext.servletContext.contextPath}/admin/orders/" shift="0">Понедельник</a></li>-->
+            <li><a href="#" shift="0">Понедельник</a></li>
+            <li><a href="#" shift="1">Вторник</a></li>
+            <li><a href="#" shift="2">Среда</a></li>
+            <li><a href="#" shift="3">Четверг</a></li>
+            <li><a href="#" shift="4">Пятница</a></li>
+        </ul>
+    </div>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            dateId.click(function(){
+                    dateId.innerHTML="week2";
+                });
+        });
+    </script>
+
+</jsp:root>

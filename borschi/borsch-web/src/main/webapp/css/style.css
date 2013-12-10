@@ -1,0 +1,265 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 100.01%;
+}
+
+html {
+    min-width: 1000px;
+}
+
+div {
+    display: block;
+}
+
+/*body {*/
+    /*min-height: 100%;*/
+    /*height: 100%;*/
+    /*color: graytext;*/
+    /*font-weight: normal;*/
+    /*font-family: Arial, Verdana, Helvetica, Sans-Serif;*/
+    /*font-size: 12px;*/
+    /*line-height: 1.4;*/
+
+/*}*/
+
+#page {
+    height: auto !important;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+/*.head_line {*/
+    /*height: 40px;*/
+    /*background: #00008b;*/
+/*}*/
+
+div.head_line > div {
+    height: 40px;
+    font-size: 17px;
+    color: #fff;
+    font-family: 'PT Sans Bold', sans-serif;
+    line-height: 1;
+    text-shadow: 1px -1px 0 #992910;
+}
+
+.wrp_ctr {
+    width: 980px;
+    padding: 0 9px;
+    margin: 0 auto;
+}
+
+.head_text {
+    text-align: center;
+}
+
+#header {
+    min-height: 180px;
+    position: relative;
+    background-color: #2F72A0;
+}
+
+.login_block {
+
+    border: 0;
+    border-top: 0;
+    padding: 10px 10px 11px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    width: 150px;
+    /*background-color: #2F72A0;*/
+}
+
+.main_menu {
+    height: 54px;
+    background: #2F72A0;
+    border-bottom: 4px solid white;
+    margin: 4px 0 0;
+}
+
+dl.main_menu dt {
+    float: left;
+    height: 54px;
+    cursor: pointer;
+}
+
+dl.main_menu dt a {
+    display: block;
+    float: left;
+    padding: 0 15px;
+    height: 54px;
+    line-height: 54px;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+}
+
+dl.main_menu dt.selected {
+    position: relative;
+}
+
+dl.main_menu dt.selected a {
+    color: #003366;
+}
+
+#maincontent {
+    margin-bottom: 25px;
+    min-height: 500px;
+
+}
+
+a.logo {
+    display: block;
+    width: 200px;
+    height: 201px;
+    position: absolute;
+    top: -21px;
+    left: 0px;
+    background: url(../img/exadel.png);
+}
+
+.left_panel {
+    width: 20%;
+    float: left;
+    min-height: 400px;
+    background: #fff;
+    text-align: center;
+}
+
+/*fix*/
+.content {
+    float: left;
+    width: 83%;
+    border-left: 2px solid grey;
+     border-right: 2px solid grey;
+    min-height: 500px;
+    margin: 0;
+    padding: 0;
+}
+
+dt a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+dt a strong {
+
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 21px;
+    width: 180px;
+    display: block;
+    position: relative;
+    z-index: 1000;
+
+}
+
+dt.elem {
+    width: 180px;
+    height: 266px;
+    padding: 10px 15px 15px;
+    float: left;
+    background: #fff;
+    margin: 0 20px 0 0;
+    position: relative;
+}
+
+dt.elem a span {
+    font-size: 11px;
+    color: white;
+    z-index: 1000;
+    position: absolute;
+    top: -19px;
+    font-weight: normal !important;
+    text-align: left;
+    width: 205px;
+}
+
+dt.clear {
+    height: 22px;
+    float: none;
+    line-height: 22px;
+    clear: both;
+    width: 100%;
+    padding: 0;
+    background: none;
+    border: 0;
+}
+
+.left_foot {
+    width: 20%;
+    height: 20px;
+    float: left;
+}
+
+
+
+/*by Max*/
+#navigation {
+    font-size: 0.9em;
+
+    width: 180px;
+}
+
+#navigation ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+#navigation li {
+    list-style: none;
+}
+
+ul.top-level {
+    background: #808080;
+}
+
+ul.top-level li {
+    border-bottom: #fff solid;
+    border-top: #fff solid;
+    border-width: 1px;
+}
+
+#navigation a {
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    text-indent: 10px;
+    text-decoration: none;
+    width: 100%;
+}
+
+#navigation a:hover {
+    text-decoration: underline;
+}
+
+#navigation li:hover {
+    background: #f90;
+    position: relative;
+}
+
+
+/*Alina*/
+
+#maincontent .span3{
+    margin-top: 20px;
+
+}
+ .login-registration{
+    padding: 10px 10px 11px;
+    color: #ffffff;
+    font-family: "Comic Sans MS";
+}
+#sourse-name{
+    color: #777777 ;
+
+
+ }
+#div-logo{
+    padding: 10px 10px 11px;
+}
+

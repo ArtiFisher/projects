@@ -1,0 +1,45 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+        >
+    <script type="text/javascript">
+        jQuery(document).ready(function(){$("#success").hide()})
+        function addSubmit() {
+            var name = $('#dishName').val()
+            var price = $('#dishPrice').val()
+            var info = $('#dishInfo').val()
+            $.post("${pageContext.servletContext.contextPath}/admin/adddish",
+                    {name: name,price: price,info: info}).done($("#success").show(1000))
+        }
+    </script>
+    <div class="content">
+        <c:if test="${not empty success}">
+           <c:out value="${success}"/>
+        </c:if>
+
+        <div class="span3" >
+        <div class="form-horizontal">
+            <ul>
+                <li>
+                    Название
+                    <input name="name" id="dishName"/>
+                </li>
+                <li>
+                    Цена
+                    <input name="price" id="dishPrice"/>
+                </li>
+                <li>
+                    Информация
+                    <textarea name="info" id="dishInfo">
+                        <jsp:text/>
+                    </textarea>
+                </li>
+                <li>
+                    <input type="button" value="Добавить блюдо" name="add" onclick="addSubmit()" class="btn"/>
+                </li>
+            </ul>
+            <div class="alert alert-success" id = "success">Блюдо добавленно</div>
+        </div>
+     </div>
+    </div>
+</jsp:root>

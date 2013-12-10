@@ -1,0 +1,9 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+
+
+    <div>
+        <h2>Регистрация прошла успешно!</h2>
+    </div>
+
+
+ </jsp:root>

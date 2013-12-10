@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="com.exadel.borsch.web"/>
+
+    <context:property-placeholder properties-ref="properties"/>
+
+    <bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:/application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="webexpressionHandler"
+          class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+
+    <bean id="dishService" class="com.exadel.borsch.service.impl.DishServiceImpl"/>
+
+    <bean id="userService" class="com.exadel.borsch.service.impl.UserServiceImpl"/>
+
+    <bean id="dateService" class="com.exadel.borsch.service.impl.DateServiceImpl"/>
+
+    <bean id="orderService" class="com.exadel.borsch.service.impl.OrderServiceImpl"/>
+
+    <bean id="dishInOrderService" class="com.exadel.borsch.service.impl.DishInOrderServiceImpl"/>
+</beans>

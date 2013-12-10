@@ -1,0 +1,60 @@
+<jsp:root
+        xmlns:jsp="http://java.sun.com/JSP/Page"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns="http://www.w3.org/1999/xhtml"
+        version="2.0">
+
+    <div class="content">
+<!--<<<<<<< HEAD-->
+        <!--<table class = "table table-hover">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>id заказа</th>-->
+            <!--<th>дата</th>-->
+            <!--<th>логин user</th>-->
+            <!--<th>блюда</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+            <!--<tbody>-->
+            <!--<c:forEach var="order" items="${orders}">-->
+                <!--<tr class="elem">-->
+                    <!--<th>${order.id}</th>-->
+                    <!--<th>${order.data}</th>-->
+                    <!--<c:forEach var="user" items="${users}">-->
+                        <!--<c:if test="${order.userId==user.id}">-->
+                           <!--<th>${user.login}</th>-->
+                        <!--</c:if>-->
+                    <!--</c:forEach>-->
+                    <!--<th>-->
+                    <!--<c:forEach var="dio" items="${dios}">-->
+                        <!--<c:if test="${dio.oorder==order.id}">-->
+                            <!--<c:forEach var="dish" items="${dishes}">-->
+                                <!--<c:if test="${dio.dishId==dish.id}">-->
+                                    <!--${dish.name}-->
+                                <!--</c:if>-->
+                            <!--</c:forEach>-->
+                        <!--</c:if>-->
+                    <!--</c:forEach>-->
+                    <!--</th>-->
+                <!--</tr>-->
+<!--=======-->
+
+        <dl>
+            <c:forEach var="order" items="${orders}">
+                <dt class="elem">
+                    id заказа:${order.id}
+                    дата:${order.data}
+                    Логин:${order.userLogin}
+                    <br/>
+                    <c:forEach items="${order.dishes}" var="item">
+                        ${item.dishName}  ${item.onumber}<br/>
+                    </c:forEach>
+
+                </dt>
+
+            </c:forEach>
+        </dl>
+        <!--</tbody>-->
+       <!--</table>-->
+    </div>
+</jsp:root>

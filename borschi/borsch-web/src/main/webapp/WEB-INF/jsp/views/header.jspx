@@ -1,0 +1,34 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:security="http://www.springframework.org/security/tags"
+          xmlns:sec="http://www.springframework.org/security/tags">
+
+    <div id="header">
+        <div id="div-logo">
+            <img  src="${pageContext.servletContext.contextPath}/img/exadel.png"></img>
+        </div>
+            <div id="div_login_block" class="login_block">
+            <sec:authorize access="isAuthenticated()">
+                <sec:authentication property="principal.username" var="login"/>
+
+                <div id="div_login" class = "login-registration">
+                    <strong>${login}</strong>
+                </div>
+                <div id="div_logout" >
+                    <a id="a_logout" href='${pageContext.servletContext.contextPath}/logout' class = "login-registration">Выход</a>
+                </div>
+            </sec:authorize>
+            <security:authorize access="isAnonymous()">
+                <div id="enter">
+
+                    <a href='${pageContext.servletContext.contextPath}/enter' class="login-registration"> Войти</a>
+                </div>
+                <div>
+                    <a href='${pageContext.servletContext.contextPath}/registration' class= "login-registration">Регистрация</a>
+
+                </div>
+            </security:authorize>
+        </div>
+    </div>
+
+
+</jsp:root>

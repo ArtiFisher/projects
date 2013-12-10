@@ -1,0 +1,86 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml"
+          version="2.0" xmlns:tiles="http://tiles.apache.org/tags-tiles"
+          xmlns:sec="http://www.springframework.org/security/tags"
+         >
+
+    <html>
+    <head>
+        <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+        <jsp:directive.page pageEncoding="UTF-8"/>
+
+        <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/style.css/"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/bootstrap-responsive.css"/>
+        <link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/css/bootstrap.css"/>
+
+        <title>BORSH!</title>
+        <![CDATA[<script src="${pageContext.servletContext.contextPath}/js/jquery-2.0.3.min.js" ></script>]]>
+        <![CDATA[<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>]]>
+        <!--<![CDATA[<script src="${pageContext.servletContext.contextPath}/js/scripts/jtable/jquery.jtable.js"></script>]]>-->
+
+
+    </head>
+    <body>
+
+    <div id="page">
+        <div class="wrp_ctr">
+            <tiles:insertAttribute name="header"/>
+            <div class="navbar">
+                <div class="navbar-inner">
+                        <div class="container">
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <div class="btn-group">
+
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    Работа с пользователями
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="${pageContext.servletContext.contextPath}/admin/users/?edit=true">Редактировать пользователя</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="${pageContext.servletContext.contextPath}/admin/orders">Заказы</a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.servletContext.contextPath}/admin/cancels">Отмены</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    Работа с меню
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <a href="${pageContext.servletContext.contextPath}/admin/dishes">Редактировать блюдо</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="${pageContext.servletContext.contextPath}/admin/adddish">Добавить блюдо</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="${pageContext.servletContext.contextPath}/admin/markdish">Редактировать меню</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </sec:authorize>
+                </div>
+                </div>
+            </div>
+
+            <div id="maincontent">
+                <tiles:insertAttribute name="left_panel"/>
+                <tiles:insertAttribute name="body"/>
+            </div>
+        </div>
+    </div>
+    <tiles:insertAttribute name="footer"/>
+
+    </body>
+    </html>
+</jsp:root>

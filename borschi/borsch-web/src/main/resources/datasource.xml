@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringSecurityFiltersConfiguredInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/util
+                            http://www.springframework.org/schema/util/spring-util-3.1.xsd
+                            http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		                    http://www.springframework.org/schema/context
+		                    http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		                    http://www.springframework.org/schema/tx
+		                    http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		                    http://www.springframework.org/schema/aop
+		                    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		                    http://www.springframework.org/schema/jee
+		                    http://www.springframework.org/schema/jee/spring-jee-3.1.xsd">
+    <!--<jee:jndi-lookup id="dataSource" jndi-name="java:/comp/env/jdbc/borsh"/>-->
+    <bean id="dataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/borsh"/>
+        <property name="user" value="root"/>
+        <property name="password" value="q1w2e3r4"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="fetchSize" value="20"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="orderDAO" class="com.exadel.borsch.dao.impl.OrderDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="dishInOrderDAO" class="com.exadel.borsch.dao.impl.DishInOrderDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="dishDAO" class="com.exadel.borsch.dao.impl.DishDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="userDAO" class="com.exadel.borsch.dao.impl.UserDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,99 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:form="http://www.springframework.org/tags/form"
+        >
+
+
+    <div>
+        <form:form commandName="user">
+            <h2>Регистрация</h2>
+
+            <table>
+                <tr>
+                    <td>Логин:</td>
+                    <td><form:input path="login" id="login" onblur="checkLogin()"/></td>
+                    <td id="response"></td>
+                </tr>
+                <tr>
+                    <td>Пароль:</td>
+                    <td><form:password path="password" id="password" pattern=".{6,250}" onblur="checkPassword()"/></td>
+                    <td id="passwordComment"></td>
+
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><form:input path="email" id="email" type="email" pattern="(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})"
+                                    onblur="checkEmail()"/></td>
+                    <td id="emailComment"></td>
+                </tr>
+                <tr>
+                    <td>Инфо:</td>
+                    <td><form:textarea cols="40" rows="5" path="info" id="info"/></td>
+                </tr>
+
+                <tr>
+                    <td><form:button class="submit" type="submit">Зарегистрироваться</form:button></td>
+                </tr>
+
+            </table>
+
+        </form:form>
+    </div>
+
+    <script type="text/javascript">
+
+        function checkLogin() {
+
+            var login = $('#login').val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "checkUser/login",
+                data: "login=" + login,
+                success: function (response) {
+                    $('#response').html(response);
+                },
+                error: function (e) {
+                    alert('Error: ' + e);
+                }
+            })
+
+        }
+
+        function checkPassword() {
+
+            var password = $('#password').val();
+
+            var pattern = /.{6,250}/;
+            var regexp = new RegExp(pattern);
+            var result = regexp.exec(password);
+
+            if (result) {
+                $('#passwordComment').html("The password is fine!");
+            }
+            else {
+                $('#passwordComment').html("The password must contain from 6 to 250 chars!");
+            }
+        }
+
+        function checkEmail() {
+
+            var email = $('#email').val();
+
+            var pattern = /(\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3})/;
+            var regexp = new RegExp(pattern);
+            var result = regexp.exec(email);
+
+            if (result) {
+                $('#emailComment').html("The email is fine!");
+            }
+            else {
+                $('#emailComment').html("The email is incorrect!");
+            }
+
+        }
+
+    </script>
+
+</jsp:root>

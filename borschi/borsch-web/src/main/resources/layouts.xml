@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+    <!--<definition name="default" template="WEB-INF/jsp/layouts/default.jspx">-->
+    <definition name="default" template="/WEB-INF/jsp/layouts/default.jspx">
+        <put-attribute name="header" value="/WEB-INF/jsp/views/header.jspx"/>
+        <put-attribute name="left_panel" value="/WEB-INF/jsp/views/navigation.jspx"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/views/footer.jspx"/>
+        <put-attribute name="body" value=""/>
+    </definition>
+
+
+
+    <definition name="index" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/body.jspx"/>
+    </definition>
+
+    <definition name="index.date" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/body.jspx"/>
+    </definition>
+
+    <definition name="enter" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/enter.jspx"/>
+    </definition>
+
+    <definition name="admin/showAddDishForm" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/addDish.jspx"/>
+    </definition>
+
+    <definition name="registration" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/registration.jspx"/>
+    </definition>
+
+
+
+    <definition name="dishes.list" extends="default">
+    <put-attribute name="body" value="/WEB-INF/jsp/views/dishes-list.jspx"/>
+    </definition>
+
+    <definition name="markDish" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/markDish.jspx"/>
+    </definition>
+
+    <definition name="admin.orders" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/orders.jspx"/>
+    </definition>
+
+    <definition name="admin.cancels" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/cancels.jspx"/>
+    </definition>
+
+    <definition name="admin/users" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/users.jspx"/>
+    </definition>
+
+    <definition name="admin/editUser" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/editUser.jspx"/>
+    </definition>
+
+    <definition name="admin/editDish" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/editDish.jspx"/>
+    </definition>
+
+    <definition name="admin/addUser" extends="default">
+        <put-attribute name="body" value="/WEB-INF/jsp/views/admin/addUser.jspx"/>
+    </definition>
+
+</tiles-definitions>

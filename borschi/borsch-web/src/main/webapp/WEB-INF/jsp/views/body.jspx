@@ -1,0 +1,21 @@
+
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+        >
+
+
+    <div class="content">
+    <dl>
+    <c:forEach var="dish" items="${dishes}">
+    <dt class="elem">
+    <a href="#" id="sourse-name">
+    <strong>${dish.name}</strong>
+    </a>
+    <img src="${pageContext.servletContext.contextPath}/img/${dish.img}" width="150" height="150"/>
+        <strong id = "info">${dish.info}</strong>
+        <br/><strong id = "price">Price: ${dish.price}</strong>
+    </dt>
+    </c:forEach>
+    </dl>
+    </div>
+</jsp:root>
