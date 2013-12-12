@@ -20,7 +20,6 @@ public class Algorithm {
         input.nextLine();
         input.nextLine();
         input.nextLine();
-        System.out.println(size);
         for (int i = 0; i < size; i++)
             V.add(new Vertex(i + 1));
 
@@ -35,7 +34,6 @@ public class Algorithm {
                     newEdge(row, col);
                 col++;
             }
-            System.out.println();
 
         }
 //        for(Vertex v:V){
@@ -115,36 +113,42 @@ public class Algorithm {
 
         }
 
+        System.out.println("A");
+
         for(Vertex v:A){
-            System.out.print(v.number + " - ");
-            for(Vertex g:v.neighbors){
-                System.out.print(g.number + " " + g + "    ");
-            }
-            System.out.println();
+            System.out.print(v.number);
+            System.out.print("  ");
+//            System.out.print(" - ");
+//            for(Vertex g:v.neighbors){
+//                System.out.print(g.number + " ");
+//            }
+            //System.out.println();
 
         }
         System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println("N");
 
         for(Vertex v:N){
-            System.out.print(v.number + " - ");
-            for(Vertex g:v.neighbors){
-                System.out.print(g.number + " " + g + "    ");
-            }
-            System.out.println();
+            System.out.print(v.number);
+            System.out.print("  ");
+//            System.out.print(" - ");
+//            for(Vertex g:v.neighbors){
+//                System.out.print(g.number+" ");
+//            }
+            //System.out.println();
 
         }
         System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println("R");
 
         for(Vertex v:R){
-            System.out.print(v.number + " - ");
-            for(Vertex g:v.neighbors){
-                System.out.print(g.number + " " + g + "    ");
-            }
-            System.out.println();
+            System.out.print(v.number);
+            System.out.print("  ");
+            //System.out.print(" - ");
+//            for(Vertex g:v.neighbors){
+//                System.out.print(g.number + " ");
+//            }
+            //System.out.println();
 
         }
 
