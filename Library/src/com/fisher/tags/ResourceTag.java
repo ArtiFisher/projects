@@ -1,27 +1,20 @@
-package by.bsuir.admission.tags;
+package com.fisher.tags;
+
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import javax.servlet.jsp.*;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.TagSupport;
-import org.apache.log4j.Logger;
 
-/**
- * This tag prints a property from resource file by key
- * This tag chooses language on attribute <code>language</code> keeping in sessions
- * @author AndreAY
- */
+
 public class ResourceTag extends TagSupport {
 
     public static final String RESOURCE_PATH = "by.bsuir.admission.resource.Resource";
     public static final String PARAM_LANGUAGE = "language";
     public static final String NO_RESOURSE = "error.no.resource";
     /**
-     * This is name of property in resource file  
+     * This is name of property in resource file
      */
     private String key;
     /**
