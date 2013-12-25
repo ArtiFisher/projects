@@ -29,27 +29,12 @@ public class Algorithm {
             Scanner line = new Scanner(input.nextLine());
             line.nextInt();
             while (line.hasNextInt()) {
-                //System.out.print(line.nextInt() + " ");
                 if (line.nextInt() == 1)
                     newEdge(row, col);
                 col++;
             }
 
         }
-//        for(Vertex v:V){
-//            System.out.print(v.number + " - ");
-//            for(Vertex g:v.neighbors){
-//                System.out.print(g.number + " " + g + "    ");
-//            }
-//            System.out.println();
-//
-//        }
-//
-//        for(Edge e:E){
-//            System.out.print(e.from + " - "+ e.to+"   "+e);
-//            System.out.println();
-//
-//        }
         for (Vertex v : V) {
             if (v.neighbors.size() < size - 1) {
                 A.add(v);
@@ -61,39 +46,6 @@ public class Algorithm {
             if(!(A.contains(v)||N.contains(v)))
                 R.add(v);
         }
-
-//        for(Vertex v:A){
-//            System.out.print(v.number + " - ");
-//            for(Vertex g:v.neighbors){
-//                System.out.print(g.number + " " + g + "    ");
-//            }
-//            System.out.println();
-//
-//        }
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//
-//        for(Vertex v:N){
-//            System.out.print(v.number + " - ");
-//            for(Vertex g:v.neighbors){
-//                System.out.print(g.number + " " + g + "    ");
-//            }
-//            System.out.println();
-//
-//        }
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//
-//        for(Vertex v:R){
-//            System.out.print(v.number + " - ");
-//            for(Vertex g:v.neighbors){
-//                System.out.print(g.number + " " + g + "    ");
-//            }
-//            System.out.println();
-//
-//        }
 
         boolean undone=true;
 
@@ -118,12 +70,6 @@ public class Algorithm {
         for(Vertex v:A){
             System.out.print(v.number);
             System.out.print("  ");
-//            System.out.print(" - ");
-//            for(Vertex g:v.neighbors){
-//                System.out.print(g.number + " ");
-//            }
-            //System.out.println();
-
         }
         System.out.println();
         System.out.println("N");
@@ -131,11 +77,6 @@ public class Algorithm {
         for(Vertex v:N){
             System.out.print(v.number);
             System.out.print("  ");
-//            System.out.print(" - ");
-//            for(Vertex g:v.neighbors){
-//                System.out.print(g.number+" ");
-//            }
-            //System.out.println();
 
         }
         System.out.println();
@@ -144,11 +85,6 @@ public class Algorithm {
         for(Vertex v:R){
             System.out.print(v.number);
             System.out.print("  ");
-            //System.out.print(" - ");
-//            for(Vertex g:v.neighbors){
-//                System.out.print(g.number + " ");
-//            }
-            //System.out.println();
 
         }
 
