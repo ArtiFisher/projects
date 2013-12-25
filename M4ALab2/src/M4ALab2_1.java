@@ -46,7 +46,7 @@ public class M4ALab2_1 {
         }
 
         for(int n=0;n<T/tau+1;n++){
-            for(int i=0; i<N/h; i++)
+            for(int i=0; i<N/h+1; i++)
                 System.out.print(y[i][n]+"\t");
             System.out.println();
         }
