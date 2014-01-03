@@ -4,25 +4,25 @@
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
         <servlet-name>ServletController</servlet-name>
-        <servlet-class>by.bsu.library.servlet.ServletController</servlet-class>
+        <servlet-class>by.epam.library.servlet.ServletController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletController</servlet-name>
         <url-pattern>/ServletController</url-pattern>
     </servlet-mapping>
 
-    <filter>
-        <filter-name>encodingfilter</filter-name>
-        <filter-class>by.bsu.library.filter.EncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>encodingfilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!--<filter>-->
+        <!--<filter-name>encodingfilter</filter-name>-->
+        <!--<filter-class>by.epam.library.filter.EncodingFilter</filter-class>-->
+        <!--<init-param>-->
+            <!--<param-name>encoding</param-name>-->
+            <!--<param-value>UTF-8</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>encodingfilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
     <session-config>
         <session-timeout>
