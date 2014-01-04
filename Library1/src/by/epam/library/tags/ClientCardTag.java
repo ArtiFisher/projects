@@ -1,6 +1,6 @@
 package by.epam.library.tags;
 
-import by.epam.library.model.Book;
+import by.epam.library.beans.Book;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;

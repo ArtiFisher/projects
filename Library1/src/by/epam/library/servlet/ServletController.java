@@ -7,23 +7,20 @@ package by.epam.library.servlet;
 import by.epam.library.actions.ActionCommand;
 import by.epam.library.actions.ActionFactory;
 import by.epam.library.actions.commands.ResultAnswer;
-import by.epam.library.connectionpool.ConnectionPool;
-import by.epam.library.dao.AdminDao;
-import by.epam.library.dao.AuthentificationDao;
-import by.epam.library.dao.BookDao;
-import by.epam.library.dao.ClientDao;
+import by.epam.library.database.connectionpool.ConnectionPool;
+import by.epam.library.database.dao.EntryDAO;
+import by.epam.library.database.dao.LibrarianDAO;
+import by.epam.library.database.dao.BookDao;
+import by.epam.library.database.dao.ReaderDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
-/**
- *
- * @author Pasha
- */
 public class ServletController extends HttpServlet {
     static {
         new DOMConfigurator().doConfigure("C:\\Users\\Artem\\IdeaProjects\\Library1\\src\\log4j.xml", LogManager.getLoggerRepository());
@@ -38,10 +35,10 @@ public class ServletController extends HttpServlet {
     private static final String AUTHORIZATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
 
     private ConnectionPool connector;
-    private AdminDao adm;
-    private AuthentificationDao ad;
+    private LibrarianDAO adm;
+    private EntryDAO ad;
     private BookDao bd;
-    private ClientDao cd;
+    private ReaderDAO cd;
     private int poolSize = 20;
     public ServletController() {
         super();
@@ -51,13 +48,13 @@ public class ServletController extends HttpServlet {
     public void init() throws ServletException {
         try {
             connector = new ConnectionPool(poolSize);
-            adm = new AdminDao();
+            adm = new LibrarianDAO();
             adm.setConnector(connector);
-            ad = new AuthentificationDao();
+            ad = new EntryDAO();
             ad.setConnector(connector);
             bd = new BookDao();
             bd.setConnector(connector);
-            cd = new ClientDao();
+            cd = new ReaderDAO();
             cd.setConnector(connector);
         } catch (SQLException ex) {
             logger.error(ex);

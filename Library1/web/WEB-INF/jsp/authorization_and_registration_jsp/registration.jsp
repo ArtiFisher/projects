@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <fmt:setLocale value="${loc}" scope="session"/>
-<fmt:setBundle basename="resources.pagecontent" var="rb"/>
+<fmt:setBundle basename="resources.pagecontent_en_US" var="rb"/>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,13 +33,6 @@
                     <td><fmt:message key="field.surname" bundle="${rb}"/></td>
                     <td><input type="text" name="surname"></td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td><fmt:message key="field.age" bundle="${rb}"/></td>
-                    <td><input type="text" name="age"></td>
-                    <td><font size=2 color=red>
-                            <c:out value="${errorAge}"/>
-                        </font></td>
                 </tr>
                 <tr>
                     <td><fmt:message key="field.login" bundle="${rb}"/></td>
