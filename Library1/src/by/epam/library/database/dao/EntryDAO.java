@@ -11,8 +11,8 @@ import org.apache.log4j.Logger;
 public class EntryDAO implements AbstractDao{
     static  Logger logger = Logger.getLogger( EntryDAO.class);
     private static final String SQL_SELECT_PASSWORD_BY_LOGIN = "SELECT password FROM entrydata WHERE login=?";
-    private static final String SQL_SELECT_READER_INFO_BY_LOGIN_AND_PASSWORD = "SELECT * FROM reader r, entrydata e WHERE r.id = e.userid AND e.login = ? AND e.password = ?";
-    private static final String SQL_SELECT_LIBRARIAN_INFO_BY_LOGIN_AND_PASSWORD = "SELECT * FROM librarian r, entrydata e WHERE r.id = e.userid AND e.login = ? AND e.password = ?";
+    private static final String SQL_SELECT_READER_INFO_BY_LOGIN_AND_PASSWORD = "SELECT * FROM reader r, entrydata e WHERE r.entryid = e.id AND e.login = ? AND e.password = ?";
+    private static final String SQL_SELECT_LIBRARIAN_INFO_BY_LOGIN_AND_PASSWORD = "SELECT * FROM librarian r, entrydata e WHERE r.entryid = e.id AND e.login = ? AND e.password = ?";
     private ConnectionPool connector;
 
     public EntryDAO() {

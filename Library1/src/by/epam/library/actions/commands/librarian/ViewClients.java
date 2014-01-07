@@ -6,7 +6,7 @@ import by.epam.library.database.dao.EntryDAO;
 import by.epam.library.database.dao.LibrarianDAO;
 import by.epam.library.database.dao.BookDao;
 import by.epam.library.database.dao.ReaderDAO;
-import by.epam.library.beans.Client;
+import by.epam.library.beans.Reader;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,9 +26,9 @@ public class ViewClients implements ActionCommand{
             throws InterruptedException, SQLException, ServletException, IOException
     {
         ResultAnswer result = new ResultAnswer();
-        List<Client> clients = new ArrayList<Client>();
-        clients.addAll(adm.viewAllClients());
-        request.setAttribute(strClients, clients);
+        List<Reader> readers = new ArrayList<Reader>();
+        readers.addAll(adm.viewAllClients());
+        request.setAttribute(strClients, readers);
         result.setPage(strViewClients);
         session1.setAttribute("prevPage", "ServletController?method=view_clients" );
         return result;

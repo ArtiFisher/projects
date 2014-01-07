@@ -7,7 +7,7 @@ import by.epam.library.database.dao.LibrarianDAO;
 import by.epam.library.database.dao.BookDao;
 import by.epam.library.database.dao.ReaderDAO;
 import by.epam.library.beans.Book;
-import by.epam.library.beans.Client;
+import by.epam.library.beans.Reader;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -37,9 +37,9 @@ public class DeleteClient implements ActionCommand{
         }
         adm.deleteClient(idCl);
 
-        List<Client> clients = new ArrayList<Client>();
-        clients.addAll(adm.viewAllClients());
-        request.setAttribute(strClients, clients);
+        List<Reader> readers = new ArrayList<Reader>();
+        readers.addAll(adm.viewAllClients());
+        request.setAttribute(strClients, readers);
         result.setPage(strDeleteClients);
         return result;
     }

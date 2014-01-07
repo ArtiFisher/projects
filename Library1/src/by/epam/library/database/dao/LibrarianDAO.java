@@ -8,7 +8,7 @@ import by.epam.library.beans.EntryData;
 import by.epam.library.beans.Librarian;
 import by.epam.library.database.connectionpool.ConnectionPool;
 import by.epam.library.beans.Book;
-import by.epam.library.beans.Client;
+import by.epam.library.beans.Reader;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +23,7 @@ public class LibrarianDAO implements  AbstractDao{
 
     private static final String SQL_SELECT_ALL_LIBRARIANS = "SELECT * FROM librarian";
     private static final String SQL_SELECT_ALL_READERS = "SELECT * FROM reader";
-    private static final String SQL_SELECT_ID_FROM_ENTRYDATA = "SELECT * FROM entrydata WHERE (login=?)";
+    private static final String SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA = "SELECT * FROM entrydata WHERE (login=?)";
     private static final String SQL_SELECT_ALL_BOOKS = "SELECT * FROM book";
     private static final String SQL_SELECT_BOOK_BY_ID_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE bookid=?";
     private static final String SQL_INSERT_READER = "INSERT INTO reader VALUES(?,?,?,?,?)";
@@ -68,8 +68,8 @@ public class LibrarianDAO implements  AbstractDao{
         }
         return librarians;
     }
-    public List<Client> viewAllClients() throws InterruptedException, SQLException{
-        List<Client> clients = new ArrayList<Client>();
+    public List<Reader> viewAllClients() throws InterruptedException, SQLException{
+        List<Reader> readers = new ArrayList<Reader>();
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
         try {
@@ -80,12 +80,12 @@ public class LibrarianDAO implements  AbstractDao{
                 String name = rs.getString(2);
                 String surname = rs.getString(3);
                 int age = rs.getInt(4);
-                Client client = new Client();
-                client.setId(id);
-                client.setAge(age);
-                client.setName(name);
-                client.setSurname(surname);
-                clients.add(client);
+                Reader reader = new Reader();
+                reader.setId(id);
+                reader.setAge(age);
+                reader.setName(name);
+                reader.setSurname(surname);
+                readers.add(reader);
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -93,15 +93,15 @@ public class LibrarianDAO implements  AbstractDao{
             connector.closeConnection(connection);
             ps.close();
         }
-        return clients;
+        return readers;
     }    
-    public void addClient(Client client,EntryData li) throws InterruptedException, SQLException{
+    public void addClient(Reader reader,EntryData li) throws InterruptedException, SQLException{
        Connection connection = connector.getConnection();
        PreparedStatement ps = null ;
        try{
 
             int clientId=0;
-            ps = connection.prepareStatement(SQL_SELECT_ID_FROM_ENTRYDATA);
+            ps = connection.prepareStatement(SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA);
             ps.setString(1, li.getLogin());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -116,9 +116,9 @@ public class LibrarianDAO implements  AbstractDao{
 
             ps = connection.prepareStatement(SQL_INSERT_READER);
             ps.setInt(1, clientId);
-            ps.setString(2,client.getName());
-            ps.setString(3,client.getSurname());
-            ps.setInt(4,client.getAge());
+            ps.setString(2, reader.getName());
+            ps.setString(3, reader.getSurname());
+            ps.setInt(4, reader.getAge());
             ps.setInt(5, clientId);
             ps.executeUpdate();
        }
@@ -136,7 +136,7 @@ public class LibrarianDAO implements  AbstractDao{
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
         try {
-            ps = connection.prepareStatement(SQL_SELECT_ID_FROM_ENTRYDATA);
+            ps = connection.prepareStatement(SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA);
             ps.setString(1, login);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

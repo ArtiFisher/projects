@@ -4,7 +4,7 @@ package by.epam.library.beans;
 public class Librarian {
     private String name;
     private String surname;
-    private int age;
+    private int age=20;
     private EntryData entryData;
 
     public Librarian() {

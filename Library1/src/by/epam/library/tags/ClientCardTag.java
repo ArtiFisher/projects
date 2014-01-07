@@ -43,7 +43,7 @@ public class ClientCardTag extends TagSupport {
             out.write("<td>"+resource.getString("book_title")+"</td>");
             out.write("<td>"+resource.getString("book_author")+"</td>");
             out.write("<td>"+resource.getString("book_year")+"</td>");
-            out.write("<td>"+resource.getString("book_numbaerOfCopies")+"</td>");
+            out.write("<td>"+resource.getString("book_numberOfCopies")+"</td>");
             for (int i = 0; i < books.size(); i++) {               
                     out.write("<tr>");
                     out.write("<td>" + books.get(i).getId() + "</td>");

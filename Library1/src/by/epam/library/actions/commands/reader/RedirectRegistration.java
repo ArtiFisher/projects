@@ -57,15 +57,15 @@ public class RedirectRegistration implements ActionCommand {
             String name = request.getParameter(atrName);
             String surname = request.getParameter(atrSurname);
             int age = Integer.parseInt(request.getParameter(atrAge));
-            Client client = new Client();
-            client.setAge(age);
-            client.setName(name);
-            client.setSurname(surname);
+            Reader reader = new Reader();
+            reader.setAge(age);
+            reader.setName(name);
+            reader.setSurname(surname);
             EntryData li = new EntryData();
             li.setLogin(login);
             li.setPass(password);
             if (adm.isLoginUnique(login) == true) {
-                adm.addClient(client, li);
+                adm.addClient(reader, li);
                 page = strShowReg;
                 result.setPage(page);
                 result.setIsForward(false);

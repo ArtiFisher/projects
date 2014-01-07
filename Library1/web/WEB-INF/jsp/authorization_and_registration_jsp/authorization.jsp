@@ -8,7 +8,7 @@
 <c:if test="${flag==1}">
     <fmt:setLocale value="${loc}" scope="session"/>
 </c:if>
-<fmt:setBundle basename="resources.pagecontent" var="rb"/>
+<fmt:setBundle basename="resources.pagecontent_en_US" var="rb"/>
 
 <html>
     <head>

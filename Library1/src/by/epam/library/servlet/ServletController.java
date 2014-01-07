@@ -23,7 +23,7 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 public class ServletController extends HttpServlet {
     static {
-        new DOMConfigurator().doConfigure("C:\\Users\\Artem\\IdeaProjects\\Library1\\src\\log4j.xml", LogManager.getLoggerRepository());
+        new DOMConfigurator().doConfigure("/log4j.xml", LogManager.getLoggerRepository());
     }
     static Logger logger = Logger.getLogger(ServletController.class);
 
@@ -68,7 +68,7 @@ public class ServletController extends HttpServlet {
     private void requestProcessing(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InterruptedException, SQLException {
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
-        ResultAnswer result = new ResultAnswer();
+        ResultAnswer result;
         HttpSession session = request.getSession();
         try{
             Integer.parseInt(session.getAttribute(FLAG).toString());

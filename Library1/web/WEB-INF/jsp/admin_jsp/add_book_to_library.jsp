@@ -51,7 +51,7 @@
                         </font></td>
                 </tr>
                 <tr>
-                    <td><fmt:message key="book_numbaerOfCopies" bundle="${rb}"/></td>
+                    <td><fmt:message key="book_numberOfCopies" bundle="${rb}"/></td>
                     <td><input type="text" name="copiesNumber"></td>
                     <td><font size=2 color=red>
                             <c:out value="${errorNumOfCopies}"/>

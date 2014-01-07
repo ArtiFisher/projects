@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Client {
+public class Reader {
     private int id;
     private String name;
     private String surname;
-    private int age;
+    private int age=20;
     private List <Book> books = new ArrayList<Book>();
 
-    public Client() {
+    public Reader() {
     }
 
     public int getAge() {
@@ -58,7 +58,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" + "id=" + id + "name=" + name + "surname=" + surname + "age=" + age + "books=" + books + '}';
+        return "Reader{" + "id=" + id + "name=" + name + "surname=" + surname + "age=" + age + "books=" + books + '}';
     }
 
    

@@ -34,15 +34,15 @@
                 <td><fmt:message key="field.surname" bundle="${rb}"/></td>
                 <td><fmt:message key="field.age" bundle="${rb}"/></td>
             </tr>
-            <c:forEach var="client" items="${clients}">
+            <c:forEach var="reader" items="${readers}">
                 <form action="ServletController?method=delete_client_from_db" method="POST">
                     <tr>
                         
-                        <td>${client.name}</td>
-                        <td>${client.surname}</td>
-                        <td>${client.age}</td>
+                        <td>${reader.name}</td>
+                        <td>${reader.surname}</td>
+                        <td>${reader.age}</td>
                         <td>
-                            <input type="hidden" name="idCl" value="${client.id}"/>
+                            <input type="hidden" name="idCl" value="${reader.id}"/>
                             <input type="submit" value=<fmt:message key="button_delete_clients" bundle="${rb}"/>>
                         </td>
                     </tr>

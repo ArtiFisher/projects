@@ -44,8 +44,8 @@ public class ReaderDAO implements AbstractDao{
 
                ps = connection.prepareStatement(SQL_INSERT_INFO_TO_READER_BOOK);
                ps.setInt(1, 0);
-               ps.setInt(2, bookID);
-               ps.setInt(3, clientID);
+               ps.setInt(2, clientID);
+               ps.setInt(3, bookID);
                ps.executeUpdate();
 
                ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
@@ -75,8 +75,8 @@ public class ReaderDAO implements AbstractDao{
 
                ps = connection.prepareStatement(SQL_INSERT_INFO_TO_READER_BOOK);
                ps.setInt(1, 0);
-               ps.setInt(2, bookID);
-               ps.setInt(3, ID);
+               ps.setInt(2, ID);
+               ps.setInt(3, bookID);
                ps.executeUpdate();
                
                ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
@@ -155,8 +155,8 @@ public class ReaderDAO implements AbstractDao{
         Connection connection = connector.getConnection();
         try {
             ps = connection.prepareStatement(SQL_SELECT_BOOK_FROM_READER_BOOK);
-            ps.setInt(1, idBook);
-            ps.setInt(2, idClient);
+            ps.setInt(1, idClient);
+            ps.setInt(2, idBook);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 idOrder = rs.getInt(1);

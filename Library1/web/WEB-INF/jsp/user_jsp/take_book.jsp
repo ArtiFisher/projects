@@ -37,7 +37,7 @@
             <td><fmt:message key="book_title" bundle="${rb}"/></td>
             <td><fmt:message key="book_author" bundle="${rb}"/></td>
             <td><fmt:message key="book_year" bundle="${rb}"/></td>
-            <td><fmt:message key="book_numbaerOfCopies" bundle="${rb}"/></td>
+            <td><fmt:message key="book_numberOfCopies" bundle="${rb}"/></td>
             <c:forEach var="book" items="${books}">
                 <form action="ServletController?method=update_db_after_taking_book" method="POST">
                     <tr>
