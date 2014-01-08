@@ -23,7 +23,7 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 public class ServletController extends HttpServlet {
     static {
-        new DOMConfigurator().doConfigure("/log4j.xml", LogManager.getLoggerRepository());
+        new DOMConfigurator().doConfigure("C:\\Users\\Artem\\IdeaProjects\\Library1\\src\\log4j.xml", LogManager.getLoggerRepository());
     }
     static Logger logger = Logger.getLogger(ServletController.class);
 
@@ -83,7 +83,9 @@ public class ServletController extends HttpServlet {
                 response.setContentType(CONTEXT_TYPE);
                 request.getRequestDispatcher(result.getPage()).forward(request, response);
             } else {
-                response.sendRedirect(result.getPage());
+                //response.sendRedirect(result.getPage());
+                response.setContentType(CONTEXT_TYPE);
+                request.getRequestDispatcher(result.getPage()).forward(request, response);
             }
         } catch (NullPointerException e) {
             request.getRequestDispatcher(AUTHORIZATION_JSP).forward(request, response);

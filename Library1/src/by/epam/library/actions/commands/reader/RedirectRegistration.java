@@ -24,7 +24,6 @@ public class RedirectRegistration implements ActionCommand {
     private static final String atrLogin = "login";
     private static final String atrPassword = "password";
     private static final String atrID = "ID";
-    private static final String atrAge = "age";
     private static final String atrName = "name";
     private static final String atrSurname = "surname";
     private static final String atrErrorLogin = "errorLogin";
@@ -51,14 +50,12 @@ public class RedirectRegistration implements ActionCommand {
 
 
 
-        if (nv.validate(request, atrPassword) && nv.validate(request, atrAge)) {
+        if (nv.validate(request, atrPassword)) {
             String login = request.getParameter(atrLogin);
             int password = Integer.parseInt(request.getParameter(atrPassword));
             String name = request.getParameter(atrName);
             String surname = request.getParameter(atrSurname);
-            int age = Integer.parseInt(request.getParameter(atrAge));
             Reader reader = new Reader();
-            reader.setAge(age);
             reader.setName(name);
             reader.setSurname(surname);
             EntryData li = new EntryData();
@@ -78,9 +75,6 @@ public class RedirectRegistration implements ActionCommand {
         } else {
             if (nv.validate(request, atrPassword) == false) {
                 request.setAttribute(atrErrorPassword, msgIncorrectPass);
-            }
-            if (nv.validate(request, atrAge) == false) {
-                request.setAttribute(errorAge, msgIncorrectAge);
             }
             page = strRegistration;
             result.setPage(page);            

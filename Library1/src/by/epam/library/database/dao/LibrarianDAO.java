@@ -26,7 +26,7 @@ public class LibrarianDAO implements  AbstractDao{
     private static final String SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA = "SELECT * FROM entrydata WHERE (login=?)";
     private static final String SQL_SELECT_ALL_BOOKS = "SELECT * FROM book";
     private static final String SQL_SELECT_BOOK_BY_ID_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE bookid=?";
-    private static final String SQL_INSERT_READER = "INSERT INTO reader VALUES(?,?,?,?,?)";
+    private static final String SQL_INSERT_READER = "INSERT INTO reader VALUES(?,?,?,?)";
     private static final String SQL_INSERT_ENTRYDATA = "INSERT INTO entrydata VALUES (?,?,?)";
     private static final String SQL_INSERT_BOOK =   "INSERT INTO book VALUES(?,?,?,?,?,?)";
     private static final String SQL_DELETE_READER = "DELETE FROM reader WHERE id=?";
@@ -53,9 +53,7 @@ public class LibrarianDAO implements  AbstractDao{
             while (rs.next()) {
                 String name = rs.getString(2);
                 String surname = rs.getString(3);
-                int age = rs.getInt(4);
                 Librarian librarian = new Librarian();
-                librarian.setAge(age);
                 librarian.setName(name);
                 librarian.setSurname(surname);
                 librarians.add(librarian);
@@ -79,10 +77,8 @@ public class LibrarianDAO implements  AbstractDao{
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
                 String surname = rs.getString(3);
-                int age = rs.getInt(4);
                 Reader reader = new Reader();
                 reader.setId(id);
-                reader.setAge(age);
                 reader.setName(name);
                 reader.setSurname(surname);
                 readers.add(reader);
@@ -118,8 +114,7 @@ public class LibrarianDAO implements  AbstractDao{
             ps.setInt(1, clientId);
             ps.setString(2, reader.getName());
             ps.setString(3, reader.getSurname());
-            ps.setInt(4, reader.getAge());
-            ps.setInt(5, clientId);
+            ps.setInt(4, clientId);
             ps.executeUpdate();
        }
        catch (SQLException e) {

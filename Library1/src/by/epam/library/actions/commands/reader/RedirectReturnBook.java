@@ -22,7 +22,7 @@ public class RedirectReturnBook implements ActionCommand{
     private static final String atrId = "id";
     private static final String atrID = "ID";
     private static final String strBooks = "books";
-    private final static String strReturnBookRefr = "/Library/ServletController?method=returnBook";
+    private final static String strReturnBookRef = "/Library/ServletController?method=returnBook";
 
     public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
@@ -38,7 +38,7 @@ public class RedirectReturnBook implements ActionCommand{
         books = bd.viewAllClientBooks(id);
         request.setAttribute(strBooks, books);
         result.setIsForward(false);
-        result.setPage(strReturnBookRefr);
+        result.setPage(strReturnBookRef);
 
         return result;
     }

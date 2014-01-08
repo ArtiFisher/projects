@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 public class MoveToTakingBook implements ActionCommand{
 
-    private static final String strTakeBook="/WEB-INF/jsp/user_jspz/take_book.jsp";
+    private static final String strTakeBook="/WEB-INF/jsp/user_jsp/take_book.jsp";
     private static final String strBooks = "books";
     private static final String bookNumber = "bookNumber" ;
 

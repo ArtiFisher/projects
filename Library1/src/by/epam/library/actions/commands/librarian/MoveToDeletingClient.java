@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class MoveToDeletingClient implements ActionCommand{
 
     private static final String strDeleteClients = "/WEB-INF/jsp/admin_jsp/delete_client.jsp";
-    private static final String strClients = "clients";
+    private static final String strClients = "readers";
     public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
 

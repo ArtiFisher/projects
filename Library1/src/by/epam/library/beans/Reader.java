@@ -8,15 +8,11 @@ public class Reader {
     private int id;
     private String name;
     private String surname;
-    private int age=20;
-    private List <Book> books = new ArrayList<Book>();
+    private List <Book> books;
 
     public Reader() {
+        books = new ArrayList<Book>();
     }
-
-    public int getAge() {
-        return age;
-    }    
 
     public String getName() {
         return name;
@@ -33,12 +29,6 @@ public class Reader {
     public void setId(int id) {
         this.id = id;
     }
-
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     
     public void setName(String name) {
         this.name = name;
@@ -58,7 +48,7 @@ public class Reader {
 
     @Override
     public String toString() {
-        return "Reader{" + "id=" + id + "name=" + name + "surname=" + surname + "age=" + age + "books=" + books + '}';
+        return "Reader{" + "id=" + id + " name=" + name + " surname=" + surname + " books=" + books + '}';
     }
 
    

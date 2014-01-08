@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 public class DeleteClient implements ActionCommand{
 
     public static final String strDeleteClients = "/WEB-INF/jsp/admin_jsp/delete_client.jsp";
-    public static final String strClients = "clients";
+    public static final String strClients = "readers";
     public static final String atrIdCl = "idCl";
     public ResultAnswer execute(HttpServletRequest request,HttpSession session1,
         LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)

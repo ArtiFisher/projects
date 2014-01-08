@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class ViewClients implements ActionCommand{
 
     private static final String strViewClients = "/WEB-INF/jsp/admin_jsp/view_clients.jsp";
-    private static final String strClients = "clients";
+    private static final String strClients = "readers";
     public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
             LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException

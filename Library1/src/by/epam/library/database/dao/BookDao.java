@@ -126,7 +126,7 @@ public class BookDao implements AbstractDao{
             ps.setInt(1, clientID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                bookID = rs.getInt(2);
+                bookID = rs.getInt(3);
                 booksID.add(bookID);
             }
 

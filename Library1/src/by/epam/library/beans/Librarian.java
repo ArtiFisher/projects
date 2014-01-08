@@ -4,14 +4,9 @@ package by.epam.library.beans;
 public class Librarian {
     private String name;
     private String surname;
-    private int age=20;
     private EntryData entryData;
 
     public Librarian() {
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public EntryData getEntryData() {
@@ -24,10 +19,6 @@ public class Librarian {
 
     public String getSurname() {
         return surname;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public void setEntryData(EntryData entryData) {
@@ -44,7 +35,7 @@ public class Librarian {
 
     @Override
     public String toString() {
-        return "Librarian{" + "name = " + name + " surname = " + surname + " age = " + age + " entrydata = " + entryData + '}';
+        return "Librarian{" + "name = " + name + " surname = " + surname + " entrydata = " + entryData + '}';
     }
 
 }

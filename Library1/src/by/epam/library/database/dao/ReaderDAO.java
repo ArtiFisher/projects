@@ -11,10 +11,10 @@ import org.apache.log4j.Logger;
 public class ReaderDAO implements AbstractDao{
     static  Logger logger = Logger.getLogger( ReaderDAO.class);
     private static final String SQL_SELECT_READER_BY_SURNAME = "SELECT * FROM reader WHERE surname=?";
-    private static final String SQL_SELECT_BOOK_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE (bookid=?) AND (readerid=?)";
+    private static final String SQL_SELECT_BOOK_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE (readerid=?) AND (bookid=?)";
     private static final String SQL_INSERT_INFO_TO_READER_BOOK = "INSERT INTO reader_book VALUES(?,?,?)";
     private static final String SQL_UPDATE_BOOK_INFO = "UPDATE book SET quantity=? WHERE title=?";
-    private static final String SQL_DELETE_INFO_FROM_READER_BOOK = "DELETE FROM reader_book WHERE (bookid=?)AND(readerid=?)";
+    private static final String SQL_DELETE_INFO_FROM_READER_BOOK = "DELETE FROM reader_book WHERE (readerid=?) AND (bookid=?)";
 
     private ConnectionPool connector;
     
@@ -107,8 +107,8 @@ public class ReaderDAO implements AbstractDao{
             }
 
             ps = connection.prepareStatement(SQL_DELETE_INFO_FROM_READER_BOOK);
-            ps.setInt(1,bookID);
-            ps.setInt(2,clientID);
+            ps.setInt(1,clientID);
+            ps.setInt(2,bookID);
             ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);//decreasing number of books
@@ -131,8 +131,8 @@ public class ReaderDAO implements AbstractDao{
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(SQL_DELETE_INFO_FROM_READER_BOOK);
-            ps.setInt(1,bookID);
-            ps.setInt(2,ID);
+            ps.setInt(1,ID);
+            ps.setInt(2,bookID);
             ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
@@ -149,7 +149,7 @@ public class ReaderDAO implements AbstractDao{
         }
     }
     public boolean checkBookAvailability(int idBook,int idClient) throws InterruptedException, SQLException {
-        boolean avaiability = false;
+        boolean availability = false;
         int idOrder=0;
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
@@ -162,7 +162,7 @@ public class ReaderDAO implements AbstractDao{
                 idOrder = rs.getInt(1);
             }
             if (idOrder != 0) {
-                 avaiability = true;
+                 availability = true;
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -170,6 +170,6 @@ public class ReaderDAO implements AbstractDao{
             connector.closeConnection(connection);
             ps.close();
         }
-        return  avaiability;
+        return  availability;
     }
 }
