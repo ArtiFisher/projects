@@ -107,7 +107,7 @@ public class LibrarianDAO implements  AbstractDao{
            ps = connection.prepareStatement(SQL_INSERT_ENTRYDATA);
            ps.setInt(1,clientId);
            ps.setString(2,li.getLogin());
-           ps.setInt(3, li.getPass());
+           ps.setString(3, li.getPass());
            ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_INSERT_READER);

@@ -23,9 +23,9 @@ public class EntryDAO implements AbstractDao{
         this.connector = connector;
     }
 
-    public boolean checkEnteredData(String login,int password) throws InterruptedException, SQLException{
+    public boolean checkEnteredData(String login,String password) throws InterruptedException, SQLException{
         boolean result=false;        
-        int realPassword = 0;
+        String realPassword = "z";
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
         try {
@@ -33,9 +33,9 @@ public class EntryDAO implements AbstractDao{
             ps.setString(1, login);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               realPassword  = rs.getInt(1);
+               realPassword  = rs.getString(1);
             }
-            if(realPassword == password){
+            if(realPassword.equals(password)){
                 result = true;
             }
 
@@ -47,7 +47,7 @@ public class EntryDAO implements AbstractDao{
         }
         return result;
     }
-    public boolean  isClient(String login,int password) throws SQLException, InterruptedException{
+    public boolean  isClient(String login,String password) throws SQLException, InterruptedException{
         boolean result = false;
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
@@ -55,7 +55,7 @@ public class EntryDAO implements AbstractDao{
             int id = -1;
             ps = connection.prepareStatement(SQL_SELECT_READER_INFO_BY_LOGIN_AND_PASSWORD);
             ps.setString(1, login);
-            ps.setInt(2, password);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
               id  = rs.getInt(1);
@@ -72,14 +72,14 @@ public class EntryDAO implements AbstractDao{
         }
         return result;
     }
-    private int getID(String login,int password,String SQLRequest) throws InterruptedException, SQLException{
+    private int getID(String login,String password,String SQLRequest) throws InterruptedException, SQLException{
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
         int id = -1;
         try {
             ps = connection.prepareStatement(SQLRequest);
             ps.setString(1, login);
-            ps.setInt(2, password);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
               id  = rs.getInt(1);
@@ -94,12 +94,12 @@ public class EntryDAO implements AbstractDao{
         return id;
     }
 
-    public int getClientID(String login,int password) throws InterruptedException, SQLException{
+    public int getClientID(String login,String password) throws InterruptedException, SQLException{
         int id = 0;
         id = getID(login,password,SQL_SELECT_READER_INFO_BY_LOGIN_AND_PASSWORD);
         return id;
     }
-    public int getAdminID(String login,int password)throws InterruptedException, SQLException{
+    public int getAdminID(String login,String password)throws InterruptedException, SQLException{
         int id = 0;
         id = getID(login,password,SQL_SELECT_LIBRARIAN_INFO_BY_LOGIN_AND_PASSWORD);
         return id;

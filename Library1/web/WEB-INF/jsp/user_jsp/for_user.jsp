@@ -37,7 +37,7 @@
                 </td>
             </tr>
             <tr>
-                <td><fmt:message key="title.view_my_card" bundle="${rb}"/></td>
+                <td><fmt:message key="title.view_list_of_books" bundle="${rb}"/></td>
                 <td>
                     <form action="ServletController?method=return_book" method="POST">
                         <input type="submit" value=<fmt:message key="button_user_view" bundle="${rb}"/>>

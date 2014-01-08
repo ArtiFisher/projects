@@ -32,7 +32,6 @@ public class RedirectRegistration implements ActionCommand {
     //messages
     private static String msgIncorrectPass = "You entered incorrect password: password can contain only figures";
     private static String msgLoginExist = "Such login is exist";
-    private static String msgIncorrectAge = "You entered incorrect age: this field can contain only figures";
 
     public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
@@ -46,13 +45,11 @@ public class RedirectRegistration implements ActionCommand {
         }
         msgIncorrectPass = resource.getString("msgIncorrectPass");
         msgLoginExist = resource.getString("msgLoginExist");
-        msgIncorrectAge = resource.getString("msgIncorrectAge");
 
 
 
-        if (nv.validate(request, atrPassword)) {
             String login = request.getParameter(atrLogin);
-            int password = Integer.parseInt(request.getParameter(atrPassword));
+            String password = request.getParameter(atrPassword);
             String name = request.getParameter(atrName);
             String surname = request.getParameter(atrSurname);
             Reader reader = new Reader();
@@ -72,13 +69,7 @@ public class RedirectRegistration implements ActionCommand {
                 result.setPage(page);
                 
             }
-        } else {
-            if (nv.validate(request, atrPassword) == false) {
-                request.setAttribute(atrErrorPassword, msgIncorrectPass);
-            }
-            page = strRegistration;
-            result.setPage(page);            
-        }
+
         session1.setAttribute("prevPage", strRegistration);
         return result;
     }

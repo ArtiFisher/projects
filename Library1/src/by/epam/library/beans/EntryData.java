@@ -3,7 +3,7 @@ package by.epam.library.beans;
 
 public class EntryData {
     private String login;
-    private int pass;
+    private String pass;
 
     public EntryData() {
     }
@@ -12,7 +12,7 @@ public class EntryData {
         return login;
     }
 
-    public int getPass() {
+    public String getPass() {
         return pass;
     }
 
@@ -20,7 +20,7 @@ public class EntryData {
         this.login = login;
     }
 
-    public void setPass(int pass) {
+    public void setPass(String pass) {
         this.pass = pass;
     }
 }

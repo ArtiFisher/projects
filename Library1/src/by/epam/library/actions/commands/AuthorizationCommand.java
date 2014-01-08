@@ -50,8 +50,7 @@ public class AuthorizationCommand implements ActionCommand {
 
         String login = request.getParameter(ATR_LOGIN);
         HttpSession session = request.getSession(true);
-        if (nv.validate(request, ATR_PASSWORD)) {
-            int password = Integer.parseInt(request.getParameter(ATR_PASSWORD));
+            String password = request.getParameter(ATR_PASSWORD);
             if (ad.checkEnteredData(login, password) == true) {
                 if (ad.isClient(login, password) == true) {
                     clientID = ad.getClientID(login, password);
@@ -70,11 +69,7 @@ public class AuthorizationCommand implements ActionCommand {
                 result.setPage(STR_AUTHORIZATION);
                 session1.setAttribute(ATR_PREV_PAGE, STR_AUTHORIZATION);
             }
-        }else {
-            request.setAttribute(ATR_ERROR, msgIncorrectPass);
-            result.setPage(STR_AUTHORIZATION);
-            session1.setAttribute(ATR_PREV_PAGE, STR_AUTHORIZATION);
-        }        
+
         return result;
     }
 }

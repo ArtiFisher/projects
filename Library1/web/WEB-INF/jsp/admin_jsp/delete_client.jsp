@@ -32,7 +32,6 @@
                 
                 <td><fmt:message key="field.name" bundle="${rb}"/></td>
                 <td><fmt:message key="field.surname" bundle="${rb}"/></td>
-                <td><fmt:message key="field.age" bundle="${rb}"/></td>
             </tr>
             <c:forEach var="reader" items="${readers}">
                 <form action="ServletController?method=delete_client_from_db" method="POST">

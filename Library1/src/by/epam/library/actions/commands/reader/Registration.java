@@ -31,8 +31,7 @@ public class Registration implements ActionCommand{
         }else{
              resource = ResourceBundle.getBundle("/resources/pagecontent_en_US.properties");
         }
-        //msgCongratulations = resource.getString("msgCongratulations");
-        //System.out.println(msgCongratulations);
+        msgCongratulations = resource.getString("msgCongratulations");
         request.setAttribute(atrSuccessfulRegistration, msgCongratulations);
         result.setPage(strAuthorization);
         session1.setAttribute("prevPage",strAuthorization);
