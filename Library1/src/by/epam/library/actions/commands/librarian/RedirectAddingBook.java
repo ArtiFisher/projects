@@ -51,7 +51,7 @@ public class RedirectAddingBook implements ActionCommand {
         msgIncorrectNumOfCopies = resource.getString("msgIncorrectNumOfCopies");
 
 
-        if (nv.validate(request, paramISBN) && nv.validate(request, paramYear) && nv.validate(request, paramCopiesNumber)) {
+        if (validate(request, paramISBN) && validate(request, paramYear) && validate(request, paramCopiesNumber)) {
             int ISBN = Integer.parseInt(request.getParameter(paramISBN));
             String title = request.getParameter(paramTitle);
             String author = request.getParameter(paramAuthor);
@@ -63,13 +63,13 @@ public class RedirectAddingBook implements ActionCommand {
             //session1.setAttribute("prevPage","/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
             //response.sendRedirect(strshowBookAdded);
         } else {
-            if (nv.validate(request, paramISBN) == false) {
+            if (validate(request, paramISBN) == false) {
                 request.setAttribute(errorISBN, msgIncorrectISBN);
             }
-            if (nv.validate(request, paramYear) == false) {
+            if (validate(request, paramYear) == false) {
                 request.setAttribute(errorYear, msgIncorrectYear);
             }
-            if (nv.validate(request, paramCopiesNumber) == false) {
+            if (validate(request, paramCopiesNumber) == false) {
                 request.setAttribute(errorNumOfCopies, msgIncorrectNumOfCopies);
             }
             result.setPage(strAddBook2);
@@ -80,4 +80,15 @@ public class RedirectAddingBook implements ActionCommand {
         return result;
     }
 
+    private boolean validate(HttpServletRequest request, String paramForValidation) {
+        boolean result = true;
+        try {
+            Integer.parseInt(request.getParameter(paramForValidation));
+            result = true;
+        } catch (NumberFormatException e) {
+            result = false;
+        } finally {
+            return result;
+        }
+    }
 }

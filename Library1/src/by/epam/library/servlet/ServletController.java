@@ -23,8 +23,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
 public class ServletController extends HttpServlet {
+    private static final String LOG4J_PATH = "C:\\Users\\Artem\\IdeaProjects\\Library1\\src\\log4j.xml";
+
     static {
-        new DOMConfigurator().doConfigure("C:\\Users\\Artem\\IdeaProjects\\Library1\\src\\log4j.xml", LogManager.getLoggerRepository());
+        new DOMConfigurator().doConfigure(LOG4J_PATH, LogManager.getLoggerRepository());
     }
 
     static Logger logger = Logger.getLogger(ServletController.class);
@@ -40,7 +42,6 @@ public class ServletController extends HttpServlet {
     private static final String STR_FOR_USER = "/WEB-INF/jsp/user_jsp/for_user.jsp";
     private static final String STR_FOR_ADMIN = "/WEB-INF/jsp/admin_jsp/for_admin.jsp";
     private static final String IS_ADMIN = "isAdmin";
-
     private ConnectionPool connector;
     private LibrarianDAO adm;
     private EntryDAO ad;
@@ -111,7 +112,6 @@ public class ServletController extends HttpServlet {
                 }
             }
         } catch (NullPointerException e) {
-            logger.error(e);
             request.getRequestDispatcher(AUTHORIZATION_JSP).forward(request, response);
         }
     }
