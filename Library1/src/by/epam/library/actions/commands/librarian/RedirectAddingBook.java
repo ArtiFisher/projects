@@ -20,7 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class RedirectAddingBook implements ActionCommand{
+public class RedirectAddingBook implements ActionCommand {
     public static final String paramISBN = "ISBN";
     public static final String paramYear = "year";
     public static final String paramCopiesNumber = "copiesNumber";
@@ -33,13 +33,13 @@ public class RedirectAddingBook implements ActionCommand{
     public static final String errorYear = "errorYear";
     public static final String errorNumOfCopies = "errorNumOfCopies";
 
-    public static String msgIncorrectISBN ;
+    public static String msgIncorrectISBN;
     public static String msgIncorrectYear;
     public static String msgIncorrectNumOfCopies;
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
-        
+
         ResourceBundle resource;
         if (Locale.getDefault().toString().equals("ru_ru") || Locale.getDefault().toString().equals("ru_RU")) {
             resource = ResourceBundle.getBundle("resources/pagecontent_ru_RU");
@@ -76,7 +76,7 @@ public class RedirectAddingBook implements ActionCommand{
 
             //request.getRequestDispatcher(strAddBook2).forward(request, response);
         }
-        session1.setAttribute("prevPage","/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
+        session1.setAttribute("prevPage", "/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
         return result;
     }
 

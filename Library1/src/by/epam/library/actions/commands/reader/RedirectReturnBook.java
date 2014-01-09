@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class RedirectReturnBook implements ActionCommand{
+public class RedirectReturnBook implements ActionCommand {
 
     private static final String atrId = "id";
     private static final String atrID = "ID";
     private static final String strBooks = "books";
     private final static String strReturnBookRef = "/Library/ServletController?method=returnBook";
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
 
         Book selectedBook = new Book();

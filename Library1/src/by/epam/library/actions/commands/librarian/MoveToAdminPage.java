@@ -18,7 +18,7 @@ public class MoveToAdminPage implements ActionCommand {
 
     private static final String strToAdminJsp = "/WEB-INF/jsp/admin_jsp/for_admin.jsp";
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         result.setPage(strToAdminJsp);
         session1.setAttribute("prevPage", strToAdminJsp);

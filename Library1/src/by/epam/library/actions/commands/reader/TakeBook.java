@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class TakeBook implements ActionCommand{
-    private static final String strTakeBook="/WEB-INF/jsp/user_jsp/take_book.jsp";
+public class TakeBook implements ActionCommand {
+    private static final String strTakeBook = "/WEB-INF/jsp/user_jsp/take_book.jsp";
 
     private static final String strBooks = "books";
     private static final String atrID = "ID";
@@ -28,20 +28,19 @@ public class TakeBook implements ActionCommand{
     private static final String atrError = "error";
     private static final String atrError2 = "error2";
     //messages
-    private static String msgAlreadyHaveBook ="You already have this book";
+    private static String msgAlreadyHaveBook = "You already have this book";
     private static String msgNoMoreBooks = "There is no more copies of such book";
-    private static final String bookNumber = "bookNumber" ;
+    private static final String bookNumber = "bookNumber";
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1,
-            LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
-            throws InterruptedException, SQLException, ServletException, IOException
-    {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+            throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         ResourceBundle resource;
-        if(Locale.getDefault().toString().equals("ru_ru") ||Locale.getDefault().toString().equals("ru_RU")){
-             resource = ResourceBundle.getBundle("resources/pagecontent_ru_RU");
-        }else{
-             resource = ResourceBundle.getBundle("resources/pagecontent_en_US");
+        if (Locale.getDefault().toString().equals("ru_ru") || Locale.getDefault().toString().equals("ru_RU")) {
+            resource = ResourceBundle.getBundle("resources/pagecontent_ru_RU");
+        } else {
+            resource = ResourceBundle.getBundle("resources/pagecontent_en_US");
         }
         msgAlreadyHaveBook = resource.getString("msgAlreadyHaveBook");
         Book selectedBook = new Book();
@@ -56,21 +55,21 @@ public class TakeBook implements ActionCommand{
                 books = bd.viewAllBooks();
                 request.setAttribute(strBooks, books);
                 result.setPage(strTakeBook);
-                
-            } else {                
+
+            } else {
                 books = bd.viewAllBooks();
-                request.setAttribute(strBooks, books);                
+                request.setAttribute(strBooks, books);
                 request.setAttribute(atrError2, msgNoMoreBooks);
                 result.setPage(strTakeBook);
-                
+
             }
         } else {
             books = bd.viewAllBooks();
-            request.setAttribute(strBooks, books);            
+            request.setAttribute(strBooks, books);
             request.setAttribute(atrError, msgAlreadyHaveBook);
-            result.setPage(strTakeBook);            
+            result.setPage(strTakeBook);
         }
-        request.setAttribute(bookNumber,books.size());        
+        request.setAttribute(bookNumber, books.size());
         return result;
     }
 }

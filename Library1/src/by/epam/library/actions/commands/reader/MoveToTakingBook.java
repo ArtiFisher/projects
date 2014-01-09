@@ -17,20 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class MoveToTakingBook implements ActionCommand{
+public class MoveToTakingBook implements ActionCommand {
 
-    private static final String strTakeBook="/WEB-INF/jsp/user_jsp/take_book.jsp";
+    private static final String strTakeBook = "/WEB-INF/jsp/user_jsp/take_book.jsp";
     private static final String strBooks = "books";
-    private static final String bookNumber = "bookNumber" ;
+    private static final String bookNumber = "bookNumber";
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
-       ResultAnswer result = new ResultAnswer();
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+        ResultAnswer result = new ResultAnswer();
 
         List<Book> books = new ArrayList<Book>();
         books = bd.viewAllBooks();
         request.setAttribute(strBooks, books);
         result.setPage(strTakeBook);
-        request.setAttribute(bookNumber,books.size());
+        request.setAttribute(bookNumber, books.size());
         session1.setAttribute("prevPage", "ServletController?method=take_book");
         return result;
     }

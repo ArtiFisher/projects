@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+
 import org.apache.log4j.Logger;
 
 public class ConnectionPool {
@@ -17,8 +18,8 @@ public class ConnectionPool {
     private static final String URL = "url";
     private static final String USER = "user";
     private static final String PASSWORD = "password";
-    private static final String RESOURCE_DB= "resources/database";
-    private static final String CHARACTER_ENCODING= "characterEncoding";
+    private static final String RESOURCE_DB = "resources/database";
+    private static final String CHARACTER_ENCODING = "characterEncoding";
     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
     private static final String UTF_8 = "UTF-8";
     private static final String WARN1 = "Database access error";
@@ -27,22 +28,21 @@ public class ConnectionPool {
     private static final String WARN4 = "SQL exception.";
 
 
-
     public ConnectionPool(int poolSize) throws SQLException, ClassNotFoundException {
         Class.forName(DRIVER_NAME);
-        connectionQueue = new ArrayBlockingQueue<Connection> (poolSize);
+        connectionQueue = new ArrayBlockingQueue<Connection>(poolSize);
         ResourceBundle resource = ResourceBundle.getBundle(RESOURCE_DB);
         String url = resource.getString(URL);
         String user = resource.getString(USER);
         String pass = resource.getString(PASSWORD);
-        url="jdbc:mysql://localhost:3306/library";
-        user="root";
-        pass="assasin1";
+        url = "jdbc:mysql://localhost:3306/library";
+        user = "root";
+        pass = "assasin1";
 
         Properties prop = new Properties();
         prop.put(USER, user);
         prop.put(PASSWORD, pass);
-        prop.put(CHARACTER_ENCODING,UTF_8);
+        prop.put(CHARACTER_ENCODING, UTF_8);
         for (int i = 0; i < poolSize; i++) {
             Connection connection = DriverManager.getConnection(url, prop);
             connectionQueue.offer(connection);
@@ -61,17 +61,18 @@ public class ConnectionPool {
         boolean closed = true;
         try {
             closed = connection.isClosed();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             log.warn(WARN1, e);
         }
-        if(!closed) {
-            if(!connectionQueue.offer(connection)) {
+        if (!closed) {
+            if (!connectionQueue.offer(connection)) {
                 log.warn(WARN2);
             }
         } else {
             log.warn(WARN3);
         }
     }
+
     public void dispose() {
         Connection connection;
         while ((connection = connectionQueue.poll()) != null) {
@@ -80,7 +81,7 @@ public class ConnectionPool {
                     connection.commit();
                 }
                 connection.close();
-            } catch(SQLException e) {
+            } catch (SQLException e) {
                 log.warn(WARN4, e);
             }
         }

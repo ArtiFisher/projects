@@ -4,6 +4,7 @@
  */
 
 package by.epam.library.database.dao;
+
 import by.epam.library.beans.EntryData;
 import by.epam.library.beans.Librarian;
 import by.epam.library.database.connectionpool.ConnectionPool;
@@ -16,10 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 
-public class LibrarianDAO implements  AbstractDao{
-    static  Logger logger = Logger.getLogger( LibrarianDAO.class);
+public class LibrarianDAO implements AbstractDao {
+    static Logger logger = Logger.getLogger(LibrarianDAO.class);
 
     private static final String SQL_SELECT_ALL_LIBRARIANS = "SELECT * FROM librarian";
     private static final String SQL_SELECT_ALL_READERS = "SELECT * FROM reader";
@@ -28,21 +30,23 @@ public class LibrarianDAO implements  AbstractDao{
     private static final String SQL_SELECT_BOOK_BY_ID_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE bookid=?";
     private static final String SQL_INSERT_READER = "INSERT INTO reader VALUES(?,?,?,?)";
     private static final String SQL_INSERT_ENTRYDATA = "INSERT INTO entrydata VALUES (?,?,?)";
-    private static final String SQL_INSERT_BOOK =   "INSERT INTO book VALUES(?,?,?,?,?,?)";
+    private static final String SQL_INSERT_BOOK = "INSERT INTO book VALUES(?,?,?,?,?,?)";
     private static final String SQL_DELETE_READER = "DELETE FROM reader WHERE id=?";
     private static final String SQL_DELETE_ENTRYDATA = "DELETE FROM entrydata WHERE (id=?)";
     private static final String SQL_DELETE_BOOK = "DELETE FROM book WHERE (id=?)";
     private static final String SQL_UPDATE_BOOK = "UPDATE book SET quantity=? WHERE id=?";
-   
+
 
     private ConnectionPool connector;
+
     public LibrarianDAO() {
     }
+
     public void setConnector(ConnectionPool connector) {
         this.connector = connector;
     }
 
-    public List<Librarian> viewAllAdmins() throws InterruptedException, SQLException{
+    public List<Librarian> viewAllAdmins() throws InterruptedException, SQLException {
         List<Librarian> librarians = new ArrayList<Librarian>();
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
@@ -66,7 +70,8 @@ public class LibrarianDAO implements  AbstractDao{
         }
         return librarians;
     }
-    public List<Reader> viewAllClients() throws InterruptedException, SQLException{
+
+    public List<Reader> viewAllClients() throws InterruptedException, SQLException {
         List<Reader> readers = new ArrayList<Reader>();
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
@@ -90,13 +95,14 @@ public class LibrarianDAO implements  AbstractDao{
             ps.close();
         }
         return readers;
-    }    
-    public void addClient(Reader reader,EntryData li) throws InterruptedException, SQLException{
-       Connection connection = connector.getConnection();
-       PreparedStatement ps = null ;
-       try{
+    }
 
-            int clientId=0;
+    public void addClient(Reader reader, EntryData li) throws InterruptedException, SQLException {
+        Connection connection = connector.getConnection();
+        PreparedStatement ps = null;
+        try {
+
+            int clientId = 0;
             ps = connection.prepareStatement(SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA);
             ps.setString(1, li.getLogin());
             ResultSet rs = ps.executeQuery();
@@ -104,11 +110,11 @@ public class LibrarianDAO implements  AbstractDao{
                 clientId = rs.getInt(1);
             }
 
-           ps = connection.prepareStatement(SQL_INSERT_ENTRYDATA);
-           ps.setInt(1,clientId);
-           ps.setString(2,li.getLogin());
-           ps.setString(3, li.getPass());
-           ps.executeUpdate();
+            ps = connection.prepareStatement(SQL_INSERT_ENTRYDATA);
+            ps.setInt(1, clientId);
+            ps.setString(2, li.getLogin());
+            ps.setString(3, li.getPass());
+            ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_INSERT_READER);
             ps.setInt(1, clientId);
@@ -116,16 +122,15 @@ public class LibrarianDAO implements  AbstractDao{
             ps.setString(3, reader.getSurname());
             ps.setInt(4, clientId);
             ps.executeUpdate();
-       }
-       catch (SQLException e) {
+        } catch (SQLException e) {
             logger.error(e);
-       }
-       finally {
-           connector.closeConnection(connection);
-           ps.close();
+        } finally {
+            connector.closeConnection(connection);
+            ps.close();
         }
     }
-    public boolean isLoginUnique(String login) throws SQLException, InterruptedException{
+
+    public boolean isLoginUnique(String login) throws SQLException, InterruptedException {
         boolean uniqueLogin = true;
         int idLoginInfo = -1;
         PreparedStatement ps = null;
@@ -138,7 +143,7 @@ public class LibrarianDAO implements  AbstractDao{
                 idLoginInfo = rs.getInt(1);
             }
             if (idLoginInfo != -1) {
-                  uniqueLogin = false;
+                uniqueLogin = false;
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -148,10 +153,11 @@ public class LibrarianDAO implements  AbstractDao{
         }
         return uniqueLogin;
     }
-    public void deleteClient(int clientID) throws InterruptedException, SQLException{
-       Connection connection = connector.getConnection();
-       PreparedStatement ps = null ;
-       int idLogin_info = clientID;
+
+    public void deleteClient(int clientID) throws InterruptedException, SQLException {
+        Connection connection = connector.getConnection();
+        PreparedStatement ps = null;
+        int idLogin_info = clientID;
         try {
             ps = connection.prepareStatement(SQL_DELETE_READER);
             ps.setInt(1, clientID);
@@ -160,23 +166,22 @@ public class LibrarianDAO implements  AbstractDao{
             ps = connection.prepareStatement(SQL_DELETE_ENTRYDATA);
             ps.setInt(1, idLogin_info);
             ps.executeUpdate();
-        }
-       catch (SQLException e) {
+        } catch (SQLException e) {
             logger.error(e);
-       }
-       finally {
-           connector.closeConnection(connection);
-           ps.close();
+        } finally {
+            connector.closeConnection(connection);
+            ps.close();
         }
     }
-    public void addBookToLibrary(int ISBN,String title,String author,int year,int number) throws InterruptedException, SQLException{
-       Connection connection = connector.getConnection();
-       PreparedStatement ps = null ;
+
+    public void addBookToLibrary(int ISBN, String title, String author, int year, int number) throws InterruptedException, SQLException {
+        Connection connection = connector.getConnection();
+        PreparedStatement ps = null;
         try {
 
             ps = connection.prepareStatement(SQL_SELECT_ALL_BOOKS);
             ResultSet rs = ps.executeQuery();
-            int idTemp =-1;
+            int idTemp = -1;
             while (rs.next()) {
                 idTemp = rs.getInt(1);
             }
@@ -190,16 +195,15 @@ public class LibrarianDAO implements  AbstractDao{
             ps.setInt(5, year);
             ps.setInt(6, number);
             ps.executeUpdate();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             logger.error(e);
-       }
-       finally {
-           connector.closeConnection(connection);
-           ps.close();
+        } finally {
+            connector.closeConnection(connection);
+            ps.close();
 
-       }
+        }
     }
+
     public void removeBookFromLibrary(Book book) throws InterruptedException, SQLException {
         Connection connection = connector.getConnection();
         PreparedStatement ps = null;
@@ -215,9 +219,9 @@ public class LibrarianDAO implements  AbstractDao{
                 ps = connection.prepareStatement(SQL_DELETE_BOOK);
                 ps.setInt(1, book.getId());
                 ps.executeUpdate();
-            }else{
+            } else {
                 ps = connection.prepareStatement(SQL_UPDATE_BOOK);
-                ps.setInt(1,0);
+                ps.setInt(1, 0);
                 ps.setInt(2, book.getId());
                 ps.executeUpdate();
             }

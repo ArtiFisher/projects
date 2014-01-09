@@ -14,14 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class MoveToUserPage implements ActionCommand{
+public class MoveToUserPage implements ActionCommand {
 
-    private static final String strForUser= "/WEB-INF/jsp/user_jsp/for_user.jsp";
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    private static final String strForUser = "/WEB-INF/jsp/user_jsp/for_user.jsp";
+
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         result.setPage(strForUser);
         session1.setAttribute("prevPage", strForUser);
-        return result;        
+        return result;
     }
 
 }

@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class MoveToAddingBook implements ActionCommand{
+public class MoveToAddingBook implements ActionCommand {
 
     private static final String strAddBook = "/WEB-INF/jsp/admin_jsp/add_book_to_library.jsp";
+
     public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
-            LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
-            throws InterruptedException, SQLException, ServletException, IOException
-    {
+                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+            throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         result.setPage(strAddBook);
         session1.setAttribute("prevPage", "ServletController?method=add_book");

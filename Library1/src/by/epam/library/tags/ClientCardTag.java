@@ -1,6 +1,7 @@
 package by.epam.library.tags;
 
 import by.epam.library.beans.Book;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -38,21 +39,21 @@ public class ClientCardTag extends TagSupport {
         try {
             JspWriter out = pageContext.getOut();
             out.write("<table border='1'>");
-            out.write("<td>"+resource.getString("book_id")+"</td>");
-            out.write("<td>"+resource.getString("book_ISBN")+"</td>");
-            out.write("<td>"+resource.getString("book_title")+"</td>");
-            out.write("<td>"+resource.getString("book_author")+"</td>");
-            out.write("<td>"+resource.getString("book_year")+"</td>");
-            out.write("<td>"+resource.getString("book_numberOfCopies")+"</td>");
-            for (int i = 0; i < books.size(); i++) {               
-                    out.write("<tr>");
-                    out.write("<td>" + books.get(i).getId() + "</td>");
-                    out.write("<td>" + books.get(i).getISBN() + "</td>");
-                    out.write("<td>" + books.get(i).getTitle() + "</td>");
-                    out.write("<td>" + books.get(i).getAuthor() + "</td>");
-                    out.write("<td>" + books.get(i).getYear() + "</td>");
-                    out.write("<td>" + books.get(i).getNumberOfCopies() + "</td>");
-                    out.write("</tr>");
+            out.write("<td>" + resource.getString("book_id") + "</td>");
+            out.write("<td>" + resource.getString("book_ISBN") + "</td>");
+            out.write("<td>" + resource.getString("book_title") + "</td>");
+            out.write("<td>" + resource.getString("book_author") + "</td>");
+            out.write("<td>" + resource.getString("book_year") + "</td>");
+            out.write("<td>" + resource.getString("book_numberOfCopies") + "</td>");
+            for (int i = 0; i < books.size(); i++) {
+                out.write("<tr>");
+                out.write("<td>" + books.get(i).getId() + "</td>");
+                out.write("<td>" + books.get(i).getISBN() + "</td>");
+                out.write("<td>" + books.get(i).getTitle() + "</td>");
+                out.write("<td>" + books.get(i).getAuthor() + "</td>");
+                out.write("<td>" + books.get(i).getYear() + "</td>");
+                out.write("<td>" + books.get(i).getNumberOfCopies() + "</td>");
+                out.write("</tr>");
             }
         } catch (IOException ex) {
             Logger.getLogger(ClientCardTag.class.getName()).log(Level.SEVERE, null, ex);

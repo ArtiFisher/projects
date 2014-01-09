@@ -18,15 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class DeleteClient implements ActionCommand{
+public class DeleteClient implements ActionCommand {
 
-    public static final String strDeleteClients = "/WEB-INF/jsp/admin_jsp/delete_client.jsp";
+    public static final String strViewClients = "/WEB-INF/jsp/admin_jsp/view_clients.jsp";
     public static final String strClients = "readers";
     public static final String atrIdCl = "idCl";
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1,
-        LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
-            throws InterruptedException,SQLException, ServletException, IOException
-    {
+
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+            throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
 
         int idCl = Integer.parseInt(request.getParameter(atrIdCl));
@@ -40,7 +40,7 @@ public class DeleteClient implements ActionCommand{
         List<Reader> readers = new ArrayList<Reader>();
         readers.addAll(adm.viewAllClients());
         request.setAttribute(strClients, readers);
-        result.setPage(strDeleteClients);
+        result.setPage(strViewClients);
         return result;
     }
 

@@ -8,7 +8,7 @@ public class Reader {
     private int id;
     private String name;
     private String surname;
-    private List <Book> books;
+    private List<Book> books;
 
     public Reader() {
         books = new ArrayList<Book>();
@@ -29,7 +29,7 @@ public class Reader {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -50,9 +50,6 @@ public class Reader {
     public String toString() {
         return "Reader{" + "id=" + id + " name=" + name + " surname=" + surname + " books=" + books + '}';
     }
-
-   
-
 
 
 }

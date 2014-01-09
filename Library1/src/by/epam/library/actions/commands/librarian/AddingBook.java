@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class AddingBook implements ActionCommand{
+public class AddingBook implements ActionCommand {
 
     private static final String strBookAdded = "bookAdded";
-    private static  String msgBookAdded = "The book just have been added to store.";
+    private static String msgBookAdded = "The book just have been added to store.";
     private static final String strToAdminJsp = "/WEB-INF/jsp/admin_jsp/for_admin.jsp";
     private static final String STR_RUS_PROPERTIES = "resources/pagecontent_ru_RU";
     private static final String STR_ENG_PROPERTIES = "resources/pagecontent_en_US";
@@ -27,7 +27,7 @@ public class AddingBook implements ActionCommand{
     private static final String STR_RU_LANG1 = "ru_ru";
     private static final String STR_RU_LANG2 = "ru_RU";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
 
         ResourceBundle resource;

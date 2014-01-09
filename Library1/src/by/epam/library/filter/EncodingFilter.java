@@ -10,6 +10,7 @@ import javax.servlet.ServletResponse;
 
 /**
  * This class is necessary for coding translation in UTF-8
+ *
  * @author AndreAY
  */
 public class EncodingFilter implements Filter {
@@ -21,10 +22,11 @@ public class EncodingFilter implements Filter {
 
     /**
      * This method checks a request encoding and sets a UTF-8 encoding
-     * @param request a ServletRequest
+     *
+     * @param request  a ServletRequest
      * @param response a ServletResponse
-     * @param chain a FilterChain
-     * @throws IOException a IOException
+     * @param chain    a FilterChain
+     * @throws IOException      a IOException
      * @throws ServletException a ServletException
      */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

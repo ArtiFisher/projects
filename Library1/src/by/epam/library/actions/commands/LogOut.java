@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class LogOut implements ActionCommand{
+public class LogOut implements ActionCommand {
     private static final String strAuthorization = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
+
     public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
-            LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
-            throws InterruptedException, SQLException, ServletException, IOException
-    {
+                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+            throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         session1.setAttribute("prevPage", strAuthorization);
         result.setPage(strAuthorization);

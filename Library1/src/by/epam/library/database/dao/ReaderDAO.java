@@ -2,14 +2,16 @@ package by.epam.library.database.dao;
 
 import by.epam.library.database.connectionpool.ConnectionPool;
 import by.epam.library.beans.Book;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 
-public class ReaderDAO implements AbstractDao{
-    static  Logger logger = Logger.getLogger( ReaderDAO.class);
+public class ReaderDAO implements AbstractDao {
+    static Logger logger = Logger.getLogger(ReaderDAO.class);
     private static final String SQL_SELECT_READER_BY_SURNAME = "SELECT * FROM reader WHERE surname=?";
     private static final String SQL_SELECT_BOOK_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE (readerid=?) AND (bookid=?)";
     private static final String SQL_INSERT_INFO_TO_READER_BOOK = "INSERT INTO reader_book VALUES(?,?,?)";
@@ -17,88 +19,87 @@ public class ReaderDAO implements AbstractDao{
     private static final String SQL_DELETE_INFO_FROM_READER_BOOK = "DELETE FROM reader_book WHERE (readerid=?) AND (bookid=?)";
 
     private ConnectionPool connector;
-    
-    public ReaderDAO(){
-     
+
+    public ReaderDAO() {
+
     }
+
     public void setConnector(ConnectionPool connector) {
         this.connector = connector;
     }
 
-    public Book takeBook(String surname,Book book) throws InterruptedException, SQLException{
-       int clientID = 0;
-       int bookID = 0;      
-       Connection connection = connector.getConnection();
-       PreparedStatement ps = null ;
-       try{
+    public Book takeBook(String surname, Book book) throws InterruptedException, SQLException {
+        int clientID = 0;
+        int bookID = 0;
+        Connection connection = connector.getConnection();
+        PreparedStatement ps = null;
+        try {
             ps = connection.prepareStatement(SQL_SELECT_READER_BY_SURNAME);
             ps.setString(1, surname);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 clientID = rs.getInt(1);
-            }        
-            
-            book.setNumberOfCopies(book.getNumberOfCopies()-1);
-            if (book.getNumberOfCopies()+1 > 0) {
-               bookID = book.getId();            
+            }
 
-               ps = connection.prepareStatement(SQL_INSERT_INFO_TO_READER_BOOK);
-               ps.setInt(1, 0);
-               ps.setInt(2, clientID);
-               ps.setInt(3, bookID);
-               ps.executeUpdate();
+            book.setNumberOfCopies(book.getNumberOfCopies() - 1);
+            if (book.getNumberOfCopies() + 1 > 0) {
+                bookID = book.getId();
 
-               ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
-               ps.setInt(1, book.getNumberOfCopies());
-               ps.setString(2, book.getTitle());
-               ps.executeUpdate();               
-           }
-       }
-       catch (SQLException e) {
+                ps = connection.prepareStatement(SQL_INSERT_INFO_TO_READER_BOOK);
+                ps.setInt(1, 0);
+                ps.setInt(2, clientID);
+                ps.setInt(3, bookID);
+                ps.executeUpdate();
+
+                ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
+                ps.setInt(1, book.getNumberOfCopies());
+                ps.setString(2, book.getTitle());
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
             logger.error(e);
-       }
-       finally {
-           connector.closeConnection(connection);
-           ps.close();
-           return book;
+        } finally {
+            connector.closeConnection(connection);
+            ps.close();
+            return book;
         }
-   }
-    public void takeBook(int ID,Book book) throws InterruptedException, SQLException{
+    }
 
-       int bookID = 0;
-       Connection connection = connector.getConnection();
-       PreparedStatement ps = null ;
-       try{
-            book.setNumberOfCopies(book.getNumberOfCopies()-1);
-            if (book.getNumberOfCopies()+1 > 0) {
-               bookID = book.getId();               
+    public void takeBook(int ID, Book book) throws InterruptedException, SQLException {
 
-               ps = connection.prepareStatement(SQL_INSERT_INFO_TO_READER_BOOK);
-               ps.setInt(1, 0);
-               ps.setInt(2, ID);
-               ps.setInt(3, bookID);
-               ps.executeUpdate();
-               
-               ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
-               ps.setInt(1, book.getNumberOfCopies());
-               ps.setString(2, book.getTitle());
-               ps.executeUpdate();
-           }
-       }
-       catch (SQLException e) {
+        int bookID = 0;
+        Connection connection = connector.getConnection();
+        PreparedStatement ps = null;
+        try {
+            book.setNumberOfCopies(book.getNumberOfCopies() - 1);
+            if (book.getNumberOfCopies() + 1 > 0) {
+                bookID = book.getId();
+
+                ps = connection.prepareStatement(SQL_INSERT_INFO_TO_READER_BOOK);
+                ps.setInt(1, 0);
+                ps.setInt(2, ID);
+                ps.setInt(3, bookID);
+                ps.executeUpdate();
+
+                ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
+                ps.setInt(1, book.getNumberOfCopies());
+                ps.setString(2, book.getTitle());
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
             logger.error(e);
-       }
-       finally {
-           connector.closeConnection(connection);
-           ps.close();           
+        } finally {
+            connector.closeConnection(connection);
+            ps.close();
         }
-   }
-    public void returnBook(String surname, String title,Book book) throws InterruptedException, SQLException {
+    }
+
+    public void returnBook(String surname, String title, Book book) throws InterruptedException, SQLException {
         int clientID = 0;
         int bookID = book.getId();
         Connection connection = connector.getConnection();
         PreparedStatement ps = null;
-        try {           
+        try {
             ps = connection.prepareStatement(SQL_SELECT_READER_BY_SURNAME);
             ps.setString(1, surname);
             ResultSet rs = ps.executeQuery();
@@ -107,14 +108,14 @@ public class ReaderDAO implements AbstractDao{
             }
 
             ps = connection.prepareStatement(SQL_DELETE_INFO_FROM_READER_BOOK);
-            ps.setInt(1,clientID);
-            ps.setInt(2,bookID);
+            ps.setInt(1, clientID);
+            ps.setInt(2, bookID);
             ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);//decreasing number of books
-            book.setNumberOfCopies(book.getNumberOfCopies()+1);
+            book.setNumberOfCopies(book.getNumberOfCopies() + 1);
             ps.setInt(1, book.getNumberOfCopies());
-            ps.setString(2,book.getTitle());
+            ps.setString(2, book.getTitle());
             ps.executeUpdate();
         } catch (SQLException e) {
             logger.error(e);
@@ -124,21 +125,22 @@ public class ReaderDAO implements AbstractDao{
 
         }
     }
-    public void returnBook(int ID,Book book) throws InterruptedException, SQLException {
+
+    public void returnBook(int ID, Book book) throws InterruptedException, SQLException {
 
         int bookID = book.getId();
         Connection connection = connector.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(SQL_DELETE_INFO_FROM_READER_BOOK);
-            ps.setInt(1,ID);
-            ps.setInt(2,bookID);
+            ps.setInt(1, ID);
+            ps.setInt(2, bookID);
             ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
-            book.setNumberOfCopies(book.getNumberOfCopies()+1);
+            book.setNumberOfCopies(book.getNumberOfCopies() + 1);
             ps.setInt(1, book.getNumberOfCopies());
-            ps.setString(2,book.getTitle());
+            ps.setString(2, book.getTitle());
             ps.executeUpdate();
         } catch (SQLException e) {
             logger.error(e);
@@ -148,9 +150,10 @@ public class ReaderDAO implements AbstractDao{
 
         }
     }
-    public boolean checkBookAvailability(int idBook,int idClient) throws InterruptedException, SQLException {
+
+    public boolean checkBookAvailability(int idBook, int idClient) throws InterruptedException, SQLException {
         boolean availability = false;
-        int idOrder=0;
+        int idOrder = 0;
         PreparedStatement ps = null;
         Connection connection = connector.getConnection();
         try {
@@ -162,7 +165,7 @@ public class ReaderDAO implements AbstractDao{
                 idOrder = rs.getInt(1);
             }
             if (idOrder != 0) {
-                 availability = true;
+                availability = true;
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -170,6 +173,6 @@ public class ReaderDAO implements AbstractDao{
             connector.closeConnection(connection);
             ps.close();
         }
-        return  availability;
+        return availability;
     }
 }

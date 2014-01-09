@@ -16,17 +16,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class ReturnBook implements ActionCommand{
+public class ReturnBook implements ActionCommand {
 
     private static final String strReturnBook = "/WEB-INF/jsp/user_jsp/return_book.jsp";
     private static final String atrID = "ID";
     private static final String strBooks = "books";
-    private static final String bookNumber = "bookNumber" ;
+    private static final String bookNumber = "bookNumber";
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1,
-            LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
-            throws InterruptedException, SQLException, ServletException, IOException
-    {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+            throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
 
         HttpSession session = request.getSession(true);
@@ -35,7 +34,7 @@ public class ReturnBook implements ActionCommand{
         books = bd.viewAllClientBooks(id);
         request.setAttribute(strBooks, books);
         result.setPage(strReturnBook);
-        request.setAttribute(bookNumber,books.size());
+        request.setAttribute(bookNumber, books.size());
         return result;
     }
 }

@@ -17,14 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class ViewBooksAdmin implements ActionCommand{
+public class ViewBooksAdmin implements ActionCommand {
     public static final String strBooks = "books";
     public static final String strViewBook = "/WEB-INF/jsp/admin_jsp/view_books.jsp";
 
     public ViewBooksAdmin() {
     }
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
-        ResultAnswer result= new ResultAnswer();
+
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+        ResultAnswer result = new ResultAnswer();
 
         List<Book> books = new ArrayList<Book>();
         books = bd.viewAllBooks();

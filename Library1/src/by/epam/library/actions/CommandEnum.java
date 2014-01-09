@@ -1,4 +1,3 @@
-
 package by.epam.library.actions;
 
 import by.epam.library.actions.commands.*;
@@ -49,12 +48,12 @@ public enum CommandEnum {
     },
     RETURN_TO_ADMIN_PAGE {
         {
-             this.command = new MoveToAdminPage();
+            this.command = new MoveToAdminPage();
         }
     },
     REMOVE_BOOK_FROM_LIBARARY {
         {
-             this.command = new MoveToRemovingBook();
+            this.command = new MoveToRemovingBook();
         }
     },
     UPDATE_DB_AFTER_REMOVING {
@@ -72,14 +71,14 @@ public enum CommandEnum {
             this.command = new MoveToDeletingClient();
         }
     },
-    DELETE_CLIENT_FROM_DB{
+    DELETE_CLIENT_FROM_DB {
         {
             this.command = new DeleteClient();
         }
     },
     ADMIN_VIEW_CLIENT_CARD {
         {
-            this.command  = new ViewClientCardAdmin();
+            this.command = new ViewClientCardAdmin();
         }
     },
     LOG_OUT {
@@ -112,7 +111,7 @@ public enum CommandEnum {
             this.command = new ReturnBook();
         }
     },
-   UPDATE_DB_AFTER_RETURNING_BOOK{
+    UPDATE_DB_AFTER_RETURNING_BOOK {
         {
             this.command = new RedirectReturnBook();
         }
@@ -126,8 +125,7 @@ public enum CommandEnum {
         {
             this.command = new SetLocaleEN();
         }
-    }
-    ;
+    };
     ActionCommand command;
 
     public ActionCommand getCurrentCommand() {

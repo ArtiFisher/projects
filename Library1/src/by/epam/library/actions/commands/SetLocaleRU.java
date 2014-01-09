@@ -15,10 +15,9 @@ import javax.servlet.http.HttpSession;
 
 public class SetLocaleRU implements ActionCommand {
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1,
-            LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
-            throws InterruptedException, SQLException, ServletException, IOException
-    {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+            throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         Locale.setDefault(new Locale("ru_RU"));
         session1.setAttribute("loc", "ru_RU");

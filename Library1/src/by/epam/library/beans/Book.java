@@ -12,7 +12,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, int ISBN, String title, String author, int year,int numberOfCopies) {
+    public Book(int id, int ISBN, String title, String author, int year, int numberOfCopies) {
         this.id = id;
         this.ISBN = ISBN;
         this.title = title;
@@ -23,7 +23,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" + "id = " + id + " ISBN = " + ISBN + " title = " + title + " author = " + author + " year = " + year + " nubber of such Book = "+ numberOfCopies +'}';
+        return "Book{" + "id = " + id + " ISBN = " + ISBN + " title = " + title + " author = " + author + " year = " + year + " nubber of such Book = " + numberOfCopies + '}';
     }
 
 
@@ -74,7 +74,6 @@ public class Book {
     public void setNumberOfCopies(int numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
     }
-    
 
-    
+
 }

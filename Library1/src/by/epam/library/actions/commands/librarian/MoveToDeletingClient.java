@@ -16,20 +16,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class MoveToDeletingClient implements ActionCommand{
+public class MoveToDeletingClient implements ActionCommand {
 
-    private static final String strDeleteClients = "/WEB-INF/jsp/admin_jsp/delete_client.jsp";
+    public static final String strViewClients = "/WEB-INF/jsp/admin_jsp/view_clients.jsp";
     private static final String strClients = "readers";
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
 
         List<Reader> readers = new ArrayList<Reader>();
         readers.addAll(adm.viewAllClients());
         request.setAttribute(strClients, readers);
-        result.setPage(strDeleteClients);
+        result.setPage(strViewClients);
         session1.setAttribute("prevPage", "ServletController?method=delete_client");
 
-        return  result;
+        return result;
     }
 
 }

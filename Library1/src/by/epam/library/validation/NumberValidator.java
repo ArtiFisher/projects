@@ -3,18 +3,16 @@ package by.epam.library.validation;
 import javax.servlet.http.HttpServletRequest;
 
 
-public class NumberValidator implements Validator{
+public class NumberValidator implements Validator {
 
-    public boolean validate(HttpServletRequest request,String paramForValidation) {
+    public boolean validate(HttpServletRequest request, String paramForValidation) {
         boolean result = true;
-        try{
+        try {
             Integer.parseInt(request.getParameter(paramForValidation));
             result = true;
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             result = false;
-        }
-        finally{
+        } finally {
             return result;
         }
     }

@@ -1,4 +1,3 @@
-
 package by.epam.library.actions.commands;
 
 import by.epam.library.actions.ActionCommand;
@@ -15,12 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
-public class SetLocaleEN implements ActionCommand{
+public class SetLocaleEN implements ActionCommand {
 
-    public ResultAnswer execute(HttpServletRequest request,HttpSession session1,
-            LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
-            throws InterruptedException, SQLException, ServletException, IOException
-    {
+    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+            throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         Locale.setDefault(new Locale("en_US"));
         session1.setAttribute("loc", "en_US");
