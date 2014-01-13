@@ -28,6 +28,7 @@ public class RedirectAddingBook implements ActionCommand {
     public static final String paramAuthor = "author";
     public static final String strshowBookAdded = "/Library/ServletController?method=showBookAdded";
     public static final String strAddBook2 = "//WEB-INF/jsp/admin_jsp/add_book_to_library.jsp";
+    private static final String STR_RU_LANG = "ru_RU";
 
     public static final String errorISBN = "errorISBN";
     public static final String errorYear = "errorYear";
@@ -41,7 +42,7 @@ public class RedirectAddingBook implements ActionCommand {
         ResultAnswer result = new ResultAnswer();
 
         ResourceBundle resource;
-        if (Locale.getDefault().toString().equals("ru_ru") || Locale.getDefault().toString().equals("ru_RU")) {
+        if (Locale.getDefault().toString().equalsIgnoreCase(STR_RU_LANG)) {
             resource = ResourceBundle.getBundle("resources/pagecontent_ru_RU");
         } else {
             resource = ResourceBundle.getBundle("resources/pagecontent_en_US");
@@ -58,7 +59,7 @@ public class RedirectAddingBook implements ActionCommand {
             int year = Integer.parseInt(request.getParameter(paramYear));
             int copiesNumber = Integer.parseInt(request.getParameter(paramCopiesNumber));
             adm.addBookToLibrary(ISBN, title, author, year, copiesNumber);
-            result.setIsForward(false);
+            result.setGoToPage(false);
             result.setPage(strshowBookAdded);
             //session1.setAttribute("prevPage","/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
             //response.sendRedirect(strshowBookAdded);

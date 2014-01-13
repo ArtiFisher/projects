@@ -37,7 +37,7 @@ public class RedirectReturnBook implements ActionCommand {
         List<Book> books = new ArrayList<Book>();
         books = bd.viewAllClientBooks(id);
         request.setAttribute(strBooks, books);
-        result.setIsForward(false);
+        result.setGoToPage(false);
         result.setPage(strReturnBookRef);
 
         return result;

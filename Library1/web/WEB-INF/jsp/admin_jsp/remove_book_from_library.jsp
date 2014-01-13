@@ -31,7 +31,7 @@
         </td>
     </tr>
 </table>
-h1><fmt:message key="label.title_view_books" bundle="${rb}"/></h1>
+<h1><fmt:message key="label.title_view_books" bundle="${rb}"/></h1>
 <c:if test="${bookNumber > 0}">
     <table border="1">
         <tr>

@@ -27,7 +27,8 @@ public class TakeBook implements ActionCommand {
     private static final String atrId = "id";
     private static final String atrError = "error";
     private static final String atrError2 = "error2";
-    //messages
+    private static final String STR_RU_LANG = "ru_RU";
+
     private static String msgAlreadyHaveBook = "You already have this book";
     private static String msgNoMoreBooks = "There is no more copies of such book";
     private static final String bookNumber = "bookNumber";
@@ -37,7 +38,7 @@ public class TakeBook implements ActionCommand {
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         ResourceBundle resource;
-        if (Locale.getDefault().toString().equals("ru_ru") || Locale.getDefault().toString().equals("ru_RU")) {
+        if (Locale.getDefault().toString().equalsIgnoreCase(STR_RU_LANG)) {
             resource = ResourceBundle.getBundle("resources/pagecontent_ru_RU");
         } else {
             resource = ResourceBundle.getBundle("resources/pagecontent_en_US");

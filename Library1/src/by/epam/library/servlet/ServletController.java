@@ -22,6 +22,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
+
 public class ServletController extends HttpServlet {
     private static final String LOG4J_PATH = "C:\\Users\\Artem\\IdeaProjects\\Library1\\src\\log4j.xml";
 
@@ -87,7 +88,7 @@ public class ServletController extends HttpServlet {
         }
         try {
             result = command.execute(request, session, adm, ad, bd, cd);
-            if (result.isIsForward()) {
+            if (result.isGoToPage()) {
                 response.setContentType(CONTEXT_TYPE);
                 request.getRequestDispatcher(result.getPage()).forward(request, response);
             } else {

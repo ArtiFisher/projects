@@ -48,7 +48,16 @@
     <tr>
         <td><fmt:message key="admin_remove_book" bundle="${rb}"/></td>
         <td>
-            <form action="ServletController?method=remove_book_from_libarary" method="POST">
+            <form action="ServletController?method=remove_book_from_library" method="POST">
+                <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_clients"
+                                                                                bundle="${rb}"/>>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td><fmt:message key="label.title_view_books" bundle="${rb}"/></td>
+        <td>
+            <form action="ServletController?method=admin_view_list_of_books" method="POST">
                 <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_clients"
                                                                                 bundle="${rb}"/>>
             </form>

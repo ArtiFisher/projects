@@ -28,7 +28,7 @@ public class MoveToRemovingBook implements ActionCommand {
         books = bd.viewAllBooks();
         request.setAttribute(strBooks, books);
         result.setPage(strRemoveBook);
-        session1.setAttribute("prevPage", "ServletController?method=remove_book_from_libarary");
+        session1.setAttribute("prevPage", "ServletController?method=remove_book_from_library");
         request.setAttribute(bookNumber, books.size());
         return result;
     }

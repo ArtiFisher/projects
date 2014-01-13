@@ -30,8 +30,7 @@ public class AuthorizationCommand implements ActionCommand {
     private static final String STR_RUS_PROPERTIES = "resources/pagecontent_ru_RU";
     private static final String STR_ENG_PROPERTIES = "resources/pagecontent_en_US";
 
-    private static final String STR_RU_LANG1 = "ru_ru";
-    private static final String STR_RU_LANG2 = "ru_RU";
+    private static final String STR_RU_LANG = "ru_RU";
 
 
     public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
@@ -41,7 +40,7 @@ public class AuthorizationCommand implements ActionCommand {
         int clientID = -1;
         int adminID = -1;
         ResourceBundle resource;
-        if (Locale.getDefault().toString().equals(STR_RU_LANG1) || Locale.getDefault().toString().equals(STR_RU_LANG2)) {
+        if (Locale.getDefault().toString().equalsIgnoreCase(STR_RU_LANG)) {
             resource = ResourceBundle.getBundle(STR_RUS_PROPERTIES);
         } else {
             resource = ResourceBundle.getBundle(STR_ENG_PROPERTIES);

@@ -28,6 +28,7 @@ public class RedirectRegistration implements ActionCommand {
     private static final String atrSurname = "surname";
     private static final String atrErrorLogin = "errorLogin";
     private static final String IS_ADMIN = "isAdmin";
+    private static final String STR_RU_LANG = "ru_RU";
     //messages
     private static String msgIncorrectPass = "You entered incorrect password: password can contain only figures";
     private static String msgLoginExist = "Such login is exist";
@@ -37,7 +38,7 @@ public class RedirectRegistration implements ActionCommand {
         String page = "";
 
         ResourceBundle resource;
-        if (Locale.getDefault().toString().equals("ru_ru") || Locale.getDefault().toString().equals("ru_RU")) {
+        if (Locale.getDefault().toString().equalsIgnoreCase(STR_RU_LANG)) {
             resource = ResourceBundle.getBundle("resources/pagecontent_ru_RU");
         } else {
             resource = ResourceBundle.getBundle("resources/pagecontent_en_US");
@@ -61,7 +62,7 @@ public class RedirectRegistration implements ActionCommand {
             page = strShowReg;
             session1.setAttribute(IS_ADMIN, -1);
             result.setPage(page);
-            result.setIsForward(false);
+            result.setGoToPage(false);
         } else {
             request.setAttribute(atrErrorLogin, msgLoginExist);
             page = strRegistration;

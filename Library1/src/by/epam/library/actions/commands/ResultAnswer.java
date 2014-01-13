@@ -2,19 +2,19 @@ package by.epam.library.actions.commands;
 
 public class ResultAnswer {
     String page;
-    boolean isForward;
+    boolean goToPage;
 
     public ResultAnswer() {
         page = "";
-        isForward = true;
+        goToPage = true;
     }
 
-    public boolean isIsForward() {
-        return isForward;
+    public boolean isGoToPage() {
+        return goToPage;
     }
 
-    public void setIsForward(boolean isForward) {
-        this.isForward = isForward;
+    public void setGoToPage(boolean isForward) {
+        this.goToPage = isForward;
     }
 
     public String getPage() {

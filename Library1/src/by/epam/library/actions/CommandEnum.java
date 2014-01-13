@@ -51,7 +51,7 @@ public enum CommandEnum {
             this.command = new MoveToAdminPage();
         }
     },
-    REMOVE_BOOK_FROM_LIBARARY {
+    REMOVE_BOOK_FROM_LIBRARY {
         {
             this.command = new MoveToRemovingBook();
         }
