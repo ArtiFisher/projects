@@ -8,11 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-/**
- * This class is necessary for coding translation in UTF-8
- *
- * @author AndreAY
- */
+
 public class EncodingFilter implements Filter {
 
     public static final String ENCODING_UTF8 = "UTF-8";
@@ -20,15 +16,7 @@ public class EncodingFilter implements Filter {
     public void init(FilterConfig arg0) throws ServletException {
     }
 
-    /**
-     * This method checks a request encoding and sets a UTF-8 encoding
-     *
-     * @param request  a ServletRequest
-     * @param response a ServletResponse
-     * @param chain    a FilterChain
-     * @throws IOException      a IOException
-     * @throws ServletException a ServletException
-     */
+
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String encoding = request.getCharacterEncoding();
         if (!ENCODING_UTF8.equals(encoding)) {

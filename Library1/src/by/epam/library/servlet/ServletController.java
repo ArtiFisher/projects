@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package by.epam.library.servlet;
 
 import by.epam.library.actions.ActionCommand;
@@ -73,21 +69,23 @@ public class ServletController extends HttpServlet {
         }
     }
 
-
+    /**
+     * handles requests, sends forward to necessary page
+     */
     private void requestProcessing(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, InterruptedException, SQLException {
         ActionFactory client = new ActionFactory();
-        ActionCommand command = client.defineCommand(request);
-        ResultAnswer result;
+        ActionCommand command = client.defineCommand(request);     //defines command from parameter 'method' of request with help of CommandEnum.java
+        ResultAnswer result;                                       //container for address of next page
         HttpSession session = request.getSession();
         try {
-            Integer.parseInt(session.getAttribute(FLAG).toString());
-        } catch (NullPointerException e) {
+            Integer.parseInt(session.getAttribute(FLAG).toString());      //exception is thrown if user just entered, because flag is not set
+        } catch (NullPointerException e) {                                //setup of default attributes for session
             session.removeAttribute(PREV_PAGE);
             session.setAttribute(FLAG, 1);
             session.setAttribute(LOCALE, LOCALE_RUS);
         }
         try {
-            result = command.execute(request, session, adm, ad, bd, cd);
+            result = command.execute(request, session, adm, ad, bd, cd);    //executes current command
             if (result.isGoToPage()) {
                 response.setContentType(CONTEXT_TYPE);
                 request.getRequestDispatcher(result.getPage()).forward(request, response);
