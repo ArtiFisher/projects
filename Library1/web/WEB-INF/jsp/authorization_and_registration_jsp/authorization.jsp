@@ -41,6 +41,7 @@
 
     <h2 class="text-center"><fmt:message key="label.title" bundle="${rb}"/></h2>
     <c:out value="${successfulRegistration}"/>
+    <c:out value="${error}"/>
 
     <form class="form-signin" role="form" action="ServletController?method=authorization" method="POST">
         <input type="text" name="login" style="width: 40%" class="form-control" placeholder=

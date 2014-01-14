@@ -11,6 +11,7 @@ import by.epam.library.database.dao.ReaderDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -31,7 +32,8 @@ public class ServletController extends HttpServlet {
     private static final String FLAG = "flag";
     private static final String PREV_PAGE = "prevPage";
     private static final String LOCALE = "loc";
-    private static final String LOCALE_RUS = "ru_RU";
+    private static final String LOCALE_EN = "en_US";
+    private static final String LOCALE_RU = "ru_RU";
     private static final String CONTEXT_TYPE = "text/html";
     private static final String AUTHORIZATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
     private static final String REGISTRATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/registration.jsp";
@@ -82,7 +84,8 @@ public class ServletController extends HttpServlet {
         } catch (NullPointerException e) {                                //setup of default attributes for session
             session.removeAttribute(PREV_PAGE);
             session.setAttribute(FLAG, 1);
-            session.setAttribute(LOCALE, LOCALE_RUS);
+            session.setAttribute(LOCALE, LOCALE_RU);
+            Locale.setDefault(new Locale("ru_RU"));
         }
         try {
             result = command.execute(request, session, adm, ad, bd, cd);    //executes current command

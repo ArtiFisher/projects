@@ -20,7 +20,6 @@ public class AuthorizationCommand implements ActionCommand {
     private static final String ATR_ERROR = "error";
     private static final String ATR_PREV_PAGE = "prevPage";
     private static final String MSG_WRONG_PASS_OR_LOGIN = "msgWrongPassOrLogin";
-    private static final String MSG_INCORRECT_PASS = "msgIncorrectPass";
 
 
     private static final String STR_FOR_USER = "/WEB-INF/jsp/user_jsp/for_user.jsp";

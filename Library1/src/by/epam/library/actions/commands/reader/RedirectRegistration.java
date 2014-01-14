@@ -29,8 +29,7 @@ public class RedirectRegistration implements ActionCommand {
     private static final String atrErrorLogin = "errorLogin";
     private static final String IS_ADMIN = "isAdmin";
     private static final String STR_RU_LANG = "ru_RU";
-    //messages
-    private static String msgIncorrectPass = "You entered incorrect password: password can contain only figures";
+
     private static String msgLoginExist = "Such login is exist";
 
     public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
@@ -43,7 +42,6 @@ public class RedirectRegistration implements ActionCommand {
         } else {
             resource = ResourceBundle.getBundle("resources/pagecontent_en_US");
         }
-        msgIncorrectPass = resource.getString("msgIncorrectPass");
         msgLoginExist = resource.getString("msgLoginExist");
 
 

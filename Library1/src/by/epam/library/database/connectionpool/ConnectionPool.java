@@ -35,9 +35,6 @@ public class ConnectionPool {
         String url = resource.getString(URL);
         String user = resource.getString(USER);
         String pass = resource.getString(PASSWORD);
-        url = "jdbc:mysql://localhost:3306/library";
-        user = "root";
-        pass = "assasin1";
 
         Properties prop = new Properties();
         prop.put(USER, user);
