@@ -31,24 +31,28 @@
     </tr>
 </table>
 <body>
-<h1 class="text-center"><fmt:message key="label.page_name_user_page" bundle="${rb}"/></h1>
-<table>
-    <tr>
-        <td><fmt:message key="label.page_name_take_book" bundle="${rb}"/></td>
-        <td>
-            <form action="ServletController?method=take_book" method="POST">
-                <input type="submit" class="btn btn-default" value=<fmt:message key="button_user_view" bundle="${rb}"/>>
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <td><fmt:message key="title.view_list_of_books" bundle="${rb}"/></td>
-        <td>
-            <form action="ServletController?method=return_book" method="POST">
-                <input type="submit" class="btn btn-default" value=<fmt:message key="button_user_view" bundle="${rb}"/>>
-            </form>
-        </td>
-    </tr>
-</table>
+<div class="container" align="center">
+    <h1 class="text-center"><fmt:message key="label.page_name_user_page" bundle="${rb}"/></h1>
+    <table>
+        <tr>
+            <td><fmt:message key="label.page_name_take_book" bundle="${rb}"/></td>
+            <td>
+                <form action="ServletController?method=take_book" method="POST">
+                    <input type="submit" class="btn btn-default" value=<fmt:message key="button_user_view"
+                                                                                    bundle="${rb}"/>>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td><fmt:message key="title.view_list_of_books" bundle="${rb}"/></td>
+            <td>
+                <form action="ServletController?method=return_book" method="POST">
+                    <input type="submit" class="btn btn-default" value=<fmt:message key="button_user_view"
+                                                                                    bundle="${rb}"/>>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

@@ -32,16 +32,19 @@
         </td>
     </tr>
 </table>
-<h1><fmt:message key="label.title_view_client_card" bundle="${rb}"/></h1>
+<div class="container" align="center">
+    <h1 align="center"><fmt:message key="label.title_view_client_card" bundle="${rb}"/></h1>
 
-<c:if test="${bookNumber > 0}">
-    <bktbl:booktable books="${books}"></bktbl:booktable>
-</c:if>
-<c:if test="${bookNumber <= 0}">
-    <h2><fmt:message key="msgNoBooks" bundle="${rb}"/></h2>
-</c:if>
-<form action="ServletController?method=return_to_admin_page" method="POST">
-    <input type="submit" class="btn btn-default" value=<fmt:message key="button_return_to_admin_page" bundle="${rb}"/>>
-</form>
+    <c:if test="${bookNumber > 0}">
+        <bktbl:booktable books="${books}"></bktbl:booktable>
+    </c:if>
+    <c:if test="${bookNumber <= 0}">
+        <h2><fmt:message key="msgNoBooks" bundle="${rb}"/></h2>
+    </c:if>
+    <form action="ServletController?method=return_to_admin_page" method="POST">
+        <input type="submit" class="btn btn-default" align="center" value=<fmt:message key="button_return_to_admin_page"
+                                                                                       bundle="${rb}"/>>
+    </form>
+</div>
 </body>
 </html>

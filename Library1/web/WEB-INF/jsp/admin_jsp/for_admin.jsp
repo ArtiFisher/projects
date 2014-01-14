@@ -32,47 +32,40 @@
         </td>
     </tr>
 </table>
-<h1><fmt:message key="label.title_admin_page" bundle="${rb}"/></h1>
-<font size=4 color=green>
-    <c:out value="${bookAdded}"/>
-</font>
-<table>
-    <tr>
-        <td><fmt:message key="admin_add_book" bundle="${rb}"/></td>
-        <td>
-            <form action="ServletController?method=add_book" method="POST">
-                <input type="submit" class="btn btn-default" value=<fmt:message key="button_add_book" bundle="${rb}"/>>
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <td><fmt:message key="admin_remove_book" bundle="${rb}"/></td>
-        <td>
-            <form action="ServletController?method=remove_book_from_library" method="POST">
-                <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_clients"
-                                                                                bundle="${rb}"/>>
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <td><fmt:message key="label.title_view_books" bundle="${rb}"/></td>
-        <td>
-            <form action="ServletController?method=admin_view_list_of_books" method="POST">
-                <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_clients"
-                                                                                bundle="${rb}"/>>
-            </form>
-        </td>
-    </tr>
-    <tr>
-        <td><fmt:message key="admin_view_clients" bundle="${rb}"/></td>
-        <td>
-            <form action="ServletController?method=view_clients" method="POST">
-                <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_clients"
-                                                                                bundle="${rb}"/>>
-            </form>
-        </td>
-    </tr>
-</table>
-
+<div class="container" align="center">
+    <h1><fmt:message key="label.title_admin_page" bundle="${rb}"/></h1>
+    <font size=4 color=green>
+        <c:out value="${bookAdded}"/>
+    </font>
+    <table>
+        <tr>
+            <td><fmt:message key="admin_add_book" bundle="${rb}"/></td>
+            <td>
+                <form action="ServletController?method=add_book" method="POST">
+                    <input type="submit" class="btn btn-default" value=<fmt:message key="button_add_book"
+                                                                                    bundle="${rb}"/>>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td><fmt:message key="label.title_view_books" bundle="${rb}"/></td>
+            <td>
+                <form action="ServletController?method=remove_book_from_library" method="POST">
+                    <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_clients"
+                                                                                    bundle="${rb}"/>>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td><fmt:message key="admin_view_clients" bundle="${rb}"/></td>
+            <td>
+                <form action="ServletController?method=view_clients" method="POST">
+                    <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_clients"
+                                                                                    bundle="${rb}"/>>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

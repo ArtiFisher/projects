@@ -32,47 +32,49 @@
         </td>
     </tr>
 </table>
-<h1><fmt:message key="label.title_adding_page" bundle="${rb}"/></h1>
+<div class="container" align="center">
+    <h1><fmt:message key="label.title_adding_page" bundle="${rb}"/></h1>
 
-<form action="ServletController?method=add_book_filling_information" method="POST">
-    <table>
-        <tr>
-            <td><fmt:message key="book_ISBN" bundle="${rb}"/></td>
-            <td><input type="text" name="ISBN"></td>
-            <td><font size=2 color=red>
-                <c:out value="${errorISBN}"/>
-            </font></td>
-        </tr>
-        <tr>
-            <td><fmt:message key="book_title" bundle="${rb}"/></td>
-            <td><input type="text" name="title"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><fmt:message key="book_author" bundle="${rb}"/></td>
-            <td><input type="text" name="author"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><fmt:message key="book_year" bundle="${rb}"/></td>
-            <td><input type="text" name="year"></td>
-            <td><font size=2 color=red>
-                <c:out value="${errorYear}"/>
-            </font></td>
-        </tr>
-        <tr>
-            <td><fmt:message key="book_numberOfCopies" bundle="${rb}"/></td>
-            <td><input type="text" name="copiesNumber"></td>
-            <td><font size=2 color=red>
-                <c:out value="${errorNumOfCopies}"/>
-            </font></td>
-        </tr>
-    </table>
-    <input type="submit" class="btn btn-default" value=<fmt:message key="button_add_book" bundle="${rb}"/>>
-</form>
-<form action="ServletController?method=return_to_admin_page" method="POST">
-    <input type="submit" class="btn btn-default" value=<fmt:message key="button_return_to_admin_page" bundle="${rb}"/>>
-</form>
-
+    <form action="ServletController?method=add_book_filling_information" method="POST">
+        <table align="center">
+            <tr>
+                <td><fmt:message key="book_ISBN" bundle="${rb}"/></td>
+                <td><input type="text" name="ISBN" class="form-control" style="width: 100%" autofocus required></td>
+                <td><font size=2 color=red>
+                    <c:out value="${errorISBN}"/>
+                </font></td>
+            </tr>
+            <tr>
+                <td><fmt:message key="book_title" bundle="${rb}"/></td>
+                <td><input type="text" name="title" class="form-control" style="width: 100%" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><fmt:message key="book_author" bundle="${rb}"/></td>
+                <td><input type="text" name="author" class="form-control" style="width: 100%" required></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><fmt:message key="book_year" bundle="${rb}"/></td>
+                <td><input type="text" name="year" class="form-control" style="width: 100%" required></td>
+                <td><font size=2 color=red>
+                    <c:out value="${errorYear}"/>
+                </font></td>
+            </tr>
+            <tr>
+                <td><fmt:message key="book_numberOfCopies" bundle="${rb}"/></td>
+                <td><input type="text" name="copiesNumber" class="form-control" style="width: 100%" required></td>
+                <td><font size=2 color=red>
+                    <c:out value="${errorNumOfCopies}"/>
+                </font></td>
+            </tr>
+        </table>
+        <input type="submit" class="btn btn-default" value=<fmt:message key="button_add_book" bundle="${rb}"/>>
+    </form>
+    <form action="ServletController?method=return_to_admin_page" method="POST">
+        <input type="submit" class="btn btn-default" value=<fmt:message key="button_return_to_admin_page"
+                                                                        bundle="${rb}"/>>
+    </form>
+</div>
 </body>
 </html>

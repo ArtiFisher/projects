@@ -38,14 +38,14 @@
     </tr>
 </table>
 <%--<c:out value="${successfulRegistration}"/>--%>
-<div class="container">
+<div class="container" align="center">
 
     <h2 class="text-center"><fmt:message key="label.title" bundle="${rb}"/></h2>
 
     <form class="form-signin" role="form" action="ServletController?method=authorization" method="POST">
-        <input type="text" name="login" class="form-control" placeholder=
+        <input type="text" name="login" style="width: 40%" class="form-control" placeholder=
         <fmt:message key="field.login" bundle="${rb}"/> required autofocus>
-        <input type="password" name="password" class="form-control" placeholder=
+        <input type="password" name="password" style="width: 40%" class="form-control" placeholder=
         <fmt:message key="field.password" bundle="${rb}"/> required>
         <input type="submit" class="btn btn-default" value=<fmt:message key="field.log_in" bundle="${rb}"/>>
     </form>

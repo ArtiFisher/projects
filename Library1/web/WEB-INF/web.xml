@@ -36,7 +36,7 @@
     <jsp-config>
         <taglib>
             <taglib-uri>booktabletag</taglib-uri>
-            <taglib-location>/WEB-INF/tlds/table.tld</taglib-location>
+            <taglib-location>/WEB-INF/table.tld</taglib-location>
         </taglib>
     </jsp-config>
 </web-app>

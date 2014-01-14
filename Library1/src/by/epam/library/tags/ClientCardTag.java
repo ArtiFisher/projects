@@ -37,7 +37,7 @@ public class ClientCardTag extends TagSupport {
 
         try {
             JspWriter out = pageContext.getOut();
-            out.write("<table border='1'>");
+            out.write("<table border='1' align=\"center\">");
             out.write("<td>" + resource.getString("book_id") + "</td>");
             out.write("<td>" + resource.getString("book_ISBN") + "</td>");
             out.write("<td>" + resource.getString("book_title") + "</td>");

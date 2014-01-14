@@ -26,11 +26,6 @@ public enum CommandEnum {
             this.command = new Registration();
         }
     },
-    ADMIN_VIEW_LIST_OF_BOOKS {
-        {
-            this.command = new ViewBooksAdmin();
-        }
-    },
     ADD_BOOK {
         {
             this.command = new MoveToAddingBook();

@@ -31,37 +31,40 @@
         </td>
     </tr>
 </table>
-<h1><fmt:message key="label.title_view_clients" bundle="${rb}"/></h1>
-<table border="1">
-    <tr>
-
-        <td><fmt:message key="field.name" bundle="${rb}"/></td>
-        <td><fmt:message key="field.surname" bundle="${rb}"/></td>
-    </tr>
-    <c:forEach var="reader" items="${readers}">
+<div class="container" align="center">
+    <h1 align="center"><fmt:message key="label.title_view_clients" bundle="${rb}"/></h1>
+    <table border="1" align="center">
         <tr>
-            <td>${reader.name}</td>
-            <td>${reader.surname}</td>
-            <form action="ServletController?method=admin_view_client_card" method="POST">
-                <td>
-                    <input type="hidden" name="idCl" value="${reader.id}"/>
-                    <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_taken_books"
-                                                                                    bundle="${rb}"/>>
-                </td>
-            </form>
-            <form action="ServletController?method=delete_client_from_db" method="POST">
-                <td>
-                    <input type="hidden" name="idCl" value="${reader.id}"/>
-                    <input type="submit" class="btn btn-default" value=<fmt:message key="button_delete_clients"
-                                                                                    bundle="${rb}"/>>
-                </td>
-            </form>
-        </tr>
-    </c:forEach>
-</table>
 
-<form action="ServletController?method=return_to_admin_page" method="POST">
-    <input type="submit" class="btn btn-default" value=<fmt:message key="button_return_to_admin_page" bundle="${rb}"/>>
-</form>
+            <td><fmt:message key="field.name" bundle="${rb}"/></td>
+            <td><fmt:message key="field.surname" bundle="${rb}"/></td>
+        </tr>
+        <c:forEach var="reader" items="${readers}">
+            <tr>
+                <td>${reader.name}</td>
+                <td>${reader.surname}</td>
+                <form action="ServletController?method=admin_view_client_card" method="POST">
+                    <td>
+                        <input type="hidden" name="idCl" value="${reader.id}"/>
+                        <input type="submit" class="btn btn-default" value=<fmt:message key="button_view_taken_books"
+                                                                                        bundle="${rb}"/>>
+                    </td>
+                </form>
+                <form action="ServletController?method=delete_client_from_db" method="POST">
+                    <td>
+                        <input type="hidden" name="idCl" value="${reader.id}"/>
+                        <input type="submit" class="btn btn-default" value=<fmt:message key="button_delete_clients"
+                                                                                        bundle="${rb}"/>>
+                    </td>
+                </form>
+            </tr>
+        </c:forEach>
+    </table>
+
+    <form action="ServletController?method=return_to_admin_page" method="POST">
+        <input type="submit" class="btn btn-default" align="center" value=<fmt:message key="button_return_to_admin_page"
+                                                                                       bundle="${rb}"/>>
+    </form>
+</div>
 </body>
 </html>
