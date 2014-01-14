@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 public class RedirectRegistration implements ActionCommand {
     private static final String strRegistration = "/WEB-INF/jsp/authorization_and_registration_jsp/registration.jsp";
-    private static final String strShowReg = "/Library/ServletController?method=showReg";
+    private static final String strShowReg = "/ServletController?method=showReg";
     //attributes
     private static final String atrLogin = "login";
     private static final String atrPassword = "password";

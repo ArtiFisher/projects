@@ -35,7 +35,7 @@ public class ServletController extends HttpServlet {
     private static final String CONTEXT_TYPE = "text/html";
     private static final String AUTHORIZATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
     private static final String REGISTRATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/registration.jsp";
-    private static final String strShowReg = "/Library/ServletController?method=showReg";
+    private static final String strShowReg = "/ServletController?method=showReg";
     private static final String STR_FOR_USER = "/WEB-INF/jsp/user_jsp/for_user.jsp";
     private static final String STR_FOR_ADMIN = "/WEB-INF/jsp/admin_jsp/for_admin.jsp";
     private static final String IS_ADMIN = "isAdmin";
@@ -90,25 +90,7 @@ public class ServletController extends HttpServlet {
                 response.setContentType(CONTEXT_TYPE);
                 request.getRequestDispatcher(result.getPage()).forward(request, response);
             } else {
-                //response.sendRedirect(result.getPage());
-                switch (((Integer) session.getAttribute(IS_ADMIN))) {
-                    case 0:
-                        request.getRequestDispatcher(STR_FOR_USER).forward(request, response);
-                        break;
-                    case 1:
-                        request.getRequestDispatcher(STR_FOR_ADMIN).forward(request, response);
-                        break;
-                    case -1:
-//                        response.sendRedirect(strShowReg);
-                        request.getRequestDispatcher(strShowReg).forward(request, response);
-                        break;
-                    case -2:
-                        request.getRequestDispatcher(REGISTRATION_JSP).forward(request, response);
-//                        response.sendRedirect(REGISTRATION_JSP);
-                        break;
-                    default:
-                        request.getRequestDispatcher(AUTHORIZATION_JSP).forward(request, response);
-                }
+                response.sendRedirect(result.getPage());
             }
         } catch (NullPointerException e) {
             request.getRequestDispatcher(AUTHORIZATION_JSP).forward(request, response);

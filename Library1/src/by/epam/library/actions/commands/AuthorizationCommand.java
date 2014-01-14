@@ -46,7 +46,6 @@ public class AuthorizationCommand implements ActionCommand {
             resource = ResourceBundle.getBundle(STR_ENG_PROPERTIES);
         }
         String msgWrongPassOrLogin = resource.getString(MSG_WRONG_PASS_OR_LOGIN);
-        String msgIncorrectPass = resource.getString(MSG_INCORRECT_PASS);
 
         String login = request.getParameter(ATR_LOGIN);
         HttpSession session = request.getSession(true);

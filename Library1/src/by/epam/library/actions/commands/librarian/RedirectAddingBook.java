@@ -21,7 +21,7 @@ public class RedirectAddingBook implements ActionCommand {
     public static final String paramCopiesNumber = "copiesNumber";
     public static final String paramTitle = "title";
     public static final String paramAuthor = "author";
-    public static final String strshowBookAdded = "/Library/ServletController?method=showBookAdded";
+    public static final String strshowBookAdded = "/ServletController?method=showBookAdded";
     public static final String strAddBook2 = "//WEB-INF/jsp/admin_jsp/add_book_to_library.jsp";
     private static final String STR_RU_LANG = "ru_RU";
 
