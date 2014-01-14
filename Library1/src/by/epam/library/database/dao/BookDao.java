@@ -37,6 +37,7 @@ public class BookDao implements AbstractDao {
 
         try {
             ps = connection.prepareStatement(SQL_SELECT_ALL_BOOKS);
+            logger.info(new Date()+" - "+ps.toString());
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -53,7 +54,7 @@ public class BookDao implements AbstractDao {
             }
 
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
             ps.close();
@@ -68,6 +69,7 @@ public class BookDao implements AbstractDao {
         try {
             ps = connection.prepareStatement(SQL_SELECT_BOOK_BY_TITLE);
             ps.setString(1, title);
+            logger.info(new Date()+" - "+ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -80,7 +82,7 @@ public class BookDao implements AbstractDao {
             }
 
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
             ps.close();
@@ -95,6 +97,7 @@ public class BookDao implements AbstractDao {
         try {
             ps = connection.prepareStatement(SQL_SELECT_BOOK_BY_ID);
             ps.setInt(1, id);
+            logger.info(new Date()+" - "+ps.toString());
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -108,7 +111,7 @@ public class BookDao implements AbstractDao {
             }
 
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
             ps.close();
@@ -127,6 +130,7 @@ public class BookDao implements AbstractDao {
             int bookID;
             Book book = new Book();
             ps.setInt(1, clientID);
+            logger.info(new Date()+" - "+ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 bookID = rs.getInt(3);
@@ -138,7 +142,7 @@ public class BookDao implements AbstractDao {
                 books.add(book);
             }
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
             ps.close();

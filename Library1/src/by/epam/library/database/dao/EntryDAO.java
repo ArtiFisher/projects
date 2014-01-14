@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
+import java.util.Date;
 
 
 public class EntryDAO implements AbstractDao {
@@ -33,6 +34,7 @@ public class EntryDAO implements AbstractDao {
         try {
             ps = connection.prepareStatement(SQL_SELECT_PASSWORD_BY_LOGIN);
             ps.setString(1, login);
+            logger.info(new Date()+" - "+ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 realPassword = rs.getString(1);
@@ -42,7 +44,7 @@ public class EntryDAO implements AbstractDao {
             }
 
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
             ps.close();
@@ -59,6 +61,7 @@ public class EntryDAO implements AbstractDao {
             ps = connection.prepareStatement(SQL_SELECT_READER_INFO_BY_LOGIN_AND_PASSWORD);
             ps.setString(1, login);
             ps.setString(2, password);
+            logger.info(new Date()+" - "+ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt(1);
@@ -67,7 +70,7 @@ public class EntryDAO implements AbstractDao {
                 result = true;
             }
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
             ps.close();
@@ -83,12 +86,13 @@ public class EntryDAO implements AbstractDao {
             ps = connection.prepareStatement(SQLRequest);
             ps.setString(1, login);
             ps.setString(2, password);
+            logger.info(new Date()+" - "+ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt(1);
             }
         } catch (SQLException e) {
-            logger.error(e);
+            logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
             ps.close();

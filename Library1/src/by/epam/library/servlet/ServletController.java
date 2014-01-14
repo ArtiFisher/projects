@@ -11,6 +11,7 @@ import by.epam.library.database.dao.ReaderDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Locale;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -21,7 +22,8 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 
 public class ServletController extends HttpServlet {
-    private static final String LOG4J_PATH = "C:\\Users\\Artem\\IdeaProjects\\Library1\\src\\log4j.xml";
+    private static final String LOG4J_PATH = "../src/log4j.xml";
+
 
     static {
         new DOMConfigurator().doConfigure(LOG4J_PATH, LogManager.getLoggerRepository());
@@ -32,15 +34,9 @@ public class ServletController extends HttpServlet {
     private static final String FLAG = "flag";
     private static final String PREV_PAGE = "prevPage";
     private static final String LOCALE = "loc";
-    private static final String LOCALE_EN = "en_US";
     private static final String LOCALE_RU = "ru_RU";
     private static final String CONTEXT_TYPE = "text/html";
     private static final String AUTHORIZATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
-    private static final String REGISTRATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/registration.jsp";
-    private static final String strShowReg = "/ServletController?method=showReg";
-    private static final String STR_FOR_USER = "/WEB-INF/jsp/user_jsp/for_user.jsp";
-    private static final String STR_FOR_ADMIN = "/WEB-INF/jsp/admin_jsp/for_admin.jsp";
-    private static final String IS_ADMIN = "isAdmin";
     private ConnectionPool connector;
     private LibrarianDAO adm;
     private EntryDAO ad;
@@ -65,9 +61,9 @@ public class ServletController extends HttpServlet {
             cd = new ReaderDAO();
             cd.setConnector(connector);
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(new Date() + " - " + ex);
         } catch (ClassNotFoundException ex) {
-            logger.error(ex);
+            logger.error(new Date() + " - " + ex);
         }
     }
 
@@ -105,9 +101,9 @@ public class ServletController extends HttpServlet {
         try {
             requestProcessing(request, response);
         } catch (InterruptedException ex) {
-            logger.error(ex);
+            logger.error(new Date() + " - " + ex);
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(new Date() + " - " + ex);
         }
     }
 
@@ -117,9 +113,9 @@ public class ServletController extends HttpServlet {
             requestProcessing(request, response);
 
         } catch (InterruptedException ex) {
-            logger.error(ex);
+            logger.error(new Date() + " - " + ex);
         } catch (SQLException ex) {
-            logger.error(ex);
+            logger.error(new Date() + " - " + ex);
         }
     }
 
