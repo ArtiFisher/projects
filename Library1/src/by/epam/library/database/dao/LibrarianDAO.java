@@ -23,8 +23,8 @@ public class LibrarianDAO implements AbstractDao {
     private static final String SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA = "SELECT * FROM entrydata WHERE (login=?)";
     private static final String SQL_SELECT_ALL_BOOKS = "SELECT * FROM book";
     private static final String SQL_SELECT_BOOK_BY_ID_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE bookid=?";
-    private static final String SQL_INSERT_READER = "INSERT INTO reader VALUES(?,?,?,?)";
-    private static final String SQL_INSERT_ENTRYDATA = "INSERT INTO entrydata VALUES (?,?,?)";
+    private static final String SQL_INSERT_READER = "INSERT INTO reader(name,surname,entryid) VALUES(?,?,?)";
+    private static final String SQL_INSERT_ENTRYDATA = "INSERT INTO entrydata(login, password) VALUES (?,?)";
     private static final String SQL_INSERT_BOOK = "INSERT INTO book VALUES(?,?,?,?,?,?)";
     private static final String SQL_DELETE_READER = "DELETE FROM reader WHERE id=?";
     private static final String SQL_DELETE_ENTRYDATA = "DELETE FROM entrydata WHERE (id=?)";
@@ -97,25 +97,23 @@ public class LibrarianDAO implements AbstractDao {
         PreparedStatement ps = null;
         try {
 
-            int clientId = 0;
+            ps = connection.prepareStatement(SQL_INSERT_ENTRYDATA);
+            ps.setString(1, li.getLogin());
+            ps.setString(2, li.getPass());
+            ps.executeUpdate();
+
+            int entryID = 0;
             ps = connection.prepareStatement(SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA);
             ps.setString(1, li.getLogin());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                clientId = rs.getInt(1);
+                entryID = rs.getInt(1);
             }
 
-            ps = connection.prepareStatement(SQL_INSERT_ENTRYDATA);
-            ps.setInt(1, clientId);
-            ps.setString(2, li.getLogin());
-            ps.setString(3, li.getPass());
-            ps.executeUpdate();
-
             ps = connection.prepareStatement(SQL_INSERT_READER);
-            ps.setInt(1, clientId);
-            ps.setString(2, reader.getName());
-            ps.setString(3, reader.getSurname());
-            ps.setInt(4, clientId);
+            ps.setString(1, reader.getName());
+            ps.setString(2, reader.getSurname());
+            ps.setInt(3, entryID);
             ps.executeUpdate();
         } catch (SQLException e) {
             logger.error(e);
