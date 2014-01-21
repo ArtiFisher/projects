@@ -30,6 +30,7 @@ public class ServletController extends HttpServlet {
     }
 
     static Logger logger = Logger.getLogger(ServletController.class);
+    static boolean firstTime = true;
 
     private static final String FLAG = "flag";
     private static final String PREV_PAGE = "prevPage";
@@ -85,20 +86,18 @@ public class ServletController extends HttpServlet {
         ActionCommand command = client.defineCommand(request);     //defines command from parameter 'method' of request with help of CommandEnum.java
         ResultAnswer result;                                       //container for address of next page
         HttpSession session = request.getSession();
-        try {
-            Integer.parseInt(session.getAttribute(FLAG).toString());      //exception is thrown if user just entered, because flag is not set
-        } catch (NullPointerException e) {                                //setup of default attributes for session
+        if(firstTime){                              //setup of default attributes for session
             session.removeAttribute(PREV_PAGE);
             session.setAttribute(FLAG, 1);
             session.setAttribute(IS_ADMIN, -1);
             session.setAttribute(LOCALE, LOCALE_RU);
             Locale.setDefault(new Locale("ru_RU"));
+            firstTime = false;
         }
         if(!accessGranted(Integer.parseInt(session.getAttribute(IS_ADMIN).toString()),command.getPageRights())) {
             request.getRequestDispatcher(ACCESS_DENIED).forward(request, response);
             return;
         }
-        try {
             result = command.execute(request, adm, ad, bd, cd);    //executes current command
             if (result.isGoToPage()) {
                 response.setContentType(CONTEXT_TYPE);
@@ -106,9 +105,6 @@ public class ServletController extends HttpServlet {
             } else {
                 response.sendRedirect(result.getPage());
             }
-        } catch (NullPointerException e) {
-            request.getRequestDispatcher(AUTHORIZATION_JSP).forward(request, response);
-        }
     }
 
     @Override
