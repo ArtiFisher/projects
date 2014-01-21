@@ -40,4 +40,8 @@ public class MoveToReturningBook implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return 0;
+    };
+
 }

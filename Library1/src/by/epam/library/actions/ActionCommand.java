@@ -18,4 +18,5 @@ public interface ActionCommand {
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException;
 
+    public int getPageRights();
 }

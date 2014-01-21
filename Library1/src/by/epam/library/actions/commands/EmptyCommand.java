@@ -22,4 +22,8 @@ public class EmptyCommand implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return -1;
+    };
+
 }

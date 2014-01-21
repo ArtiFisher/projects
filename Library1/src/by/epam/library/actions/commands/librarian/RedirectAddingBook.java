@@ -89,4 +89,8 @@ public class RedirectAddingBook implements ActionCommand {
         }
     }
 
+    public int getPageRights(){
+        return 1;
+    };
+
 }

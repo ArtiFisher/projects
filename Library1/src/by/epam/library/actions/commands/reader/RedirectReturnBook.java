@@ -43,4 +43,8 @@ public class RedirectReturnBook implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return 0;
+    };
+
 }

@@ -74,4 +74,8 @@ public class RedirectRegistration implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return -1;
+    };
+
 }

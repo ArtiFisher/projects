@@ -37,6 +37,7 @@ public class ServletController extends HttpServlet {
     private static final String LOCALE_RU = "ru_RU";
     private static final String CONTEXT_TYPE = "text/html";
     private static final String AUTHORIZATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
+    private static final String ACCESS_DENIED = "/WEB-INF/jsp/access_denied.jsp";
     private static final String IS_ADMIN = "isAdmin";
     private ConnectionPool connector;
     private LibrarianDAO adm;
@@ -68,6 +69,14 @@ public class ServletController extends HttpServlet {
         }
     }
 
+    public boolean accessGranted(int rights, int page){
+        if(page<0)
+            return true;
+        if(rights==page)
+            return true;
+        return false;
+    };
+
     /**
      * handles requests, sends forward to necessary page
      */
@@ -84,6 +93,10 @@ public class ServletController extends HttpServlet {
             session.setAttribute(IS_ADMIN, -1);
             session.setAttribute(LOCALE, LOCALE_RU);
             Locale.setDefault(new Locale("ru_RU"));
+        }
+        if(!accessGranted(Integer.parseInt(session.getAttribute(IS_ADMIN).toString()),command.getPageRights())) {
+            request.getRequestDispatcher(ACCESS_DENIED).forward(request, response);
+            return;
         }
         try {
             result = command.execute(request, adm, ad, bd, cd);    //executes current command

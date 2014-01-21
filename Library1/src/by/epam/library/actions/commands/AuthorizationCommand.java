@@ -72,4 +72,8 @@ public class AuthorizationCommand implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return -1;
+    };
+
 }

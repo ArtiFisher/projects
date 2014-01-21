@@ -26,4 +26,8 @@ public class LogOut implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return -1;
+    };
+
 }

@@ -74,4 +74,8 @@ public class TakeBook implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return 0;
+    };
+
 }

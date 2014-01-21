@@ -34,4 +34,8 @@ public class MoveToRemovingBook implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return 1;
+    };
+
 }

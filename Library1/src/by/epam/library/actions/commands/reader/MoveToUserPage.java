@@ -26,4 +26,8 @@ public class MoveToUserPage implements ActionCommand {
         return result;
     }
 
+    public int getPageRights(){
+        return 0;
+    };
+
 }

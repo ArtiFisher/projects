@@ -35,4 +35,8 @@ public class MoveToTakingBook implements ActionCommand {
         session.setAttribute("prevPage", "ServletController?method=take_book");
         return result;
     }
+
+    public int getPageRights(){
+        return 0;
+    };
 }
