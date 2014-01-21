@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 
 public interface ActionCommand {
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException;
+
 }

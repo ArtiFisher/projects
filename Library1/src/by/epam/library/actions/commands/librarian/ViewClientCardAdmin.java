@@ -24,14 +24,15 @@ public class ViewClientCardAdmin implements ActionCommand {
     private static final String atrIdCl = "idCl";
     private static final String bookNumber = "bookNumber";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
         int idCl;
         try {
             idCl = Integer.parseInt(request.getParameter(atrIdCl));
-            session1.setAttribute(atrIdCl, idCl);
+            session.setAttribute(atrIdCl, idCl);
         } catch (NumberFormatException e) {
-            idCl = Integer.parseInt(session1.getAttribute(atrIdCl).toString());
+            idCl = Integer.parseInt(session.getAttribute(atrIdCl).toString());
         }
 
         List<Book> books = new ArrayList<Book>();
@@ -42,7 +43,7 @@ public class ViewClientCardAdmin implements ActionCommand {
 
         request.setAttribute(strBooks, books);
         result.setPage(strViewClientCard);
-        session1.setAttribute("prevPage", "ServletController?method=admin_view_client_card");
+        session.setAttribute("prevPage", "ServletController?method=admin_view_client_card");
         request.setAttribute(bookNumber, books.size());
         return result;
     }

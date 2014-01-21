@@ -22,15 +22,16 @@ public class ViewClients implements ActionCommand {
     private static final String strViewClients = "/WEB-INF/jsp/admin_jsp/view_clients.jsp";
     private static final String strClients = "readers";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
         List<Reader> readers = new ArrayList<Reader>();
         readers.addAll(adm.viewAllClients());
         request.setAttribute(strClients, readers);
         result.setPage(strViewClients);
-        session1.setAttribute("prevPage", "ServletController?method=view_clients");
+        session.setAttribute("prevPage", "ServletController?method=view_clients");
         return result;
     }
 

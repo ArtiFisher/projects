@@ -37,6 +37,7 @@ public class ServletController extends HttpServlet {
     private static final String LOCALE_RU = "ru_RU";
     private static final String CONTEXT_TYPE = "text/html";
     private static final String AUTHORIZATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
+    private static final String IS_ADMIN = "isAdmin";
     private ConnectionPool connector;
     private LibrarianDAO adm;
     private EntryDAO ad;
@@ -80,11 +81,12 @@ public class ServletController extends HttpServlet {
         } catch (NullPointerException e) {                                //setup of default attributes for session
             session.removeAttribute(PREV_PAGE);
             session.setAttribute(FLAG, 1);
+            session.setAttribute(IS_ADMIN, -1);
             session.setAttribute(LOCALE, LOCALE_RU);
             Locale.setDefault(new Locale("ru_RU"));
         }
         try {
-            result = command.execute(request, session, adm, ad, bd, cd);    //executes current command
+            result = command.execute(request, adm, ad, bd, cd);    //executes current command
             if (result.isGoToPage()) {
                 response.setContentType(CONTEXT_TYPE);
                 request.getRequestDispatcher(result.getPage()).forward(request, response);

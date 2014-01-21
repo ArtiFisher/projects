@@ -23,15 +23,16 @@ public class MoveToTakingBook implements ActionCommand {
     private static final String strBooks = "books";
     private static final String bookNumber = "bookNumber";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
 
         List<Book> books = new ArrayList<Book>();
         books = bd.viewAllBooks();
         request.setAttribute(strBooks, books);
         result.setPage(strTakeBook);
         request.setAttribute(bookNumber, books.size());
-        session1.setAttribute("prevPage", "ServletController?method=take_book");
+        session.setAttribute("prevPage", "ServletController?method=take_book");
         return result;
     }
 }

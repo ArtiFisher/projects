@@ -33,7 +33,7 @@ public class TakeBook implements ActionCommand {
     private static String msgNoMoreBooks = "There is no more copies of such book";
     private static final String bookNumber = "bookNumber";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
@@ -73,4 +73,5 @@ public class TakeBook implements ActionCommand {
         request.setAttribute(bookNumber, books.size());
         return result;
     }
+
 }

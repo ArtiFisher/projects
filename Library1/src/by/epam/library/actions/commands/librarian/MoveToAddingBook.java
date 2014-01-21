@@ -18,12 +18,13 @@ public class MoveToAddingBook implements ActionCommand {
 
     private static final String strAddBook = "/WEB-INF/jsp/admin_jsp/add_book_to_library.jsp";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
+        HttpSession session = request.getSession();
         ResultAnswer result = new ResultAnswer();
         result.setPage(strAddBook);
-        session1.setAttribute("prevPage", "ServletController?method=add_book");
+        session.setAttribute("prevPage", "ServletController?method=add_book");
         return result;
     }
 

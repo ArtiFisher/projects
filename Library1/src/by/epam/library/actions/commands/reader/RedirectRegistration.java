@@ -32,8 +32,9 @@ public class RedirectRegistration implements ActionCommand {
 
     private static String msgLoginExist = "Such login is exist";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
         String page = "";
 
         ResourceBundle resource;
@@ -58,18 +59,19 @@ public class RedirectRegistration implements ActionCommand {
         if (adm.isLoginUnique(login) == true) {
             adm.addClient(reader, li);
             page = strShowReg;
-            session1.setAttribute(IS_ADMIN, -1);
+            session.setAttribute(IS_ADMIN, -1);
             result.setPage(page);
             result.setGoToPage(false);
         } else {
             request.setAttribute(atrErrorLogin, msgLoginExist);
             page = strRegistration;
             result.setPage(page);
-            session1.setAttribute(IS_ADMIN, -2);
+            session.setAttribute(IS_ADMIN, -2);
 
         }
 
-        session1.setAttribute("prevPage", strRegistration);
+        session.setAttribute("prevPage", strRegistration);
         return result;
     }
+
 }

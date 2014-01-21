@@ -15,13 +15,15 @@ import javax.servlet.http.HttpSession;
 
 public class SetLocaleRU implements ActionCommand {
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession(true);
         Locale.setDefault(new Locale("ru_RU"));
-        session1.setAttribute("loc", "ru_RU");
-        result.setPage(session1.getAttribute("prevPage").toString());
+        session.setAttribute("loc", "ru_RU");
+        result.setPage(session.getAttribute("prevPage").toString());
         return result;
     }
+
 }

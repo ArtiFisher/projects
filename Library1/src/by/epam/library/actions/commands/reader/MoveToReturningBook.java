@@ -25,18 +25,18 @@ public class MoveToReturningBook implements ActionCommand {
     private static final String bookNumber = "bookNumber";
 
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
 
         List<Book> books = new ArrayList<Book>();
-        HttpSession session = request.getSession(true);
         int id = (Integer) session.getAttribute(atrID);
         books.addAll(bd.viewAllClientBooks(id));
         request.setAttribute(strBooks, books);
         request.setAttribute(bookNumber, books.size());
         result.setPage(strReturnBook);
 
-        session1.setAttribute("prevPage", "ServletController?method=return_book");
+        session.setAttribute("prevPage", "ServletController?method=return_book");
         return result;
     }
 

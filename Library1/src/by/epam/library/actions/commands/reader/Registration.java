@@ -24,10 +24,11 @@ public class Registration implements ActionCommand {
     private static final String STR_ENG_PROPERTIES = "resources/pagecontent_en_US";
     private static final String STR_RU_LANG = "ru_RU";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
         ResourceBundle resource;
         if (Locale.getDefault().toString().equalsIgnoreCase(STR_RU_LANG)) {
             resource = ResourceBundle.getBundle(STR_RUS_PROPERTIES);
@@ -37,7 +38,8 @@ public class Registration implements ActionCommand {
         msgCongratulations = resource.getString("msgCongratulations");
         request.setAttribute(atrSuccessfulRegistration, msgCongratulations);
         result.setPage(strAuthorization);
-        session1.setAttribute("prevPage", strAuthorization);
+        session.setAttribute("prevPage", strAuthorization);
         return result;
     }
+
 }

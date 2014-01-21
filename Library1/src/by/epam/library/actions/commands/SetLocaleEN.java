@@ -16,13 +16,15 @@ import javax.servlet.http.HttpSession;
 
 public class SetLocaleEN implements ActionCommand {
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession(true);
         Locale.setDefault(new Locale("en_US"));
-        session1.setAttribute("loc", "en_US");
-        result.setPage(session1.getAttribute("prevPage").toString());
+        session.setAttribute("loc", "en_US");
+        result.setPage(session.getAttribute("prevPage").toString());
         return result;
     }
+
 }

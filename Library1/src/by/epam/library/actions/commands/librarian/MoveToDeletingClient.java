@@ -21,14 +21,15 @@ public class MoveToDeletingClient implements ActionCommand {
     public static final String strViewClients = "/WEB-INF/jsp/admin_jsp/view_clients.jsp";
     private static final String strClients = "readers";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
 
         List<Reader> readers = new ArrayList<Reader>();
         readers.addAll(adm.viewAllClients());
         request.setAttribute(strClients, readers);
         result.setPage(strViewClients);
-        session1.setAttribute("prevPage", "ServletController?method=delete_client");
+        session.setAttribute("prevPage", "ServletController?method=delete_client");
 
         return result;
     }

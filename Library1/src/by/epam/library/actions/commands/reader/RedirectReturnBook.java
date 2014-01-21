@@ -24,11 +24,11 @@ public class RedirectReturnBook implements ActionCommand {
     private static final String strBooks = "books";
     private final static String strReturnBookRef = "/ServletController?method=returnBook";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
 
         Book selectedBook = new Book();
-        HttpSession session = request.getSession(true);
         int id = (Integer) session.getAttribute(atrID);
         int bookId = Integer.parseInt(request.getParameter(atrId));
         selectedBook = bd.selectBookByID(bookId);

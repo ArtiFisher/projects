@@ -16,11 +16,12 @@ import javax.servlet.http.HttpSession;
 public class LogOut implements ActionCommand {
     private static final String strAuthorization = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
-        session1.setAttribute("prevPage", strAuthorization);
+        HttpSession session = request.getSession();
+        session.setAttribute("prevPage", strAuthorization);
         result.setPage(strAuthorization);
         return result;
     }

@@ -18,10 +18,11 @@ public class MoveToUserPage implements ActionCommand {
 
     private static final String strForUser = "/WEB-INF/jsp/user_jsp/for_user.jsp";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession(true);
         result.setPage(strForUser);
-        session1.setAttribute("prevPage", strForUser);
+        session.setAttribute("prevPage", strForUser);
         return result;
     }
 

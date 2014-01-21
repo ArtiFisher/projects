@@ -24,7 +24,7 @@ public class RemoveBookFromLibrary implements ActionCommand {
     private static final String atrId = "id";
     private static final String bookNumber = "bookNumber";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cdzz)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
@@ -40,4 +40,5 @@ public class RemoveBookFromLibrary implements ActionCommand {
         request.setAttribute(bookNumber, books.size());
         return result;
     }
+
 }

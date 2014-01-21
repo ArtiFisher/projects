@@ -24,11 +24,10 @@ public class DeleteClient implements ActionCommand {
     public static final String strClients = "readers";
     public static final String atrIdCl = "idCl";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
-
         int idCl = Integer.parseInt(request.getParameter(atrIdCl));
         List<Book> books = new ArrayList<Book>();
         books.addAll(bd.viewAllClientBooks(idCl));

@@ -32,7 +32,7 @@ public class AuthorizationCommand implements ActionCommand {
     private static final String STR_RU_LANG = "ru_RU";
 
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
@@ -55,20 +55,21 @@ public class AuthorizationCommand implements ActionCommand {
                 session.setAttribute(ATR_ID, clientID);
                 session.setAttribute(IS_ADMIN, 0);
                 result.setPage(STR_FOR_USER);
-                session1.setAttribute(ATR_PREV_PAGE, STR_FOR_USER);
+                session.setAttribute(ATR_PREV_PAGE, STR_FOR_USER);
             } else {
                 adminID = ad.getAdminID(login, password);
                 session.setAttribute(IS_ADMIN, 1);
                 session.setAttribute(ATR_ID, adminID);
                 result.setPage(STR_FOR_ADMIN);
-                session1.setAttribute(ATR_PREV_PAGE, STR_FOR_ADMIN);
+                session.setAttribute(ATR_PREV_PAGE, STR_FOR_ADMIN);
             }
         } else {
             request.setAttribute(ATR_ERROR, msgWrongPassOrLogin);
             result.setPage(STR_AUTHORIZATION);
-            session1.setAttribute(ATR_PREV_PAGE, STR_AUTHORIZATION);
+            session.setAttribute(ATR_PREV_PAGE, STR_AUTHORIZATION);
         }
 
         return result;
     }
+
 }

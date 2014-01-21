@@ -14,11 +14,12 @@ public class EmptyCommand implements ActionCommand {
 
     private final static String NO_SUCH_COMMAND = "/WEB-INF/jsp/no_such_command.jsp";
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1,
+    public ResultAnswer execute(HttpServletRequest request,
                                 LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         result.setPage(NO_SUCH_COMMAND);
         return result;
     }
+
 }

@@ -33,8 +33,9 @@ public class RedirectAddingBook implements ActionCommand {
     public static String msgIncorrectYear;
     public static String msgIncorrectNumOfCopies;
 
-    public ResultAnswer execute(HttpServletRequest request, HttpSession session1, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
+        HttpSession session = request.getSession();
 
         ResourceBundle resource;
         if (Locale.getDefault().toString().equalsIgnoreCase(STR_RU_LANG)) {
@@ -72,7 +73,7 @@ public class RedirectAddingBook implements ActionCommand {
 
             //request.getRequestDispatcher(strAddBook2).forward(request, response);
         }
-        session1.setAttribute("prevPage", "/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
+        session.setAttribute("prevPage", "/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
         return result;
     }
 
@@ -87,4 +88,5 @@ public class RedirectAddingBook implements ActionCommand {
             return result;
         }
     }
+
 }
