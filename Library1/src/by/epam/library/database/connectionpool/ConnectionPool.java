@@ -61,8 +61,8 @@ public class ConnectionPool {
         try {
             closed = connection.isClosed();
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             log.warn(WARN1, e);
         }
         if (!closed) {
@@ -83,8 +83,8 @@ public class ConnectionPool {
                 }
                 connection.close();
             } catch (SQLException e) {
-                ErrorOutput.error=true;
-                ErrorOutput.errorMessage=e.toString();
+                ErrorOutput.error = true;
+                ErrorOutput.errorMessage = e.toString();
                 log.warn(WARN4, e);
             }
         }

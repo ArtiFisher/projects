@@ -20,16 +20,18 @@ public class EmptyCommand implements ActionCommand {
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         result.setPage(NO_SUCH_COMMAND);
-        if(ErrorOutput.error){
+        if (ErrorOutput.error) {
 
-            ErrorOutput.error=false;
+            ErrorOutput.error = false;
             result.setPage(ErrorOutput.ERROR);
         }
         return result;
     }
 
-    public int getPageRights(){
+    public int getPageRights() {
         return -1;
-    };
+    }
+
+    ;
 
 }

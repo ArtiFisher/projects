@@ -19,7 +19,7 @@
 <table align="left">
     <form action="ServletController?method=registration" method="POST">
         <input type="submit" class="btn btn-default" value=<fmt:message key="field.registration"
-                                                                                            bundle="${rb}"/>>
+                                                                        bundle="${rb}"/>>
     </form>
 </table>
 

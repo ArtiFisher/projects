@@ -71,16 +71,18 @@ public class AuthorizationCommand implements ActionCommand {
             session.setAttribute(ATR_PREV_PAGE, STR_AUTHORIZATION);
         }
 
-        if(ErrorOutput.error){
+        if (ErrorOutput.error) {
 
-            ErrorOutput.error=false;
+            ErrorOutput.error = false;
             result.setPage(ErrorOutput.ERROR);
         }
         return result;
     }
 
-    public int getPageRights(){
+    public int getPageRights() {
         return -1;
-    };
+    }
+
+    ;
 
 }

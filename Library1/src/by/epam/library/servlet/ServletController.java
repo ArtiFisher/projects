@@ -66,23 +66,25 @@ public class ServletController extends HttpServlet {
             readerDAO = new ReaderDAO();
             readerDAO.setConnector(connector);
         } catch (SQLException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             logger.error(new Date() + " - " + ex);
         } catch (ClassNotFoundException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             logger.error(new Date() + " - " + ex);
         }
     }
 
-    public boolean accessGranted(int rights, int page){
-        if(page<0)
+    public boolean accessGranted(int rights, int page) {
+        if (page < 0)
             return true;
-        if(rights==page)
+        if (rights == page)
             return true;
         return false;
-    };
+    }
+
+    ;
 
     /**
      * handles requests, sends forward to necessary page
@@ -92,7 +94,7 @@ public class ServletController extends HttpServlet {
         ActionCommand command = client.defineCommand(request);     //defines command from parameter 'method' of request with help of CommandEnum.java
         ResultAnswer result;                                       //container for address of next page
         HttpSession session = request.getSession();
-        if(firstTime){                              //setup of default attributes for session
+        if (firstTime) {                              //setup of default attributes for session
             session.setAttribute(PREV_PAGE, AUTHORIZATION);
             session.setAttribute(FLAG, 1);
             session.setAttribute(IS_ADMIN, -1);
@@ -100,17 +102,17 @@ public class ServletController extends HttpServlet {
             Locale.setDefault(new Locale("ru_RU"));
             firstTime = false;
         }
-        if(!accessGranted(Integer.parseInt(session.getAttribute(IS_ADMIN).toString()),command.getPageRights())) {
+        if (!accessGranted(Integer.parseInt(session.getAttribute(IS_ADMIN).toString()), command.getPageRights())) {
             request.getRequestDispatcher(ACCESS_DENIED).forward(request, response);
             return;
         }
-            result = command.execute(request, response, libDAO, entryDAO, bookDAO, readerDAO);    //executes current command
-            if (result.isGoToPage()) {
-                response.setContentType(CONTEXT_TYPE);
-                request.getRequestDispatcher(result.getPage()).forward(request, response);
-            } else {
-                response.sendRedirect(result.getPage());
-            }
+        result = command.execute(request, response, libDAO, entryDAO, bookDAO, readerDAO);    //executes current command
+        if (result.isGoToPage()) {
+            response.setContentType(CONTEXT_TYPE);
+            request.getRequestDispatcher(result.getPage()).forward(request, response);
+        } else {
+            response.sendRedirect(result.getPage());
+        }
     }
 
     @Override
@@ -118,12 +120,12 @@ public class ServletController extends HttpServlet {
         try {
             requestProcessing(request, response);
         } catch (InterruptedException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             logger.error(new Date() + " - " + ex);
         } catch (SQLException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             logger.error(new Date() + " - " + ex);
         }
     }
@@ -134,12 +136,12 @@ public class ServletController extends HttpServlet {
             requestProcessing(request, response);
 
         } catch (InterruptedException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             logger.error(new Date() + " - " + ex);
         } catch (SQLException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             logger.error(new Date() + " - " + ex);
         }
     }

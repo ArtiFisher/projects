@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import by.epam.library.actions.commands.ErrorOutput;
 
 public class RedirectAddingBook implements ActionCommand {
@@ -77,9 +78,9 @@ public class RedirectAddingBook implements ActionCommand {
             //request.getRequestDispatcher(strAddBook2).forward(request, response);
         }
         session.setAttribute("prevPage", "/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
-        if(ErrorOutput.error){
+        if (ErrorOutput.error) {
 
-            ErrorOutput.error=false;
+            ErrorOutput.error = false;
             result.setPage(ErrorOutput.ERROR);
         }
         return result;
@@ -93,12 +94,14 @@ public class RedirectAddingBook implements ActionCommand {
         } catch (NumberFormatException e) {
             result = false;
         } finally {
-        return result;
+            return result;
         }
     }
 
-    public int getPageRights(){
+    public int getPageRights() {
         return 1;
-    };
+    }
+
+    ;
 
 }

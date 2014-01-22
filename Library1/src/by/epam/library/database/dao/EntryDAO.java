@@ -9,7 +9,9 @@ import java.sql.SQLException;
 
 import by.epam.library.servlet.ServletController;
 import org.apache.log4j.Logger;
+
 import java.util.Date;
+
 import by.epam.library.actions.commands.ErrorOutput;
 
 
@@ -36,7 +38,7 @@ public class EntryDAO implements AbstractDao {
         try {
             ps = connection.prepareStatement(SQL_SELECT_PASSWORD_BY_LOGIN);
             ps.setString(1, login);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 realPassword = rs.getString(1);
@@ -46,8 +48,8 @@ public class EntryDAO implements AbstractDao {
             }
 
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -65,7 +67,7 @@ public class EntryDAO implements AbstractDao {
             ps = connection.prepareStatement(SQL_SELECT_READER_INFO_BY_LOGIN_AND_PASSWORD);
             ps.setString(1, login);
             ps.setString(2, password);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt(1);
@@ -74,8 +76,8 @@ public class EntryDAO implements AbstractDao {
                 result = true;
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -92,14 +94,14 @@ public class EntryDAO implements AbstractDao {
             ps = connection.prepareStatement(SQLRequest);
             ps.setString(1, login);
             ps.setString(2, password);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 id = rs.getInt(1);
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);

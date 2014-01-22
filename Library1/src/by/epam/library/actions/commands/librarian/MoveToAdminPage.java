@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import by.epam.library.actions.commands.ErrorOutput;
 
 
@@ -26,16 +27,18 @@ public class MoveToAdminPage implements ActionCommand {
         HttpSession session = request.getSession(true);
         result.setPage(strToAdminJsp);
         session.setAttribute("prevPage", strToAdminJsp);
-        if(ErrorOutput.error){
+        if (ErrorOutput.error) {
 
-            ErrorOutput.error=false;
+            ErrorOutput.error = false;
             result.setPage(ErrorOutput.ERROR);
         }
         return result;
     }
 
-    public int getPageRights(){
+    public int getPageRights() {
         return 1;
-    };
+    }
+
+    ;
 
 }

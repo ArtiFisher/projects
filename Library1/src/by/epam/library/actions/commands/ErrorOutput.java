@@ -18,8 +18,8 @@ public class ErrorOutput implements ActionCommand {
     private final static String ERROR_LOC = "/WEB-INF/jsp/error.jsp";
     public static final String ERROR = "/ServletController?method=error";
 
-    public static boolean error=false;
-    public static String errorMessage="Unknown error";
+    public static boolean error = false;
+    public static String errorMessage = "Unknown error";
 
     public ResultAnswer execute(HttpServletRequest request,
                                 HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO)
@@ -30,7 +30,9 @@ public class ErrorOutput implements ActionCommand {
         return result;
     }
 
-    public int getPageRights(){
+    public int getPageRights() {
         return -1;
-    };
+    }
+
+    ;
 }

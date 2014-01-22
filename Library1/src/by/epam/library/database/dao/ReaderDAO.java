@@ -39,7 +39,7 @@ public class ReaderDAO implements AbstractDao {
         try {
             ps = connection.prepareStatement(SQL_SELECT_READER_BY_SURNAME);
             ps.setString(1, surname);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 clientID = rs.getInt(1);
@@ -53,18 +53,18 @@ public class ReaderDAO implements AbstractDao {
                 ps.setInt(1, 0);
                 ps.setInt(2, clientID);
                 ps.setInt(3, bookID);
-                logger.info(new Date()+" - "+ps.toString());
+                logger.info(new Date() + " - " + ps.toString());
                 ps.executeUpdate();
 
                 ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
                 ps.setInt(1, book.getNumberOfCopies());
                 ps.setString(2, book.getTitle());
-                logger.info(new Date()+" - "+ps.toString());
+                logger.info(new Date() + " - " + ps.toString());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -87,18 +87,18 @@ public class ReaderDAO implements AbstractDao {
                 ps.setInt(1, 0);
                 ps.setInt(2, ID);
                 ps.setInt(3, bookID);
-                logger.info(new Date()+" - "+ps.toString());
+                logger.info(new Date() + " - " + ps.toString());
                 ps.executeUpdate();
 
                 ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
                 ps.setInt(1, book.getNumberOfCopies());
                 ps.setString(2, book.getTitle());
-                logger.info(new Date()+" - "+ps.toString());
+                logger.info(new Date() + " - " + ps.toString());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -114,7 +114,7 @@ public class ReaderDAO implements AbstractDao {
         try {
             ps = connection.prepareStatement(SQL_SELECT_READER_BY_SURNAME);
             ps.setString(1, surname);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 clientID = rs.getInt(1);
@@ -123,18 +123,18 @@ public class ReaderDAO implements AbstractDao {
             ps = connection.prepareStatement(SQL_DELETE_INFO_FROM_READER_BOOK);
             ps.setInt(1, clientID);
             ps.setInt(2, bookID);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);//decreasing number of books
             book.setNumberOfCopies(book.getNumberOfCopies() + 1);
             ps.setInt(1, book.getNumberOfCopies());
             ps.setString(2, book.getTitle());
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -152,18 +152,18 @@ public class ReaderDAO implements AbstractDao {
             ps = connection.prepareStatement(SQL_DELETE_INFO_FROM_READER_BOOK);
             ps.setInt(1, ID);
             ps.setInt(2, bookID);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_UPDATE_BOOK_INFO);
             book.setNumberOfCopies(book.getNumberOfCopies() + 1);
             ps.setInt(1, book.getNumberOfCopies());
             ps.setString(2, book.getTitle());
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -181,7 +181,7 @@ public class ReaderDAO implements AbstractDao {
             ps = connection.prepareStatement(SQL_SELECT_BOOK_FROM_READER_BOOK);
             ps.setInt(1, idClient);
             ps.setInt(2, idBook);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 idOrder = rs.getInt(1);
@@ -190,8 +190,8 @@ public class ReaderDAO implements AbstractDao {
                 availability = true;
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);

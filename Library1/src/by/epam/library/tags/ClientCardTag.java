@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
+
 import by.epam.library.actions.commands.ErrorOutput;
 
 public class ClientCardTag extends TagSupport {
@@ -57,8 +58,8 @@ public class ClientCardTag extends TagSupport {
                 out.write("</tr>");
             }
         } catch (IOException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             Logger.getLogger(ClientCardTag.class.getName()).log(Level.SEVERE, null, ex);
         }
         return EVAL_BODY_INCLUDE;
@@ -70,8 +71,8 @@ public class ClientCardTag extends TagSupport {
         try {
             pageContext.getOut().write("</table>");
         } catch (IOException ex) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=ex.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = ex.toString();
             Logger.getLogger(ClientCardTag.class.getName()).log(Level.SEVERE, null, ex);
         }
         return EVAL_PAGE;

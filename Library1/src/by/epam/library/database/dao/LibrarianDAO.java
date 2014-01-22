@@ -16,6 +16,7 @@ import java.sql.SQLException;
 
 import by.epam.library.servlet.ServletController;
 import org.apache.log4j.Logger;
+
 import java.util.Date;
 
 public class LibrarianDAO implements AbstractDao {
@@ -24,6 +25,7 @@ public class LibrarianDAO implements AbstractDao {
     private static final String SQL_SELECT_ALL_LIBRARIANS = "SELECT * FROM librarian";
     private static final String SQL_SELECT_ALL_READERS = "SELECT * FROM reader";
     private static final String SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA = "SELECT * FROM entrydata WHERE (login=?)";
+    private static final String SQL_SELECT_ENTRYID_BY_ID = "SELECT entryid FROM reader WHERE (id=?)";
     private static final String SQL_SELECT_ALL_BOOKS = "SELECT * FROM book";
     private static final String SQL_SELECT_BOOK_BY_ID_FROM_READER_BOOK = "SELECT * FROM reader_book WHERE bookid=?";
     private static final String SQL_INSERT_READER = "INSERT INTO reader(name,surname,entryid) VALUES(?,?,?)";
@@ -62,8 +64,8 @@ public class LibrarianDAO implements AbstractDao {
                 librarians.add(librarian);
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -78,7 +80,7 @@ public class LibrarianDAO implements AbstractDao {
         Connection connection = connector.getConnection();
         try {
             ps = connection.prepareStatement(SQL_SELECT_ALL_READERS);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt(1);
@@ -91,8 +93,8 @@ public class LibrarianDAO implements AbstractDao {
                 readers.add(reader);
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -109,13 +111,13 @@ public class LibrarianDAO implements AbstractDao {
             ps = connection.prepareStatement(SQL_INSERT_ENTRYDATA);
             ps.setString(1, li.getLogin());
             ps.setString(2, li.getPass());
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
 
             int entryID = 0;
             ps = connection.prepareStatement(SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA);
             ps.setString(1, li.getLogin());
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 entryID = rs.getInt(1);
@@ -125,11 +127,11 @@ public class LibrarianDAO implements AbstractDao {
             ps.setString(1, reader.getName());
             ps.setString(2, reader.getSurname());
             ps.setInt(3, entryID);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -145,7 +147,7 @@ public class LibrarianDAO implements AbstractDao {
         try {
             ps = connection.prepareStatement(SQL_SELECT_BY_LOGIN_FROM_ENTRYDATA);
             ps.setString(1, login);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 idLoginInfo = rs.getInt(1);
@@ -154,8 +156,8 @@ public class LibrarianDAO implements AbstractDao {
                 uniqueLogin = false;
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -167,20 +169,29 @@ public class LibrarianDAO implements AbstractDao {
     public void deleteClient(int clientID) throws InterruptedException, SQLException {
         Connection connection = connector.getConnection();
         PreparedStatement ps = null;
-        int idLogin_info = clientID;
+        int entryID = 0;
         try {
+            ps = connection.prepareStatement(SQL_SELECT_ENTRYID_BY_ID);
+            ps.setInt(1, clientID);
+            logger.info(new Date() + " - " + ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                entryID = rs.getInt(1);
+            }
+
+
             ps = connection.prepareStatement(SQL_DELETE_READER);
             ps.setInt(1, clientID);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
 
             ps = connection.prepareStatement(SQL_DELETE_ENTRYDATA);
-            ps.setInt(1, idLogin_info);
-            logger.info(new Date()+" - "+ps.toString());
+            ps.setInt(1, entryID);
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -194,7 +205,7 @@ public class LibrarianDAO implements AbstractDao {
         try {
 
             ps = connection.prepareStatement(SQL_SELECT_ALL_BOOKS);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             int idTemp = -1;
             while (rs.next()) {
@@ -209,11 +220,11 @@ public class LibrarianDAO implements AbstractDao {
             ps.setString(4, author);
             ps.setInt(5, year);
             ps.setInt(6, number);
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -229,7 +240,7 @@ public class LibrarianDAO implements AbstractDao {
             int numberTakenBooks = 0;
             ps = connection.prepareStatement(SQL_SELECT_BOOK_BY_ID_FROM_READER_BOOK);
             ps.setInt(1, book.getId());
-            logger.info(new Date()+" - "+ps.toString());
+            logger.info(new Date() + " - " + ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 numberTakenBooks++;
@@ -237,18 +248,18 @@ public class LibrarianDAO implements AbstractDao {
             if (numberTakenBooks == 0) {
                 ps = connection.prepareStatement(SQL_DELETE_BOOK);
                 ps.setInt(1, book.getId());
-                logger.info(new Date()+" - "+ps.toString());
+                logger.info(new Date() + " - " + ps.toString());
                 ps.executeUpdate();
             } else {
                 ps = connection.prepareStatement(SQL_UPDATE_BOOK);
                 ps.setInt(1, 0);
                 ps.setInt(2, book.getId());
-                logger.info(new Date()+" - "+ps.toString());
+                logger.info(new Date() + " - " + ps.toString());
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
-            ErrorOutput.error=true;
-            ErrorOutput.errorMessage=e.toString();
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);

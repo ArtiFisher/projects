@@ -14,8 +14,8 @@ public class ActionFactory {
         if (action == null || action.isEmpty()) {
             return current;
         }
-            CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
-            current = currentEnum.getCurrentCommand();
+        CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
+        current = currentEnum.getCurrentCommand();
         return current;
     }
 

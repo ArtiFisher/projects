@@ -25,16 +25,18 @@ public class SetLocaleRU implements ActionCommand {
         Locale.setDefault(new Locale("ru_RU"));
         session.setAttribute("loc", "ru_RU");
         result.setPage(session.getAttribute("prevPage").toString());
-        if(ErrorOutput.error){
+        if (ErrorOutput.error) {
 
-            ErrorOutput.error=false;
+            ErrorOutput.error = false;
             result.setPage(ErrorOutput.ERROR);
         }
         return result;
     }
 
-    public int getPageRights(){
+    public int getPageRights() {
         return -1;
-    };
+    }
+
+    ;
 
 }
