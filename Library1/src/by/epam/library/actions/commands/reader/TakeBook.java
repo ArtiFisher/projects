@@ -1,6 +1,7 @@
 package by.epam.library.actions.commands.reader;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.servlet.ServletController;
 import by.epam.library.actions.commands.ResultAnswer;
 import by.epam.library.database.dao.EntryDAO;
 import by.epam.library.database.dao.LibrarianDAO;
@@ -16,7 +17,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import by.epam.library.actions.commands.ErrorOutput;
 
 
 public class TakeBook implements ActionCommand {
@@ -34,7 +37,7 @@ public class TakeBook implements ActionCommand {
     private static final String bookNumber = "bookNumber";
 
     public ResultAnswer execute(HttpServletRequest request,
-                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+                                HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         ResourceBundle resource;
@@ -48,29 +51,34 @@ public class TakeBook implements ActionCommand {
         HttpSession session = request.getSession(true);
         int idCl = (Integer) session.getAttribute(atrID);
         int bookId = Integer.parseInt(request.getParameter(atrId));
-        selectedBook = bd.selectBookByID(bookId);
+        selectedBook = bookDAO.selectBookByID(bookId);
         List<Book> books = new ArrayList<Book>();
-        if (cd.checkBookAvailability(bookId, idCl) == false) {
+        if (readerDAO.checkBookAvailability(bookId, idCl) == false) {
             if (selectedBook.getNumberOfCopies() != 0) {
-                cd.takeBook(idCl, selectedBook);
-                books = bd.viewAllBooks();
+                readerDAO.takeBook(idCl, selectedBook);
+                books = bookDAO.viewAllBooks();
                 request.setAttribute(strBooks, books);
                 result.setPage(strTakeBook);
 
             } else {
-                books = bd.viewAllBooks();
+                books = bookDAO.viewAllBooks();
                 request.setAttribute(strBooks, books);
                 request.setAttribute(atrError2, msgNoMoreBooks);
                 result.setPage(strTakeBook);
 
             }
         } else {
-            books = bd.viewAllBooks();
+            books = bookDAO.viewAllBooks();
             request.setAttribute(strBooks, books);
             request.setAttribute(atrError, msgAlreadyHaveBook);
             result.setPage(strTakeBook);
         }
         request.setAttribute(bookNumber, books.size());
+        if(ErrorOutput.error){
+
+            ErrorOutput.error=false;
+            result.setPage(ErrorOutput.ERROR);
+        }
         return result;
     }
 

@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 public interface ActionCommand {
 
     public ResultAnswer execute(HttpServletRequest request,
-                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+                                HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO)
             throws InterruptedException, SQLException, ServletException, IOException;
 
     public int getPageRights();

@@ -8,7 +8,9 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import by.epam.library.servlet.ServletController;
 import org.apache.log4j.Logger;
+import by.epam.library.actions.commands.ErrorOutput;
 
 public class ConnectionPool {
 
@@ -59,6 +61,8 @@ public class ConnectionPool {
         try {
             closed = connection.isClosed();
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             log.warn(WARN1, e);
         }
         if (!closed) {
@@ -79,6 +83,8 @@ public class ConnectionPool {
                 }
                 connection.close();
             } catch (SQLException e) {
+                ErrorOutput.error=true;
+                ErrorOutput.errorMessage=e.toString();
                 log.warn(WARN4, e);
             }
         }

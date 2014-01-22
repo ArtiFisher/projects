@@ -1,6 +1,7 @@
 package by.epam.library.actions.commands.reader;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.servlet.ServletController;
 import by.epam.library.actions.commands.ResultAnswer;
 import by.epam.library.database.dao.EntryDAO;
 import by.epam.library.database.dao.LibrarianDAO;
@@ -13,7 +14,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import by.epam.library.actions.commands.ErrorOutput;
 
 public class Registration implements ActionCommand {
 
@@ -25,7 +28,7 @@ public class Registration implements ActionCommand {
     private static final String STR_RU_LANG = "ru_RU";
 
     public ResultAnswer execute(HttpServletRequest request,
-                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+                                HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         HttpSession session = request.getSession();
@@ -39,6 +42,11 @@ public class Registration implements ActionCommand {
         request.setAttribute(atrSuccessfulRegistration, msgCongratulations);
         result.setPage(strAuthorization);
         session.setAttribute("prevPage", strAuthorization);
+        if(ErrorOutput.error){
+
+            ErrorOutput.error=false;
+            result.setPage(ErrorOutput.ERROR);
+        }
         return result;
     }
 

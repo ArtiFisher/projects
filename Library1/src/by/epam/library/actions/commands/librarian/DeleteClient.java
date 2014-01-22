@@ -1,6 +1,7 @@
 package by.epam.library.actions.commands.librarian;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.servlet.ServletController;
 import by.epam.library.actions.commands.ResultAnswer;
 import by.epam.library.database.dao.EntryDAO;
 import by.epam.library.database.dao.LibrarianDAO;
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
+import by.epam.library.actions.commands.ErrorOutput;
 
 
 public class DeleteClient implements ActionCommand {
@@ -25,21 +27,26 @@ public class DeleteClient implements ActionCommand {
     public static final String atrIdCl = "idCl";
 
     public ResultAnswer execute(HttpServletRequest request,
-                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+                                HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         int idCl = Integer.parseInt(request.getParameter(atrIdCl));
         List<Book> books = new ArrayList<Book>();
-        books.addAll(bd.viewAllClientBooks(idCl));
+        books.addAll(bookDAO.viewAllClientBooks(idCl));
         for (int i = 0; i < books.size(); i++) {
-            cd.returnBook(idCl, books.get(i));
+            readerDAO.returnBook(idCl, books.get(i));
         }
-        adm.deleteClient(idCl);
+        libDAO.deleteClient(idCl);
 
         List<Reader> readers = new ArrayList<Reader>();
-        readers.addAll(adm.viewAllClients());
+        readers.addAll(libDAO.viewAllClients());
         request.setAttribute(strClients, readers);
         result.setPage(strViewClients);
+        if(ErrorOutput.error){
+
+            ErrorOutput.error=false;
+            result.setPage(ErrorOutput.ERROR);
+        }
         return result;
     }
 

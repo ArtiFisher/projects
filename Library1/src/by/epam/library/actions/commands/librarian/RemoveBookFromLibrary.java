@@ -1,6 +1,7 @@
 package by.epam.library.actions.commands.librarian;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.servlet.ServletController;
 import by.epam.library.actions.commands.ResultAnswer;
 import by.epam.library.database.dao.EntryDAO;
 import by.epam.library.database.dao.LibrarianDAO;
@@ -14,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
+import by.epam.library.actions.commands.ErrorOutput;
 
 
 public class RemoveBookFromLibrary implements ActionCommand {
@@ -25,19 +27,24 @@ public class RemoveBookFromLibrary implements ActionCommand {
     private static final String bookNumber = "bookNumber";
 
     public ResultAnswer execute(HttpServletRequest request,
-                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cdzz)
+                                HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         Book selectedBook = new Book();
         int bookId = Integer.parseInt(request.getParameter(atrId));
-        selectedBook = bd.selectBookByID(bookId);
-        adm.removeBookFromLibrary(selectedBook);
+        selectedBook = bookDAO.selectBookByID(bookId);
+        libDAO.removeBookFromLibrary(selectedBook);
 
         List<Book> books = new ArrayList<Book>();
-        books = bd.viewAllBooks();
+        books = bookDAO.viewAllBooks();
         request.setAttribute(strBooks, books);
         result.setPage(strRemoveBook);
         request.setAttribute(bookNumber, books.size());
+        if(ErrorOutput.error){
+
+            ErrorOutput.error=false;
+            result.setPage(ErrorOutput.ERROR);
+        }
         return result;
     }
 

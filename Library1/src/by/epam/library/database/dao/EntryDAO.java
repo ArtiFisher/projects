@@ -7,8 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import by.epam.library.servlet.ServletController;
 import org.apache.log4j.Logger;
 import java.util.Date;
+import by.epam.library.actions.commands.ErrorOutput;
 
 
 public class EntryDAO implements AbstractDao {
@@ -44,6 +46,8 @@ public class EntryDAO implements AbstractDao {
             }
 
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -70,6 +74,8 @@ public class EntryDAO implements AbstractDao {
                 result = true;
             }
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -92,6 +98,8 @@ public class EntryDAO implements AbstractDao {
                 id = rs.getInt(1);
             }
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);

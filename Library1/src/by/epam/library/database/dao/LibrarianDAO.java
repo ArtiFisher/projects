@@ -1,5 +1,6 @@
 package by.epam.library.database.dao;
 
+import by.epam.library.actions.commands.ErrorOutput;
 import by.epam.library.beans.EntryData;
 import by.epam.library.beans.Librarian;
 import by.epam.library.database.connectionpool.ConnectionPool;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import by.epam.library.servlet.ServletController;
 import org.apache.log4j.Logger;
 import java.util.Date;
 
@@ -60,6 +62,8 @@ public class LibrarianDAO implements AbstractDao {
                 librarians.add(librarian);
             }
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -87,6 +91,8 @@ public class LibrarianDAO implements AbstractDao {
                 readers.add(reader);
             }
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -122,6 +128,8 @@ public class LibrarianDAO implements AbstractDao {
             logger.info(new Date()+" - "+ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -146,6 +154,8 @@ public class LibrarianDAO implements AbstractDao {
                 uniqueLogin = false;
             }
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -169,6 +179,8 @@ public class LibrarianDAO implements AbstractDao {
             logger.info(new Date()+" - "+ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -200,6 +212,8 @@ public class LibrarianDAO implements AbstractDao {
             logger.info(new Date()+" - "+ps.toString());
             ps.executeUpdate();
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -233,6 +247,8 @@ public class LibrarianDAO implements AbstractDao {
                 ps.executeUpdate();
             }
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);

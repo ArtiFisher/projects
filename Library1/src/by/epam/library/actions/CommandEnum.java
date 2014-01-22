@@ -1,6 +1,7 @@
 package by.epam.library.actions;
 
 import by.epam.library.actions.commands.*;
+import by.epam.library.actions.commands.ErrorOutput;
 import by.epam.library.actions.commands.librarian.*;
 import by.epam.library.actions.commands.reader.*;
 
@@ -109,6 +110,11 @@ public enum CommandEnum {
     UPDATE_DB_AFTER_RETURNING_BOOK {
         {
             this.command = new RedirectReturnBook();
+        }
+    },
+    ERROR {
+        {
+            this.command = new ErrorOutput();
         }
     },
     RU {

@@ -3,6 +3,7 @@ package by.epam.library.database.dao;
 import by.epam.library.database.connectionpool.ConnectionPool;
 
 import by.epam.library.beans.Book;
+import by.epam.library.actions.commands.ErrorOutput;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import by.epam.library.servlet.ServletController;
 import org.apache.log4j.Logger;
 
 
@@ -54,6 +56,8 @@ public class BookDao implements AbstractDao {
             }
 
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -82,6 +86,8 @@ public class BookDao implements AbstractDao {
             }
 
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -101,7 +107,6 @@ public class BookDao implements AbstractDao {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                //int id = rs.getInt(1);
                 int ISBN = rs.getInt(2);
                 String title = rs.getString(3);
                 String author = rs.getString(4);
@@ -111,6 +116,8 @@ public class BookDao implements AbstractDao {
             }
 
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);
@@ -142,6 +149,8 @@ public class BookDao implements AbstractDao {
                 books.add(book);
             }
         } catch (SQLException e) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=e.toString();
             logger.error(new Date() + " - " + e);
         } finally {
             connector.closeConnection(connection);

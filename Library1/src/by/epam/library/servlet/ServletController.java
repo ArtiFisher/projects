@@ -1,6 +1,8 @@
 package by.epam.library.servlet;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.actions.commands.ErrorOutput;
+import by.epam.library.servlet.ServletController;
 import by.epam.library.actions.ActionFactory;
 import by.epam.library.actions.commands.ResultAnswer;
 import by.epam.library.database.connectionpool.ConnectionPool;
@@ -37,14 +39,14 @@ public class ServletController extends HttpServlet {
     private static final String LOCALE = "loc";
     private static final String LOCALE_RU = "ru_RU";
     private static final String CONTEXT_TYPE = "text/html";
-    private static final String AUTHORIZATION_JSP = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
     private static final String ACCESS_DENIED = "/WEB-INF/jsp/access_denied.jsp";
+    private static final String AUTHORIZATION = "/WEB-INF/jsp/authorization_and_registration_jsp/authorization.jsp";
     private static final String IS_ADMIN = "isAdmin";
     private ConnectionPool connector;
-    private LibrarianDAO adm;
-    private EntryDAO ad;
-    private BookDao bd;
-    private ReaderDAO cd;
+    private LibrarianDAO libDAO;
+    private EntryDAO entryDAO;
+    private BookDao bookDAO;
+    private ReaderDAO readerDAO;
     private int poolSize = 20;
 
     public ServletController() {
@@ -55,17 +57,21 @@ public class ServletController extends HttpServlet {
     public void init() throws ServletException {
         try {
             connector = new ConnectionPool(poolSize);
-            adm = new LibrarianDAO();
-            adm.setConnector(connector);
-            ad = new EntryDAO();
-            ad.setConnector(connector);
-            bd = new BookDao();
-            bd.setConnector(connector);
-            cd = new ReaderDAO();
-            cd.setConnector(connector);
+            libDAO = new LibrarianDAO();
+            libDAO.setConnector(connector);
+            entryDAO = new EntryDAO();
+            entryDAO.setConnector(connector);
+            bookDAO = new BookDao();
+            bookDAO.setConnector(connector);
+            readerDAO = new ReaderDAO();
+            readerDAO.setConnector(connector);
         } catch (SQLException ex) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=ex.toString();
             logger.error(new Date() + " - " + ex);
         } catch (ClassNotFoundException ex) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=ex.toString();
             logger.error(new Date() + " - " + ex);
         }
     }
@@ -87,7 +93,7 @@ public class ServletController extends HttpServlet {
         ResultAnswer result;                                       //container for address of next page
         HttpSession session = request.getSession();
         if(firstTime){                              //setup of default attributes for session
-            session.removeAttribute(PREV_PAGE);
+            session.setAttribute(PREV_PAGE, AUTHORIZATION);
             session.setAttribute(FLAG, 1);
             session.setAttribute(IS_ADMIN, -1);
             session.setAttribute(LOCALE, LOCALE_RU);
@@ -98,7 +104,7 @@ public class ServletController extends HttpServlet {
             request.getRequestDispatcher(ACCESS_DENIED).forward(request, response);
             return;
         }
-            result = command.execute(request, adm, ad, bd, cd);    //executes current command
+            result = command.execute(request, response, libDAO, entryDAO, bookDAO, readerDAO);    //executes current command
             if (result.isGoToPage()) {
                 response.setContentType(CONTEXT_TYPE);
                 request.getRequestDispatcher(result.getPage()).forward(request, response);
@@ -112,8 +118,12 @@ public class ServletController extends HttpServlet {
         try {
             requestProcessing(request, response);
         } catch (InterruptedException ex) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=ex.toString();
             logger.error(new Date() + " - " + ex);
         } catch (SQLException ex) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=ex.toString();
             logger.error(new Date() + " - " + ex);
         }
     }
@@ -124,8 +134,12 @@ public class ServletController extends HttpServlet {
             requestProcessing(request, response);
 
         } catch (InterruptedException ex) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=ex.toString();
             logger.error(new Date() + " - " + ex);
         } catch (SQLException ex) {
+            ErrorOutput.error=true;
+            ErrorOutput.errorMessage=ex.toString();
             logger.error(new Date() + " - " + ex);
         }
     }

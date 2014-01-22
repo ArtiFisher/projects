@@ -1,6 +1,7 @@
 package by.epam.library.actions.commands.reader;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.servlet.ServletController;
 import by.epam.library.actions.commands.ResultAnswer;
 import by.epam.library.database.dao.EntryDAO;
 import by.epam.library.database.dao.LibrarianDAO;
@@ -14,7 +15,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import by.epam.library.actions.commands.ErrorOutput;
 
 
 public class RedirectRegistration implements ActionCommand {
@@ -32,7 +35,7 @@ public class RedirectRegistration implements ActionCommand {
 
     private static String msgLoginExist = "Such login is exist";
 
-    public ResultAnswer execute(HttpServletRequest request, LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd) throws InterruptedException, SQLException, ServletException, IOException {
+    public ResultAnswer execute(HttpServletRequest request, HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO) throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         HttpSession session = request.getSession();
         String page = "";
@@ -53,11 +56,11 @@ public class RedirectRegistration implements ActionCommand {
         Reader reader = new Reader();
         reader.setName(name);
         reader.setSurname(surname);
-        EntryData li = new EntryData();
-        li.setLogin(login);
-        li.setPass(password);
-        if (adm.isLoginUnique(login) == true) {
-            adm.addClient(reader, li);
+        EntryData entryData = new EntryData();
+        entryData.setLogin(login);
+        entryData.setPass(password);
+        if (libDAO.isLoginUnique(login) == true) {
+            libDAO.addClient(reader, entryData);
             page = strShowReg;
             session.setAttribute(IS_ADMIN, -1);
             result.setPage(page);
@@ -71,6 +74,11 @@ public class RedirectRegistration implements ActionCommand {
         }
 
         session.setAttribute("prevPage", strRegistration);
+        if(ErrorOutput.error){
+
+            ErrorOutput.error=false;
+            result.setPage(ErrorOutput.ERROR);
+        }
         return result;
     }
 

@@ -1,6 +1,7 @@
 package by.epam.library.actions.commands;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.servlet.ServletController;
 import by.epam.library.database.dao.*;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
@@ -33,7 +35,7 @@ public class AuthorizationCommand implements ActionCommand {
 
 
     public ResultAnswer execute(HttpServletRequest request,
-                                LibrarianDAO adm, EntryDAO ad, BookDao bd, ReaderDAO cd)
+                                HttpServletResponse response, LibrarianDAO libDAO, EntryDAO entryDAO, BookDao bookDAO, ReaderDAO readerDAO)
             throws InterruptedException, SQLException, ServletException, IOException {
         ResultAnswer result = new ResultAnswer();
         int clientID = -1;
@@ -49,15 +51,15 @@ public class AuthorizationCommand implements ActionCommand {
         String login = request.getParameter(ATR_LOGIN);
         HttpSession session = request.getSession(true);
         String password = request.getParameter(ATR_PASSWORD);
-        if (ad.checkEnteredData(login, password) == true) {
-            if (ad.isClient(login, password) == true) {
-                clientID = ad.getClientID(login, password);
+        if (entryDAO.checkEnteredData(login, password) == true) {
+            if (entryDAO.isClient(login, password) == true) {
+                clientID = entryDAO.getClientID(login, password);
                 session.setAttribute(ATR_ID, clientID);
                 session.setAttribute(IS_ADMIN, 0);
                 result.setPage(STR_FOR_USER);
                 session.setAttribute(ATR_PREV_PAGE, STR_FOR_USER);
             } else {
-                adminID = ad.getAdminID(login, password);
+                adminID = entryDAO.getAdminID(login, password);
                 session.setAttribute(IS_ADMIN, 1);
                 session.setAttribute(ATR_ID, adminID);
                 result.setPage(STR_FOR_ADMIN);
@@ -69,6 +71,11 @@ public class AuthorizationCommand implements ActionCommand {
             session.setAttribute(ATR_PREV_PAGE, STR_AUTHORIZATION);
         }
 
+        if(ErrorOutput.error){
+
+            ErrorOutput.error=false;
+            result.setPage(ErrorOutput.ERROR);
+        }
         return result;
     }
 
