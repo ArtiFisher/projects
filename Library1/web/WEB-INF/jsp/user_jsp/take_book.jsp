@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><fmt:message key="label.title_take_book" bundle="${rb}"/></title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
+    <link rel="stylesheet" href="dist/css/bootstrap.css"/>
 </head>
 <body>
 <table align="left">

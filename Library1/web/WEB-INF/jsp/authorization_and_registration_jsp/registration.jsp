@@ -8,7 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><fmt:message key="label.title_reg" bundle="${rb}"/></title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
+    <link rel="stylesheet" href="dist/css/bootstrap.css"/>
 
 </head>
 <body>
@@ -26,9 +26,9 @@
         </td>
     </tr>
 </table>
-<h1><fmt:message key="label.page_name_reg" bundle="${rb}"/></h1>
 
 <div class="container">
+    <h1 align="center"><fmt:message key="label.page_name_reg" bundle="${rb}"/></h1>
     <form action="ServletController?method=register" method="POST">
         <fmt:message key="field.name" bundle="${rb}"/>
         <input type="text" class="form-control" name="name">
@@ -50,10 +50,10 @@
 
         <input type="submit" class="btn btn-default" value=<fmt:message key="field.button_reg" bundle="${rb}"/>>
     </form>
-</div>
 
-<form action="ServletController?method=log_out" method="POST">
-    <input type="submit" class="btn btn-default" value=<fmt:message key="field.button_to_main_page" bundle="${rb}"/>>
-</form>
+    <form action="ServletController?method=log_out" method="POST">
+        <input type="submit" class="btn btn-default" value=<fmt:message key="field.button_to_main_page" bundle="${rb}"/>>
+    </form>
+</div>
 </body>
 </html>

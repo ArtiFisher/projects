@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -12,8 +13,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
-    <%--<link rel="stylesheet" type="text/css" href="../../bootstrap-3.0.3-dist/css/bootstrap.css" />--%>
+    <%--<link rel="stylesheet" href="dist/css/bootstrap.css"/>--%>
+    <link rel="stylesheet" href="dist/css/bootstrap.css"/>
 </head>
 <body>
 <table align="left">

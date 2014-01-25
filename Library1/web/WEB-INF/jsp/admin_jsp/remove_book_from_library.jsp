@@ -8,8 +8,72 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title><fmt:message key="label.title_remove_book" bundle="${rb}"/></title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
+    <link rel="stylesheet" href="dist/css/bootstrap.css"/>
 </head>
+<script type="text/javascript">
+    function Pager(tableName, itemsPerPage) {
+        this.tableName = tableName;
+        this.itemsPerPage = itemsPerPage;
+        this.currentPage = 1;
+        this.pages = 0;
+        this.inited = false;
+
+        this.showRecords = function (from, to) {
+            var rows = document.getElementById(tableName).rows;
+            // i starts from 1 to skip table header row
+            for (var i = 1; i < rows.length; i++) {
+                if (i < from || i > to)
+                    rows[i].style.display = 'none';
+                else
+                    rows[i].style.display = '';
+            }
+        }
+
+        this.showPage = function (pageNumber) {
+            if (!this.inited) {
+                alert("not inited");
+                return;
+            }
+            this.currentPage = pageNumber;
+            var from = (pageNumber - 1) * itemsPerPage + 1;
+            var to = from + itemsPerPage - 1;
+            this.showRecords(from, to);
+        }
+
+        this.prev = function () {
+            if (this.currentPage > 1)
+                this.showPage(this.currentPage - 1);
+        }
+
+        this.next = function () {
+            if (this.currentPage < this.pages) {
+                this.showPage(this.currentPage + 1);
+            }
+        }
+
+        this.init = function () {
+            var rows = document.getElementById(tableName).rows;
+            var records = (rows.length - 1);
+            this.pages = Math.ceil(records / itemsPerPage);
+            this.inited = true;
+        }
+
+        this.showPageNav = function (pagerName, positionId) {
+            if (!this.inited) {
+                alert("not inited");
+                return;
+            }
+            var element = document.getElementById(positionId);
+
+            var pagerHtml = '<button class="btn btn-default" onclick="' + pagerName + '.prev();" > « Prev </button> | ';
+            for (var page = 1; page <= this.pages; page++)
+                pagerHtml += '<button id="pg' + page + '" onclick="' + pagerName + '.showPage(' + page + ');" class="btn btn-default">' + page + ' </button> | ';
+            pagerHtml += '<button class="btn btn-default" onclick="' + pagerName + '.next();" > Next »</button>';
+
+            element.innerHTML = pagerHtml;
+        }
+    }
+</script>
 <body>
 
 <table align="left">
@@ -34,7 +98,7 @@
 <div class="container" align="center">
     <h1 align="center"><fmt:message key="label.title_view_books" bundle="${rb}"/></h1>
     <c:if test="${bookNumber > 0}">
-        <table border="1" align="center">
+        <table border="1" align="center" id="results">
             <tr>
                 <td><fmt:message key="book_id" bundle="${rb}"/></td>
                 <td><fmt:message key="book_ISBN" bundle="${rb}"/></td>
@@ -64,6 +128,7 @@
                 </form>
             </c:forEach>
         </table>
+        <div id="pageNavPosition"></div>
     </c:if>
     <c:if test="${bookNumber <= 0}">
         <h2><fmt:message key="msgNoBooks" bundle="${rb}"/></h2>
@@ -74,6 +139,13 @@
                                                                         bundle="${rb}"/>>
     </form>
 </div>
+
+<script type="text/javascript"><!--
+var pager = new Pager('results', 3);
+pager.init();
+pager.showPageNav('pager', 'pageNavPosition');
+pager.showPage(1);
+//--></script>
 
 </body>
 </html>
