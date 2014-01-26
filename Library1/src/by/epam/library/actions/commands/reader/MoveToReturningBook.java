@@ -53,6 +53,5 @@ public class MoveToReturningBook implements ActionCommand {
         return 0;
     }
 
-    ;
 
 }

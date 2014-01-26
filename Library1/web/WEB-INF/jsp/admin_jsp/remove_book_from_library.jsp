@@ -98,6 +98,17 @@
 <div class="container" align="center">
     <h1 align="center"><fmt:message key="label.title_view_books" bundle="${rb}"/></h1>
     <c:if test="${bookNumber > 0}">
+        <div id="pageNavPosition"></div>
+        <form action="ServletController?method=search_remove" method="POST">
+            <table>
+                <td>
+                    <input type="text" name="search" class="form-control" style="width: 100%">
+                </td>
+                <td>
+                    <input class="btn btn-default" type="submit" value=<fmt:message key="search" bundle="${rb}"/>>
+                </td>
+            </table>
+        </form>
         <table border="1" align="center" id="results">
             <tr>
                 <td><fmt:message key="book_id" bundle="${rb}"/></td>
@@ -128,10 +139,20 @@
                 </form>
             </c:forEach>
         </table>
-        <div id="pageNavPosition"></div>
     </c:if>
     <c:if test="${bookNumber <= 0}">
         <h2><fmt:message key="msgNoBooks" bundle="${rb}"/></h2>
+
+        <form action="ServletController?method=search_remove" method="POST">
+            <table>
+                <td>
+                    <input type="text" name="search" class="form-control" style="width: 100%">
+                </td>
+                <td>
+                    <input class="btn btn-default" type="submit" value=<fmt:message key="search" bundle="${rb}"/>>
+                </td>
+            </table>
+        </form>
     </c:if>
 
     <form action="ServletController?method=return_to_admin_page" method="POST">

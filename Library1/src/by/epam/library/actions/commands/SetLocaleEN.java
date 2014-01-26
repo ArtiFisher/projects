@@ -38,6 +38,5 @@ public class SetLocaleEN implements ActionCommand {
         return -1;
     }
 
-    ;
 
 }

@@ -48,6 +48,5 @@ public class ViewClients implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

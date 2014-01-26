@@ -1,6 +1,7 @@
 package by.epam.library.actions.commands.librarian;
 
 import by.epam.library.actions.ActionCommand;
+import by.epam.library.exceptions.NotPositiveException;
 import by.epam.library.servlet.ServletController;
 import by.epam.library.actions.commands.ResultAnswer;
 import by.epam.library.database.dao.EntryDAO;
@@ -61,8 +62,6 @@ public class RedirectAddingBook implements ActionCommand {
             libDAO.addBookToLibrary(ISBN, title, author, year, copiesNumber);
             result.setGoToPage(false);
             result.setPage(strshowBookAdded);
-            //session1.setAttribute("prevPage","/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
-            //response.sendRedirect(strshowBookAdded);
         } else {
             if (validate(request, paramISBN) == false) {
                 request.setAttribute(errorISBN, msgIncorrectISBN);
@@ -75,7 +74,6 @@ public class RedirectAddingBook implements ActionCommand {
             }
             result.setPage(strAddBook2);
 
-            //request.getRequestDispatcher(strAddBook2).forward(request, response);
         }
         session.setAttribute("prevPage", "/WEB-INF/jsp/admin_jsp/for_admin.jsp");//
         if (ErrorOutput.error) {
@@ -88,10 +86,15 @@ public class RedirectAddingBook implements ActionCommand {
 
     private boolean validate(HttpServletRequest request, String paramForValidation) {
         boolean result = true;
+        int param;
         try {
-            Integer.parseInt(request.getParameter(paramForValidation));
+            param = Integer.parseInt(request.getParameter(paramForValidation));
+            if (param < 1)
+                throw new NotPositiveException(paramForValidation + "is not positive");
             result = true;
         } catch (NumberFormatException e) {
+            result = false;
+        } catch (NotPositiveException e) {
             result = false;
         } finally {
             return result;
@@ -102,6 +105,5 @@ public class RedirectAddingBook implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

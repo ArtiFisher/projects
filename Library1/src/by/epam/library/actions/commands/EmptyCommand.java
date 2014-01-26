@@ -32,6 +32,5 @@ public class EmptyCommand implements ActionCommand {
         return -1;
     }
 
-    ;
 
 }

@@ -56,6 +56,5 @@ public class RedirectReturnBook implements ActionCommand {
         return 0;
     }
 
-    ;
 
 }

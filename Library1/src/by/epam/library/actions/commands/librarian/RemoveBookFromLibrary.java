@@ -53,6 +53,5 @@ public class RemoveBookFromLibrary implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

@@ -39,6 +39,5 @@ public class MoveToAdminPage implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

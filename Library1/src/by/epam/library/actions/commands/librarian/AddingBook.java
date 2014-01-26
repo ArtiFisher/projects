@@ -47,11 +47,6 @@ public class AddingBook implements ActionCommand {
             ErrorOutput.error = false;
             result.setPage(ErrorOutput.ERROR);
         }
-        if (ErrorOutput.error) {
-
-            ErrorOutput.error = false;
-            result.setPage(ErrorOutput.ERROR);
-        }
         return result;
     }
 
@@ -59,6 +54,5 @@ public class AddingBook implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

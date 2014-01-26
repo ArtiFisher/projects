@@ -37,6 +37,5 @@ public class SetLocaleRU implements ActionCommand {
         return -1;
     }
 
-    ;
 
 }

@@ -29,6 +29,7 @@
 
 <div class="container">
     <h1 align="center"><fmt:message key="label.page_name_reg" bundle="${rb}"/></h1>
+
     <form action="ServletController?method=register" method="POST">
         <fmt:message key="field.name" bundle="${rb}"/>
         <input type="text" class="form-control" name="name">
@@ -52,7 +53,8 @@
     </form>
 
     <form action="ServletController?method=log_out" method="POST">
-        <input type="submit" class="btn btn-default" value=<fmt:message key="field.button_to_main_page" bundle="${rb}"/>>
+        <input type="submit" class="btn btn-default" value=<fmt:message key="field.button_to_main_page"
+                                                                        bundle="${rb}"/>>
     </form>
 </div>
 </body>

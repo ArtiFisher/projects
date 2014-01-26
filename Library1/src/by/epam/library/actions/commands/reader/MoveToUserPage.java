@@ -39,6 +39,5 @@ public class MoveToUserPage implements ActionCommand {
         return 0;
     }
 
-    ;
 
 }

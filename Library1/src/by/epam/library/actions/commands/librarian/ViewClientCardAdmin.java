@@ -38,19 +38,11 @@ public class ViewClientCardAdmin implements ActionCommand {
 
         List<Book> books = new ArrayList<Book>();
         books.addAll(bookDAO.viewAllClientBooks(idCl));
-
         request.setAttribute("rows", books.size());
-
-
         request.setAttribute(strBooks, books);
         result.setPage(strViewClientCard);
         session.setAttribute("prevPage", "ServletController?method=admin_view_client_card");
         request.setAttribute(bookNumber, books.size());
-        if (ErrorOutput.error) {
-
-            ErrorOutput.error = false;
-            result.setPage(ErrorOutput.ERROR);
-        }
         if (ErrorOutput.error) {
 
             ErrorOutput.error = false;
@@ -63,6 +55,5 @@ public class ViewClientCardAdmin implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

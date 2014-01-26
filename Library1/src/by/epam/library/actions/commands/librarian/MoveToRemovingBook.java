@@ -47,6 +47,5 @@ public class MoveToRemovingBook implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

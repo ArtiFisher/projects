@@ -83,6 +83,5 @@ public class AuthorizationCommand implements ActionCommand {
         return -1;
     }
 
-    ;
 
 }

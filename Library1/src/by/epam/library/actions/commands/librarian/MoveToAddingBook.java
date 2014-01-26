@@ -42,6 +42,5 @@ public class MoveToAddingBook implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

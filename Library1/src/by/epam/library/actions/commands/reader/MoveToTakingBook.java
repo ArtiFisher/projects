@@ -48,6 +48,4 @@ public class MoveToTakingBook implements ActionCommand {
     public int getPageRights() {
         return 0;
     }
-
-    ;
 }

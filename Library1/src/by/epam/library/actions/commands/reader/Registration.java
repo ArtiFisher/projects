@@ -55,6 +55,5 @@ public class Registration implements ActionCommand {
         return -1;
     }
 
-    ;
 
 }

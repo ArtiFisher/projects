@@ -55,6 +55,5 @@ public class DeleteClient implements ActionCommand {
         return 1;
     }
 
-    ;
 
 }

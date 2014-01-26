@@ -87,6 +87,5 @@ public class RedirectRegistration implements ActionCommand {
         return -1;
     }
 
-    ;
 
 }

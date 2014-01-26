@@ -37,6 +37,5 @@ public class LogOut implements ActionCommand {
         return -1;
     }
 
-    ;
 
 }

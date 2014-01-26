@@ -112,6 +112,16 @@ public enum CommandEnum {
             this.command = new RedirectReturnBook();
         }
     },
+    SEARCH {
+        {
+            this.command = new Search();
+        }
+    },
+    SEARCH_REMOVE {
+        {
+            this.command = new SearchRemove();
+        }
+    },
     ERROR {
         {
             this.command = new ErrorOutput();

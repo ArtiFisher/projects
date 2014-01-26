@@ -87,6 +87,5 @@ public class TakeBook implements ActionCommand {
         return 0;
     }
 
-    ;
 
 }

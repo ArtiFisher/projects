@@ -84,7 +84,6 @@ public class ServletController extends HttpServlet {
         return false;
     }
 
-    ;
 
     /**
      * handles requests, sends forward to necessary page

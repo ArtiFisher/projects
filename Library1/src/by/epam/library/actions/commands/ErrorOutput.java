@@ -34,5 +34,5 @@ public class ErrorOutput implements ActionCommand {
         return -1;
     }
 
-    ;
+
 }

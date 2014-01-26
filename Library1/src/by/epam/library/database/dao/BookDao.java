@@ -49,10 +49,39 @@ public class BookDao implements AbstractDao {
                 String author = rs.getString(4);
                 int year = rs.getInt(5);
                 int numberOfCopies = rs.getInt(6);
-                Book book = new Book(id, ISBN, title, author, year, numberOfCopies);
-                if (numberOfCopies != 0) {
-                    books.add(book);
-                }
+                books.add(new Book(id, ISBN, title, author, year, numberOfCopies));
+            }
+
+        } catch (SQLException e) {
+            ErrorOutput.error = true;
+            ErrorOutput.errorMessage = e.toString();
+            logger.error(new Date() + " - " + e);
+        } finally {
+            connector.closeConnection(connection);
+            ps.close();
+        }
+        return books;
+    }
+
+    public List<Book> search(String pattern) throws InterruptedException, SQLException {
+        List<Book> books = new ArrayList<Book>();
+        PreparedStatement ps = null;
+        Connection connection = connector.getConnection();
+
+        try {
+            ps = connection.prepareStatement(SQL_SELECT_ALL_BOOKS);
+            logger.info(new Date() + " - " + ps.toString());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                int ISBN = rs.getInt(2);
+                String title = rs.getString(3);
+                String author = rs.getString(4);
+                int year = rs.getInt(5);
+                int numberOfCopies = rs.getInt(6);
+                if (title.contains(pattern) || author.contains(pattern))
+                    books.add(new Book(id, ISBN, title, author, year, numberOfCopies));
             }
 
         } catch (SQLException e) {
